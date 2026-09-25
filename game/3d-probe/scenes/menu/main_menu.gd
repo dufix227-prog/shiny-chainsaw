@@ -3,9 +3,12 @@ extends Control
 ## Главное меню: фон-картинка, версия слева сверху, кнопки и окно настроек.
 
 const FIRST_SECTION := "res://scenes/world/first40.tscn"
+## Временная кнопка: проба графики «как в меню», пока автор её оценивает.
+const STYLE_PROBE := "res://scenes/style_probe/style_probe.tscn"
 
 @onready var new_game_button: Button = %NewGameButton
 @onready var continue_button: Button = %ContinueButton
+@onready var style_probe_button: Button = %StyleProbeButton
 @onready var settings_button: Button = %SettingsButton
 @onready var quit_button: Button = %QuitButton
 @onready var main_buttons: Control = %MainButtons
@@ -23,6 +26,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().paused = false
 	new_game_button.pressed.connect(_start_new_game)
+	style_probe_button.pressed.connect(get_tree().change_scene_to_file.bind(STYLE_PROBE))
 	settings_button.pressed.connect(_open_settings)
 	quit_button.pressed.connect(get_tree().quit)
 	settings_back_button.pressed.connect(_close_settings)

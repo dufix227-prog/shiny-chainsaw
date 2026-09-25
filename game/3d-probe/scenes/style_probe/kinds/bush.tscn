@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/props/bush.gd" id="1_ep7cv"]
+[ext_resource type="ArrayMesh" path="res://scenes/style_probe/kinds/bush_mesh.res" id="2_jg8po"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ep7cv"]
+size = Vector3(2.6, 1.6, 2.6)
+
+[node name="Bush" type="Node3D" unique_id=1044199995]
+script = ExtResource("1_ep7cv")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1901821966]
+mesh = ExtResource("2_jg8po")
+
+[node name="SlowZone" type="Area3D" parent="." unique_id=940088166]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="Shape" type="CollisionShape3D" parent="SlowZone" unique_id=1668633737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.8, 0.2)
+shape = SubResource("BoxShape3D_ep7cv")

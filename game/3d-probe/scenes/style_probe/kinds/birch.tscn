@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://scenes/style_probe/kinds/birch_mesh.res" id="1_w4pmm"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_w4pmm"]
+height = 4.0
+radius = 0.3
+
+[node name="Birch" type="StaticBody3D" unique_id=1939006745]
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=512739225]
+mesh = ExtResource("1_w4pmm")
+
+[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=938987967]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CylinderShape3D_w4pmm")

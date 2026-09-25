@@ -95,6 +95,13 @@ layout_mode = 2
 text = "Новая игра"
 alignment = 0
 
+[node name="StyleProbeButton" type="Button" parent="MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Короткий кусок тропы в стиле картинки меню — на оценку"
+text = "Проба графики"
+alignment = 0
+
 [node name="ContinueButton" type="Button" parent="MainButtons"]
 unique_name_in_owner = true
 layout_mode = 2

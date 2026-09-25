@@ -13,7 +13,7 @@ var invert_camera_y := false
 var fullscreen := false
 var master_volume := 0.8
 ## Размер пикселя картинки: 1 — без пикселизации, 4 — самые крупные пиксели.
-var pixel_size := 3
+var pixel_size := 1
 
 
 func _ready() -> void:

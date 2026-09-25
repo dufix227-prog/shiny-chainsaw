@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[resource]
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+roughness = 0.9
+metallic_specular = 0.2
+backlight_enabled = true
+backlight = Color(0.42, 0.34, 0.08, 1)

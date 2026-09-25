@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://scenes/style_probe/kinds/fence_mesh.res" id="1_4epmk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4epmk"]
+size = Vector3(3, 1.6, 0.4)
+
+[node name="Fence" type="StaticBody3D" unique_id=1659292903]
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1649410877]
+mesh = ExtResource("1_4epmk")
+
+[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=1481398319]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.8, 0)
+shape = SubResource("BoxShape3D_4epmk")

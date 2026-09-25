@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://scenes/style_probe/kinds/spruce_tall_mesh.res" id="1_elu26"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_elu26"]
+height = 4.0
+radius = 0.35
+
+[node name="SpruceTall" type="StaticBody3D" unique_id=73715285]
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=845569868]
+mesh = ExtResource("1_elu26")
+
+[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=2013467825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CylinderShape3D_elu26")
