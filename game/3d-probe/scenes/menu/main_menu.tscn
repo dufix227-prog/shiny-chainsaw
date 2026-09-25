@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/menu/main_menu.gd" id="1_script"]
 [ext_resource type="Theme" path="res://scenes/ui/menu_theme.tres" id="2_theme"]
 [ext_resource type="Texture2D" path="res://assets/art/menu_background_candidate.jpg" id="3_background"]
-[ext_resource type="FontFile" path="res://assets/fonts/yesevaone/YesevaOne-Regular.ttf" id="4_title_font"]
+[ext_resource type="FontFile" path="res://assets/fonts/pressstart2p/PressStart2P-Regular.ttf" id="4_title_font"]
 
 [sub_resource type="Gradient" id="shade_gradient"]
 offsets = PackedFloat32Array(0, 0.42, 0.7)
@@ -63,29 +63,30 @@ anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 90.0
 offset_top = -250.0
-offset_right = 620.0
+offset_right = 520.0
 offset_bottom = 250.0
 grow_vertical = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 12
 alignment = 1
 
 [node name="Title" type="Label" parent="MainButtons"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.9, 0.72, 1)
-theme_override_constants/shadow_offset_x = 3
-theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
 theme_override_fonts/font = ExtResource("4_title_font")
-theme_override_font_sizes/font_size = 88
-text = "Пролог"
+theme_override_font_sizes/font_size = 44
+text = "10 000 метров
+до дома"
 
 [node name="Subtitle" type="Label" parent="MainButtons"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.85, 0.7, 0.85)
 theme_override_font_sizes/font_size = 24
-text = "лесная тропа · первые 40 метров"
+text = "Пролог · первые 40 метров"
 
 [node name="Gap" type="Control" parent="MainButtons"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
 [node name="NewGameButton" type="Button" parent="MainButtons"]
@@ -121,9 +122,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 90.0
-offset_top = -220.0
+offset_top = -280.0
 offset_right = 650.0
-offset_bottom = 220.0
+offset_bottom = 280.0
 grow_vertical = 2
 
 [node name="Rows" type="VBoxContainer" parent="SettingsPanel"]
@@ -170,6 +171,21 @@ layout_mode = 2
 max_value = 1.0
 step = 0.05
 value = 0.8
+
+[node name="PixelLabel" type="Label" parent="SettingsPanel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Пиксельность картинки"
+
+[node name="PixelSlider" type="HSlider" parent="SettingsPanel/Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+min_value = 1.0
+max_value = 4.0
+value = 3.0
+tick_count = 4
+ticks_on_borders = true
 
 [node name="SettingsBackButton" type="Button" parent="SettingsPanel/Rows"]
 unique_name_in_owner = true

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/ui/pause_menu.gd" id="1_script"]
 [ext_resource type="Theme" path="res://scenes/ui/menu_theme.tres" id="2_theme"]
-[ext_resource type="FontFile" path="res://assets/fonts/yesevaone/YesevaOne-Regular.ttf" id="3_title_font"]
+[ext_resource type="FontFile" path="res://assets/fonts/pressstart2p/PressStart2P-Regular.ttf" id="3_title_font"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3

@@ -14,6 +14,8 @@ const FIRST_SECTION := "res://scenes/world/first40.tscn"
 @onready var invert_check: CheckBox = %InvertCheck
 @onready var fullscreen_check: CheckBox = %FullscreenCheck
 @onready var volume_slider: HSlider = %VolumeSlider
+@onready var pixel_slider: HSlider = %PixelSlider
+@onready var pixel_label: Label = %PixelLabel
 @onready var settings_back_button: Button = %SettingsBackButton
 
 
@@ -26,6 +28,7 @@ func _ready() -> void:
 	settings_back_button.pressed.connect(_close_settings)
 	# Сохранений пока нет — кнопка честно неактивна, а не ведёт в пустоту.
 	continue_button.disabled = true
+	pixel_slider.value_changed.connect(_show_pixel_size)
 	settings_panel.visible = false
 	new_game_button.grab_focus()
 
@@ -45,6 +48,8 @@ func _open_settings() -> void:
 	invert_check.button_pressed = GameSettings.invert_camera_y
 	fullscreen_check.button_pressed = GameSettings.fullscreen
 	volume_slider.value = GameSettings.master_volume
+	pixel_slider.value = GameSettings.pixel_size
+	_show_pixel_size(pixel_slider.value)
 	main_buttons.visible = false
 	settings_panel.visible = true
 	sensitivity_slider.grab_focus()
@@ -55,8 +60,14 @@ func _close_settings() -> void:
 	GameSettings.invert_camera_y = invert_check.button_pressed
 	GameSettings.fullscreen = fullscreen_check.button_pressed
 	GameSettings.master_volume = volume_slider.value
+	GameSettings.pixel_size = int(pixel_slider.value)
 	GameSettings.apply()
 	GameSettings.save_settings()
 	settings_panel.visible = false
 	main_buttons.visible = true
 	settings_button.grab_focus()
+
+
+func _show_pixel_size(value: float) -> void:
+	var size := int(value)
+	pixel_label.text = "Пиксельность картинки: " + ("выкл" if size == 1 else "×%d" % size)

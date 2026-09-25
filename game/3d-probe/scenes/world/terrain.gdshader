@@ -1,37 +1,45 @@
 shader_type spatial;
 
-// Земля участка: трава, утоптанная тропа и камень на крутых склонах.
-// Где тропа — задаёт сборщик участка: красный канал цвета вершины (1 = тропа).
+// Блочная земля участка. Каждая грань — одна пиксельная текстура 16×16 на блок.
+// Цвет вершины (задаёт сборщик): R = 1 — тропа, G = 1 — верхний слой боковой грани.
 
-uniform sampler2D grass_texture : source_color, filter_linear_mipmap, repeat_enable;
-uniform sampler2D path_texture : source_color, filter_linear_mipmap, repeat_enable;
-uniform sampler2D rock_texture : source_color, filter_linear_mipmap, repeat_enable;
-uniform vec3 grass_tint : source_color = vec3(0.78, 0.9, 0.62);
-uniform vec3 path_tint : source_color = vec3(1.0, 0.9, 0.78);
-uniform float grass_scale = 0.22;
-uniform float path_scale = 0.3;
-uniform float rock_scale = 0.12;
+uniform sampler2D grass_top_texture : source_color, filter_nearest, repeat_enable;
+uniform sampler2D grass_side_texture : source_color, filter_nearest, repeat_enable;
+uniform sampler2D dirt_texture : source_color, filter_nearest, repeat_enable;
+uniform sampler2D path_texture : source_color, filter_nearest, repeat_enable;
+// Лёгкий разброс яркости по блокам, чтобы поле не было одним ковром.
+uniform float block_brightness_spread = 0.07;
 
 varying vec3 world_position;
 varying vec3 world_normal;
 
+float block_random(vec2 block) {
+	return fract(sin(dot(block, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
 void vertex() {
 	world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	world_normal = normalize((MODEL_MATRIX * vec4(NORMAL, 0.0)).xyz);
+	world_normal = (MODEL_MATRIX * vec4(NORMAL, 0.0)).xyz;
 }
 
 void fragment() {
-	vec3 grass = texture(grass_texture, world_position.xz * grass_scale).rgb * grass_tint;
-	vec3 path = texture(path_texture, world_position.xz * path_scale).rgb * path_tint;
-	// Камень на склоне проецируется сбоку, иначе на крутизне текстура растягивается.
-	vec3 rock = texture(rock_texture, vec2(world_position.x + world_position.z, world_position.y) * rock_scale).rgb;
-
-	// Крупная неровность, чтобы край тропы не был идеальной линией.
-	float edge_noise = texture(grass_texture, world_position.xz * 0.05).g - 0.5;
-	float path_amount = smoothstep(0.3, 0.7, COLOR.r + edge_noise * 0.5);
-	float steepness = smoothstep(0.45, 0.7, 1.0 - world_normal.y);
-
-	ALBEDO = mix(mix(grass, path, path_amount), rock, steepness);
-	ROUGHNESS = 0.95;
-	SPECULAR = 0.1;
+	// Стороны блоков лежат на полуцелых X/Z и на целых Y.
+	vec3 grid = world_position + vec3(0.5, 0.0, 0.5);
+	vec3 albedo;
+	vec2 block;
+	if (abs(world_normal.y) > 0.5) {
+		block = floor(grid.xz);
+		vec2 uv = fract(grid.xz);
+		albedo = COLOR.r > 0.5 ? texture(path_texture, uv).rgb : texture(grass_top_texture, uv).rgb;
+	} else {
+		vec2 side = abs(world_normal.x) > 0.5 ? vec2(grid.z, -grid.y) : vec2(grid.x, -grid.y);
+		block = floor(side);
+		vec2 uv = fract(side);
+		bool top_layer = COLOR.g > 0.5 && COLOR.r < 0.5;
+		albedo = top_layer ? texture(grass_side_texture, uv).rgb : texture(dirt_texture, uv).rgb;
+	}
+	albedo *= 1.0 + (block_random(block) - 0.5) * 2.0 * block_brightness_spread;
+	ALBEDO = albedo;
+	ROUGHNESS = 1.0;
+	SPECULAR = 0.2;
 }

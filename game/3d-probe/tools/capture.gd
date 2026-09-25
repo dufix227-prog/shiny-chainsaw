@@ -20,10 +20,10 @@ func _capture() -> void:
 	if args.size() > 2 and scene.has_node("CatPlayer"):
 		var builder = scene.get_node("Builder")
 		builder.setup_noise()
-		var z: float = -float(args[2]) * builder.WORLD_UNITS_PER_METRE
-		var x: float = builder.path_center_x(z)
+		var z := roundi(-float(args[2]) * builder.WORLD_UNITS_PER_METRE)
+		var x := roundi(builder.path_center_x(z))
 		var player: Node3D = scene.get_node("CatPlayer")
-		player.global_position = Vector3(x, builder.ground_height(x, z) + 0.1, z)
+		player.global_position = Vector3(x, builder.block_height(x, z) + 0.1, z)
 		var pivot: Node3D = player.get_node("CameraPivot")
 		if args.size() > 3:
 			pivot.rotation.y = deg_to_rad(float(args[3]))

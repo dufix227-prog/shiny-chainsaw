@@ -2,16 +2,16 @@
 
 [ext_resource type="ArrayMesh" path="res://scenes/trees/meshes/fallen_log.res" id="1_mesh"]
 
-[sub_resource type="CylinderShape3D" id="log_shape"]
-radius = 0.55
-height = 10.0
+[sub_resource type="BoxShape3D" id="shape_0"]
+size = Vector3(8, 1, 1)
 
 [node name="FallenLog" type="StaticBody3D"]
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_mesh")
-visibility_range_end = 150.0
+visibility_range_end = 160.0
 
 [node name="LogCollision" type="CollisionShape3D" parent="."]
-transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("log_shape")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0)
+shape = SubResource("shape_0")
+

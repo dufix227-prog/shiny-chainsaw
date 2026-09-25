@@ -27,6 +27,11 @@ var _bushes_touching := 0
 var _walk_cycle := 0.0
 
 @onready var visual: Node3D = $Visual
+@onready var leg_left: Node3D = $Visual/LegLeft
+@onready var leg_right: Node3D = $Visual/LegRight
+@onready var arm_left: Node3D = $Visual/ArmLeft
+@onready var arm_right: Node3D = $Visual/ArmRight
+@onready var tail: Node3D = $Visual/Tail
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera: Camera3D = $CameraPivot/SpringArm3D/Camera3D
 
@@ -105,18 +110,28 @@ func _update_stamina(wants_to_run: bool, delta: float) -> void:
 		stamina = minf(stamina + STAMINA_RECOVERY * delta, STAMINA_MAX)
 
 
-## Пока у модели кота нет своих анимаций: поворот по ходу движения
-## и лёгкое покачивание шага, чтобы кот не скользил статуей.
+## Блочная анимация: лапы качаются в такт шагу (частота зависит от скорости,
+## чтобы кот не скользил), хвост покачивается всегда.
 func _animate(direction: Vector3, delta: float) -> void:
 	var moving := direction != Vector3.ZERO and is_on_floor()
 	if direction != Vector3.ZERO:
 		# Модель смотрит вдоль −Z, поэтому угол считается от −direction.
 		var target_yaw := atan2(-direction.x, -direction.z)
 		visual.rotation.y = lerp_angle(visual.rotation.y, target_yaw, 12.0 * delta)
+	var swing := 0.0
 	if moving:
-		_walk_cycle += delta * (14.0 if is_running else 9.0)
-		visual.position.y = absf(sin(_walk_cycle)) * 0.12
-		visual.rotation.z = sin(_walk_cycle) * 0.06
+		var speed := Vector2(velocity.x, velocity.z).length()
+		_walk_cycle += delta * speed * 2.6
+		swing = sin(_walk_cycle) * (0.9 if is_running else 0.6)
+		visual.position.y = absf(sin(_walk_cycle)) * 0.06
 	else:
+		_walk_cycle = 0.0
 		visual.position.y = lerpf(visual.position.y, 0.0, 10.0 * delta)
-		visual.rotation.z = lerpf(visual.rotation.z, 0.0, 10.0 * delta)
+	if not is_on_floor():
+		swing = -0.5  # в прыжке лапы поджаты
+	var blend := 14.0 * delta
+	leg_left.rotation.x = lerpf(leg_left.rotation.x, swing, blend)
+	leg_right.rotation.x = lerpf(leg_right.rotation.x, -swing if is_on_floor() else swing, blend)
+	arm_left.rotation.x = lerpf(arm_left.rotation.x, -swing * 0.8, blend)
+	arm_right.rotation.x = lerpf(arm_right.rotation.x, swing * 0.8, blend)
+	tail.rotation.y = sin(Time.get_ticks_msec() * 0.003) * 0.3

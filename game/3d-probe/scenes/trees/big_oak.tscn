@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="ArrayMesh" path="res://scenes/trees/meshes/big_oak.res" id="1_mesh"]
+
+[sub_resource type="BoxShape3D" id="shape_0"]
+size = Vector3(3, 6, 3)
+
+[sub_resource type="BoxShape3D" id="shape_1"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="shape_2"]
+size = Vector3(1, 1, 1)
+
+[node name="BigOak" type="StaticBody3D"]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_mesh")
+visibility_range_end = 160.0
+
+[node name="TrunkCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("shape_0")
+
+[node name="Collision1" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, 0)
+shape = SubResource("shape_1")
+
+[node name="Collision2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
+shape = SubResource("shape_2")
+

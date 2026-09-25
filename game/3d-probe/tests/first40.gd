@@ -56,11 +56,16 @@ func _check_path_shape() -> void:
 	check(narrowest >= first.path_min_width - 0.01 and widest <= first.path_max_width + 0.01,
 		"ширина тропы в заданных пределах")
 	check(widest - narrowest > 3.0, "тропа заметно сужается и расширяется")
-	# Склоны за краем долины круче, чем кот может подняться (45°).
-	for sample_z in [-50.0, -200.0, -400.0]:
-		var edge_x: float = first.path_center_x(sample_z) + first.valley_half_width + 3.0
-		var rise: float = first.ground_height(edge_x + 1.0, sample_z) - first.ground_height(edge_x, sample_z)
-		check(rise > 1.0, "склон у края долины непроходим (z=%.0f)" % sample_z)
+	# Обрыв у края долины: первый уступ выше, чем кот запрыгивает (1 блок).
+	for sample_z in [-50, -200, -400]:
+		var edge_x := roundi(first.path_center_x(sample_z) + first.valley_half_width)
+		var biggest_rise := 0
+		for x in range(edge_x - 2, edge_x + 3):
+			biggest_rise = maxi(biggest_rise, first.block_height(x + 1, sample_z) - first.block_height(x, sample_z))
+		check(biggest_rise >= 3, "обрыв у края долины не запрыгнуть (z=%d)" % sample_z)
+	var path_z := -100
+	var path_x := roundi(first.path_center_x(path_z))
+	check(first.is_path_block(path_x, path_z) and first.block_height(path_x, path_z) == 0, "тропа ровная, на нулевой высоте")
 	first.free()
 	second.free()
 
@@ -74,7 +79,7 @@ func _check_forest(world: Node3D) -> void:
 		kinds[tree.scene_file_path] = true
 		if not (tree is StaticBody3D and tree.get_node_or_null("TrunkCollision") is CollisionShape3D):
 			without_collision += 1
-	check(kinds.size() >= 5, "в лесу не меньше пяти видов деревьев")
+	check(kinds.size() >= 7, "в лесу семь видов деревьев")
 	check(without_collision == 0, "у каждого дерева своя коллизия ствола")
 
 
@@ -100,9 +105,9 @@ func _put_player_on_path(world: Node3D, metres: float) -> CharacterBody3D:
 	var builder = world.get_node("Builder")
 	builder.setup_noise()
 	var player: CharacterBody3D = world.get_node("CatPlayer")
-	var z := -metres * Builder.WORLD_UNITS_PER_METRE
-	var x: float = builder.path_center_x(z)
-	player.global_position = Vector3(x, builder.ground_height(x, z) + 0.2, z)
+	var z := roundi(-metres * Builder.WORLD_UNITS_PER_METRE)
+	var x := roundi(builder.path_center_x(z))
+	player.global_position = Vector3(x, builder.block_height(x, z) + 0.2, z)
 	player.velocity = Vector3.ZERO
 	player.get_node("CameraPivot").rotation.y = 0.0
 	return player

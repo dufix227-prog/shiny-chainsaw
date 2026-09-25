@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="ArrayMesh" path="res://scenes/trees/meshes/small_spruce.res" id="1_mesh"]
+
+[sub_resource type="BoxShape3D" id="shape_0"]
+size = Vector3(1, 3, 1)
+
+[node name="SmallSpruce" type="StaticBody3D"]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_mesh")
+visibility_range_end = 160.0
+
+[node name="TrunkCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("shape_0")
+

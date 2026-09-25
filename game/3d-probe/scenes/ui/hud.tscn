@@ -4,6 +4,7 @@
 [ext_resource type="Theme" path="res://scenes/ui/menu_theme.tres" id="2_theme"]
 
 [node name="HUD" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_script")
 
 [node name="Root" type="Control" parent="."]
