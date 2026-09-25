@@ -6,11 +6,11 @@
 height = 7.8
 radius = 0.62
 
-[node name="Log" type="StaticBody3D" unique_id=93928414]
+[node name="Log" type="StaticBody3D" unique_id=1597375464]
 
-[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1360807126]
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=480007230]
 mesh = ExtResource("1_0qvdd")
 
-[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=338550948]
+[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=1956916929]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_0qvdd")

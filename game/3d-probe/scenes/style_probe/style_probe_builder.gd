@@ -116,12 +116,12 @@ func _save_tree(kind: String, mesh: ArrayMesh, trunk_radius: float) -> void:
 	var shape := CylinderShape3D.new()
 	shape.radius = trunk_radius
 	shape.height = 4.0
-	_save_kind(kind, mesh, shape, Transform3D(Basis(), Vector3(0, 2, 0)))
+	_save_kind(kind, mesh, shape, Transform3D(Basis(), Vector3(0, 2, 0)), false, true)
 
 
 ## Сцена вида: StaticBody3D → Mesh + коллизия (+ свет у фонаря).
 func _save_kind(kind: String, mesh: ArrayMesh, shape: Shape3D, shape_transform: Transform3D,
-		with_light: bool = false) -> void:
+		with_light: bool = false, blocks_camera: bool = false) -> void:
 	var mesh_path := KINDS_DIR + kind + "_mesh.res"
 	ResourceSaver.save(mesh, mesh_path, ResourceSaver.FLAG_COMPRESS)
 	var body := StaticBody3D.new()
@@ -146,7 +146,32 @@ func _save_kind(kind: String, mesh: ArrayMesh, shape: Shape3D, shape_transform: 
 		light.omni_range = 7.0
 		body.add_child(light)
 		light.owner = body
+	if blocks_camera:
+		_add_camera_blocker(body, mesh)
 	_pack(body, kind)
+
+
+## Крона и куст для кота проходимы (упирается он только в ствол), а для
+## камеры — нет: иначе она влетает внутрь листвы. Поэтому у них отдельное
+## тело на слое 3 «только камера» — его видит лишь SpringArm3D кота.
+## Форма — выпуклая оболочка каждой поверхности меша (ствол, крона).
+const CAMERA_ONLY_LAYER := 4  # бит слоя 3
+
+func _add_camera_blocker(owner_node: Node3D, mesh: ArrayMesh) -> void:
+	var blocker := StaticBody3D.new()
+	blocker.name = "CameraBlocker"
+	blocker.collision_layer = CAMERA_ONLY_LAYER
+	blocker.collision_mask = 0
+	owner_node.add_child(blocker)
+	blocker.owner = owner_node
+	for i in mesh.get_surface_count():
+		var single := ArrayMesh.new()
+		single.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh.surface_get_arrays(i))
+		var hull := CollisionShape3D.new()
+		hull.name = "Hull%d" % i
+		hull.shape = single.create_convex_shape(true, false)
+		blocker.add_child(hull)
+		hull.owner = owner_node
 
 
 ## Куст проходим и замедляет кота вдвое (скрипт bush.gd).
@@ -176,6 +201,7 @@ func _save_bush() -> void:
 	shape.position = Vector3(0.3, 0.8, 0.2)
 	zone.add_child(shape)
 	shape.owner = root
+	_add_camera_blocker(root, visual.mesh)
 	_pack(root, "bush")
 
 

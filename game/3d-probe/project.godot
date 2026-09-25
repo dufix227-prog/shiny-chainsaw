@@ -16,6 +16,12 @@ window/size/viewport_height=800
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[layer_names]
+
+3d_physics/layer_1="world"
+3d_physics/layer_2="player"
+3d_physics/layer_3="camera_only"
+
 [physics]
 ; Keep normal simulation speed in the software-rendered preview below 8 FPS.
 common/max_physics_steps_per_frame=64

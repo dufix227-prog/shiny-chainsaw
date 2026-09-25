@@ -6,16 +6,16 @@
 height = 3.0
 radius = 0.25
 
-[node name="Lantern" type="StaticBody3D" unique_id=1481607662]
+[node name="Lantern" type="StaticBody3D" unique_id=1902575008]
 
-[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1123580733]
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1340011727]
 mesh = ExtResource("1_1mtli")
 
-[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=354374949]
+[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=1250926047]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CylinderShape3D_1mtli")
 
-[node name="Light" type="OmniLight3D" parent="." unique_id=36429840]
+[node name="Light" type="OmniLight3D" parent="." unique_id=857072947]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 2.2, -0.3)
 light_color = Color(1, 0.72, 0.4, 1)
 light_energy = 2.0

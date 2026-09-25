@@ -5,11 +5,11 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_4epmk"]
 size = Vector3(3, 1.6, 0.4)
 
-[node name="Fence" type="StaticBody3D" unique_id=2086807766]
+[node name="Fence" type="StaticBody3D" unique_id=1516075864]
 
-[node name="Mesh" type="MeshInstance3D" parent="." unique_id=927042925]
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=835818274]
 mesh = ExtResource("1_4epmk")
 
-[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=2006745653]
+[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=988534734]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.8, 0)
 shape = SubResource("BoxShape3D_4epmk")

@@ -17,6 +17,11 @@ const STAMINA_TO_RUN_AGAIN := 25.0  # после полного выдоха б�
 const STICK_LOOK_SPEED := 2.6  # радиан в секунду при полном отклонении стика
 const PITCH_MIN := -1.1
 const PITCH_MAX := 0.35
+## Когда препятствие прижимает камеру ближе этого расстояния, кот начинает
+## становиться прозрачным, а на FADE_GONE_DISTANCE исчезает совсем: иначе
+## камера упирается в его голову и закрывает весь экран.
+const FADE_START_DISTANCE := 3.0
+const FADE_GONE_DISTANCE := 1.3
 
 var stamina := STAMINA_MAX
 var is_running := false
@@ -25,6 +30,8 @@ var controls_enabled := true
 var _out_of_breath := false
 var _bushes_touching := 0
 var _walk_cycle := 0.0
+var _visual_parts: Array[GeometryInstance3D] = []
+var _current_fade := 0.0
 
 @onready var visual: Node3D = $Visual
 @onready var leg_left: Node3D = $Visual/LegLeft
@@ -33,7 +40,22 @@ var _walk_cycle := 0.0
 @onready var arm_right: Node3D = $Visual/ArmRight
 @onready var tail: Node3D = $Visual/Tail
 @onready var camera_pivot: Node3D = $CameraPivot
+@onready var spring_arm: SpringArm3D = $CameraPivot/SpringArm3D
 @onready var camera: Camera3D = $CameraPivot/SpringArm3D/Camera3D
+
+
+func _ready() -> void:
+	for part in visual.find_children("*", "GeometryInstance3D", true, false):
+		_visual_parts.append(part)
+
+
+func _process(_delta: float) -> void:
+	var distance := spring_arm.get_hit_length()
+	var fade := 1.0 - clampf((distance - FADE_GONE_DISTANCE) / (FADE_START_DISTANCE - FADE_GONE_DISTANCE), 0.0, 1.0)
+	if absf(fade - _current_fade) > 0.01:
+		_current_fade = fade
+		for part in _visual_parts:
+			part.transparency = fade
 
 
 func _unhandled_input(event: InputEvent) -> void:

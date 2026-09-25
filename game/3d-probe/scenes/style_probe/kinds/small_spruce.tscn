@@ -6,11 +6,27 @@
 height = 4.0
 radius = 0.3
 
-[node name="SmallSpruce" type="StaticBody3D" unique_id=78997910]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4slip"]
+points = PackedVector3Array(-0.3, 0, -0.3, 0.3, 0, -0.3, -0.3, 0, 0.3, -0.3, 4.8, -0.3, 0.3, 0, 0.3, 0.3, 4.8, -0.3, -0.3, 2.6997652, 0.3, 0.3, 2.6997652, 0.3)
 
-[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1361948111]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nilli"]
+points = PackedVector3Array(-1.5, 2.7, -0.30008817, -1.5, 2.7, 0.2998531, -1.5, 2.9995303, -0.30008817, -1.2000294, 2.7, -1.2, -0.6000881, 2.7, 1.5, -1.5, 3.2995596, 0.2998531, -1.5, 3.2995596, -0.00011754036, -0.6000881, 7.4999714, -0.00011754036, -1.2000294, 2.9995303, -1.2, 0.899765, 2.7, -1.2, 0.29982376, 2.7, 1.5, -0.6000881, 2.9995303, 1.5, -0.90005875, 5.099736, 0.5998237, -0.6000881, 7.4999714, 0.2998531, -0.3001175, 7.8, -0.30008817, -0.6000881, 6.2998533, -0.6000588, -0.6000881, 3.5995889, -1.2, -0.3001175, 7.1999416, -0.6000588, 0.899765, 2.9995303, -1.2, 1.2, 2.7, -0.9000294, 0.899765, 2.7, 1.199765, 0.29982376, 3.2995596, 1.5, -0.3001175, 3.2995596, 1.5, -0.6000881, 5.399765, 0.89979434, -0.3001175, 7.8, 0.2998531, 0.29982376, 7.8, -0.30008817, -0.3001175, 3.5995889, -1.2, 0.5997944, 7.1999416, -0.6000588, 1.2, 2.9995303, -0.9000294, 0.899765, 5.099736, -0.9000294, 1.2, 2.7, 0.89979434, 0.899765, 2.9995303, 1.199765, 0.5997944, 5.099736, 0.89979434, 0.29982376, 5.699795, 0.89979434, -0.3001175, 5.699795, 0.89979434, 0.29982376, 7.8, 0.2998531, 0.5997944, 7.1999416, 0.2998531, 0.899765, 5.699795, -0.30008817, 1.2, 3.8996184, -0.30008817, 1.2, 3.5995889, -0.6000588, 1.2, 2.9995303, 0.89979434, 0.899765, 5.399765, 0.5998237, 0.899765, 5.699795, -0.00011754036, 1.2, 3.8996184, -0.00011754036)
+
+[node name="SmallSpruce" type="StaticBody3D" unique_id=2030564360]
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1987546368]
 mesh = ExtResource("1_poxem")
 
-[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=23858015]
+[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=602189353]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("CylinderShape3D_poxem")
+
+[node name="CameraBlocker" type="StaticBody3D" parent="." unique_id=744023948]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Hull0" type="CollisionShape3D" parent="CameraBlocker" unique_id=1109917082]
+shape = SubResource("ConvexPolygonShape3D_4slip")
+
+[node name="Hull1" type="CollisionShape3D" parent="CameraBlocker" unique_id=2080110964]
+shape = SubResource("ConvexPolygonShape3D_nilli")
