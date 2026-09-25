@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800" role="img" aria-labelledby="title desc">
+  <title id="title">Пролог: плоский антро-кот в рисованном макете</title>
+  <desc id="desc">Оригинальная статичная иллюстрация, не игра и не рендер движка. Дорога, деревья, дом и грядки; условный кот на двух лапах. Окрас, детали и числа интерфейса — пробные.</desc>
+  <defs>
+    <linearGradient id="grass" x2=".65" y2="1"><stop stop-color="#bccb80"/><stop offset="1" stop-color="#6e9766"/></linearGradient>
+    <linearGradient id="leaves" x2=".8" y2="1"><stop stop-color="#b9c77b"/><stop offset=".45" stop-color="#73995e"/><stop offset="1" stop-color="#365f4d"/></linearGradient>
+    <linearGradient id="road" x2=".8" y2="1"><stop stop-color="#f1d5a1"/><stop offset="1" stop-color="#c3aa79"/></linearGradient>
+    <pattern id="specks" width="71" height="53" patternUnits="userSpaceOnUse"><path d="M8 13h3m21 28h4m26-32h2" stroke="#edf1bc" stroke-width="2" opacity=".25"/></pattern>
+    <pattern id="soil" width="26" height="17" patternUnits="userSpaceOnUse"><rect width="26" height="17" fill="#755d49"/><path d="M2 9h17" stroke="#a17e56" stroke-width="2"/></pattern>
+    <filter id="shadow" x="-.4" y="-.4" width="1.8" height="1.9"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#243c34" flood-opacity=".19"/></filter>
+    <g id="sprig" stroke="#50754c" stroke-width="2" stroke-linecap="round"><path d="M0 0l-3-7m3 7l5-5m-5 5l1-10"/></g>
+    <g id="flowers"><path d="M0 0l3-14m3 12l4-17" stroke="#587c53" stroke-width="2"/><circle cx="3" cy="-14" r="3" fill="#f5e3a0"/><circle cx="10" cy="-19" r="3" fill="#f3f0cf"/></g>
+    <g id="berry"><path d="M-7 0Q0-11 7 0Q4 10 0 11Q-4 8-7 0" fill="#c85843" stroke="#754838" stroke-width="1.3"/><path d="M-8-3l6 1 2-6 3 5 6-1-5 5-8-1z" fill="#557b45"/><path d="M-2 2v2m4 1v2" stroke="#f2cf7e" stroke-width="1.2"/></g>
+    <g id="plant"><path d="M0 3Q-22-1-15-10Q-2-13 0 3Q2-18 15-14Q22-5 0 3Q-3-26-10-21Q-19-15 0 3" fill="#567f43"/><use href="#berry" x="-7" y="4"/><use href="#berry" x="8" y="1"/></g>
+    <g id="tree">
+      <ellipse cx="34" cy="18" rx="92" ry="27" fill="#3b5945" opacity=".18" transform="rotate(-15 34 18)"/>
+      <path d="M-14 7l6-139 17 1 5 141-15 7z" fill="#6d5a43" stroke="#4c5540" stroke-width="3"/>
+      <path d="M0-38l-27-35m29 16l24-33" fill="none" stroke="#6d5a43" stroke-width="12"/>
+      <path d="M-4-213c-29-7-58 9-61 36-32 8-46 34-27 61-13 38 30 62 60 46 25 29 61 15 71-2 43 4 67-26 48-61 15-29-6-62-42-65-11-18-33-22-49-15z" fill="url(#leaves)" stroke="#466a49" stroke-width="3"/>
+      <path d="M-49-174q7-22 31-20m-52 69q-9-21 9-34m61-34q31-10 46 16M-2-120q24-13 40-1" fill="none" stroke="#d2d68b" stroke-width="9" stroke-linecap="round" opacity=".42"/>
+      <path d="M-23-83q31 17 52-9m22-26q21 2 24-20" fill="none" stroke="#355e4b" stroke-width="6" stroke-linecap="round" opacity=".45"/>
+    </g>
+    <g id="fence">
+      <path d="M0 0l126-35m-126 19l126-35" fill="none" stroke="#775f45" stroke-width="7"/>
+      <path d="M0 8v-52l5-7 5 5v52m53-18v-52l5-7 5 5v52m52-17v-52l5-7 5 5v52" fill="#cfba89" stroke="#806c4f" stroke-width="2"/>
+    </g>
+    <g id="face" stroke="#413e36" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M-37-2l-3-45 28 16q12-5 24 0l28-16-3 45q14 41-37 44Q-49 36-37-2z" fill="#c5b6a0" stroke-width="4"/>
+      <path d="M-32-31l15 9-15 6zm64 0l-15 9 15 6z" fill="#c78278" stroke="none"/>
+      <path d="M-17-25l7 12m10-15v13m17-10l-7 12" fill="none" stroke="#7b7166" stroke-width="5"/>
+      <path d="M-30 13q4-18 21-12 9 8 9 10 5-13 16-12 16 2 15 16Q25 36 0 37q-25 0-30-24" fill="#e5ddc6" stroke="none"/>
+      <path d="M-24 2q7-4 13 0m22 0q6-4 13 0" fill="none" stroke-width="2.7"/>
+      <ellipse cx="-16" cy="6" rx="3.3" ry="5" fill="#363a31" stroke="none"/><ellipse cx="16" cy="6" rx="3.3" ry="5" fill="#363a31" stroke="none"/>
+      <path d="M-4 17l4 4 4-4z" fill="#775b50" stroke-width="1"/>
+      <path d="M0 21v3q-3 5-8 1m8-1q3 5 8 1m-30-10l-13-3m14 10l-13 1m56-8l13-3m-14 10l13 1" fill="none" stroke-width="2"/>
+    </g>
+    <g id="cat" stroke="#413e36" stroke-width="4" stroke-linejoin="round">
+      <path d="M24 59q35 7 28-29-3-12-11-4-4 5 1 12 5 15-21 9" fill="#b6a88f"/>
+      <path d="M-17 18q-14 16-12 43l9 6 7-12-1 30 13 1 6-23 5 20 13-4-3-30 5 6 9-8Q28 23 14 17" fill="#b6a88f"/>
+      <path d="M-12 28q10-8 22 0l4 25q-16 13-31-1z" fill="#e5ddc6" stroke="none"/>
+      <path d="M-22 59l8 3" stroke="#b25349" stroke-width="7"/>
+      <use href="#face" transform="translate(0 -6) scale(.83)"/>
+    </g>
+    <g id="slot"><rect width="52" height="52" rx="12" fill="#f4edd6" stroke="#91a085" stroke-width="1.5"/></g>
+  </defs>
+  <g id="world">
+    <rect width="1280" height="800" fill="url(#grass)"/>
+    <path d="M0 41Q310 193 619 61T1280 77V0H0" fill="#88a675"/>
+    <path d="M0 501Q166 391 338 471T753 626Q1073 594 1280 341V800H0" fill="#5c855a" opacity=".37"/>
+    <path d="M79 800Q9 687 89 569T203 263Q293 143 419 156L469 198Q328 203 287 307T236 581Q142 713 241 800" fill="#6a9781"/>
+    <path d="M89 800Q37 660 124 566T222 284Q298 167 422 168l24 17Q323 203 271 307T221 582Q134 709 221 800" fill="#a2bfb0"/>
+    <path d="M122 626l37 6m-2-56l28 3m31-206l32 3m-18 87l-26 3m-25 102l32 2" stroke="#deead0" stroke-width="3" opacity=".7"/>
+    <path d="M390 825Q364 672 491 572T640 384Q621 289 806 249T1110 108" fill="none" stroke="#6b8554" stroke-width="123" opacity=".35"/>
+    <path d="M396 827Q380 675 494 582T651 385Q633 302 811 264T1115 112" fill="none" stroke="url(#road)" stroke-width="97"/>
+    <path d="M433 800Q414 667 520 596T679 388" fill="none" stroke="#f2d9a4" stroke-width="3" opacity=".4"/>
+    <rect width="1280" height="800" fill="url(#specks)"/>
+    <path d="M694 341l298-114 210 117-281 140z" fill="#819357"/>
+    <path d="M715 339l54-23 153 86-52 22zm76-30l54-23 153 85-53 23zm77-31l54-23 153 86-53 23z" fill="url(#soil)" stroke="#af9e6d" stroke-width="4"/>
+    <g>
+      <use href="#plant" x="756" y="338"/><use href="#plant" x="795" y="360"/><use href="#plant" x="835" y="382"/><use href="#plant" x="875" y="403"/>
+      <use href="#plant" x="833" y="307"/><use href="#plant" x="873" y="329"/><use href="#plant" x="913" y="351"/><use href="#plant" x="953" y="373"/>
+      <use href="#plant" x="910" y="276"/><use href="#plant" x="950" y="298"/><use href="#plant" x="990" y="320"/><use href="#plant" x="1030" y="342"/>
+    </g>
+    <use href="#fence" x="713" y="326"/><use href="#fence" x="847" y="288"/>
+    <path d="M953 197l199-30 105 68-181 77z" fill="#35533e" opacity=".18"/>
+    <path d="M927 123l125-45 115 59v111l-123 49-117-62z" fill="#e1d4a8" stroke="#615d47" stroke-width="3"/>
+    <path d="M1044 185l123-48v111l-123 49z" fill="#afaa81"/>
+    <path d="M898 129l154-122 144 80-149 115z" fill="#95634d" stroke="#514f40" stroke-width="4"/>
+    <path d="M898 129l-7 15 156 68 149-112V87l-149 115z" fill="#624f42"/>
+    <path d="M918 130l145-108m-115 122L1086 35m-109 122l133-110m-103 125l126-112m-98 128L1154 72M1008 43l142 81m-170-57l142 80m-168-55l140 79" stroke="#bd8660" stroke-width="3" opacity=".66"/>
+    <path d="M967 222v-58l31 14v61" fill="#80765a" stroke="#635c45" stroke-width="3"/>
+    <path d="M932 166l22 11v29l-22-11zm159 21l35-14v33l-35 14z" fill="#557976" stroke="#ebe0ae" stroke-width="5"/>
+    <path d="M1108 180v33" stroke="#ebe0ae" stroke-width="3"/>
+    <path d="M975 235l-12 7 32 16 12-7" fill="#aaa482"/>
+    <path d="M931 143l102 45v8l-102-45z" fill="#efd69c"/>
+    <use href="#tree" transform="translate(304 134) scale(.95)"/><use href="#tree" transform="translate(88 252) scale(1.15)"/>
+    <use href="#tree" transform="translate(476 209) scale(.81)"/><use href="#tree" transform="translate(752 137) scale(.95)"/>
+    <path d="M416 205l58-10 27 22-58 13z" fill="#87956a"/><path d="M445 194l35-5 19 17-41 12z" fill="#b5b993"/>
+    <use href="#tree" transform="translate(1196 533) scale(1.1)"/>
+    <g fill="#456c50"><ellipse cx="832" cy="482" rx="38" ry="25"/><ellipse cx="797" cy="488" rx="27" ry="20"/><ellipse cx="861" cy="493" rx="25" ry="18"/></g>
+    <path d="M807 473q26-24 47 3m-52 9l12-3" fill="none" stroke="#93ac66" stroke-width="6" stroke-linecap="round"/>
+    <g fill="#668952"><ellipse cx="307" cy="508" rx="43" ry="29"/><ellipse cx="262" cy="514" rx="26" ry="21"/></g>
+    <path d="M274 500q24-22 46-7" fill="none" stroke="#b5c879" stroke-width="6" stroke-linecap="round"/>
+    <use href="#sprig" x="343" y="303"/><use href="#sprig" x="394" y="333"/><use href="#sprig" x="913" y="532"/><use href="#sprig" x="1080" y="590"/><use href="#sprig" x="689" y="645"/><use href="#sprig" x="471" y="444"/><use href="#sprig" x="715" y="559"/>
+    <use href="#flowers" x="586" y="659"/><use href="#flowers" x="610" y="666"/><use href="#flowers" x="342" y="441"/><use href="#flowers" x="928" y="548"/><use href="#flowers" x="1089" y="559"/>
+    <g fill="#a7ad87" stroke="#718566" stroke-width="2"><path d="M442 574l10-9 15 5 4 10-23 1z"/><path d="M595 450l8-7 12 4-1 7-15 3z"/><path d="M476 635l9-5 9 5-4 7-12-1z"/></g>
+    <path d="M710 282v81" stroke="#685d43" stroke-width="9"/><path d="M676 291l65-14 15 13-13 13-67 12z" fill="#d2b987" stroke="#736347" stroke-width="3"/>
+    <path d="M691 301l38-9m-8-5l8 5-6 7" fill="none" stroke="#68613f" stroke-width="3"/>
+    <ellipse cx="565" cy="566" rx="34" ry="13" fill="#665f45" opacity=".23"/>
+    <use href="#cat" transform="translate(562 509) scale(.65)"/>
+    <use href="#tree" transform="translate(181 807) scale(1.42)"/>
+    <use href="#tree" transform="translate(1214 833) scale(1.52)"/>
+    <g opacity=".23" fill="#304f40"><ellipse cx="881" cy="759" rx="105" ry="32"/><ellipse cx="1042" cy="802" rx="151" ry="40"/></g>
+  </g>
+  <g id="ui" font-family="DejaVu Sans, sans-serif" fill="#34483c">
+    <rect width="1280" height="44" fill="#203c35"/>
+    <text x="26" y="29" font-size="17" fill="#f0e9cf" letter-spacing="1.3">10 000 МЕТРОВ ДО ДОМА</text>
+    <text id="variant-label" x="1254" y="28" text-anchor="end" font-size="13" fill="#c4d1b4">ПРОБА 01 · РИСОВАННЫЙ КОНТУР</text>
+    <g filter="url(#shadow)">
+      <rect x="24" y="65" width="230" height="120" rx="18" fill="#f3eedc" fill-opacity=".96"/>
+      <circle cx="68" cy="109" r="30" fill="#d9d3b8"/><use href="#face" transform="translate(68 108) scale(.56)"/>
+      <text x="109" y="94" font-size="11" letter-spacing="1.6" fill="#7d8b70">ПРОЛОГ · 500 М</text>
+      <text x="109" y="119" font-size="17">За клубничкой</text>
+      <text x="42" y="156" font-size="12">Силы</text><rect x="89" y="146" width="142" height="8" rx="4" fill="#dbddc9"/><rect x="89" y="146" width="111" height="8" rx="4" fill="#8a9d61"/>
+      <text x="42" y="174" font-size="10" fill="#8a8c76">Условный портрет и шкала</text>
+    </g>
+    <g filter="url(#shadow)">
+      <rect x="1076" y="65" width="180" height="134" rx="17" fill="#f3eedc" fill-opacity=".95"/>
+      <text x="1094" y="88" font-size="11" letter-spacing="1.4">КАРТА</text>
+      <path d="M1094 173q30-9 28-32t56-19 59-19" fill="none" stroke="#c6c4a1" stroke-width="15" stroke-linecap="round"/>
+      <path d="M1094 173q30-9 28-32t56-19 59-19" fill="none" stroke="#8b9c70" stroke-width="2" stroke-dasharray="3 5"/>
+      <circle cx="1141" cy="124" r="6" fill="#bc7256" stroke="#fff7da" stroke-width="3"/>
+      <path d="M1222 105l9-8 9 5v12l-16 4z" fill="#92765c"/>
+      <text x="1094" y="185" font-size="10" fill="#808570">Схема, не точная география</text>
+    </g>
+    <g filter="url(#shadow)">
+      <rect x="480" y="612" width="201" height="40" rx="20" fill="#f3eedc" fill-opacity=".92"/>
+      <rect x="492" y="621" width="23" height="22" rx="6" fill="#485e4b"/><text x="504" y="637" font-size="13" text-anchor="middle" fill="#fff2d1">E</text>
+      <text x="527" y="637" font-size="13">Взаимодействовать</text>
+    </g>
+    <g transform="translate(462 684)" filter="url(#shadow)">
+      <rect x="-12" y="-12" width="360" height="77" rx="20" fill="#f3eedc" fill-opacity=".92"/>
+      <use href="#slot"/><use href="#slot" x="59"/><use href="#slot" x="118"/><use href="#slot" x="177"/>
+      <path d="M13 36l28-24" stroke="#816246" stroke-width="6" stroke-linecap="round"/><path d="M30 23v-9" stroke="#816246" stroke-width="3"/>
+      <use href="#berry" transform="translate(85 25) scale(1.2)"/>
+      <path d="M133 15l11-4 13 5v23l-13-4-11 4z" fill="#c7bd8b" stroke="#8b9069" stroke-width="2"/><path d="M144 11v24" stroke="#8b9069" stroke-width="2"/>
+      <path d="M191 23q6-12 20 0l-3 15h-14z" fill="#d2b283" stroke="#8e7957" stroke-width="2"/><path d="M196 21v-5q5-7 9 0v5" fill="none" stroke="#8e7957" stroke-width="2"/>
+      <text x="250" y="22" font-size="12">Tab</text><text x="250" y="39" font-size="11" fill="#7c876e">Инвентарь</text>
+    </g>
+    <rect y="772" width="1280" height="28" fill="#203c35"/>
+    <text x="640" y="791" font-size="11" text-anchor="middle" fill="#dee4c9">СТАТИЧНЫЙ МАКЕТ · НЕ ИГРА И НЕ 3D-РЕНДЕР · ДЕТАЛИ И ЦВЕТ КОТА НЕ УТВЕРЖДЕНЫ · ТЕЛЕФОНА В ПРОЛОГЕ НЕТ</text>
+  </g>
+</svg>

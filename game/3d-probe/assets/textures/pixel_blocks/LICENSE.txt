@@ -1,0 +1,14 @@
+Источник: OpenGameArt.org, «16x16 Block Texture Set» и «16*16 Block Textures»
+(ARoachIFoundOnMyPillow), лицензия CC0 (Public Domain). Ссылки:
+https://opengameart.org/content/16x16-block-texture-set
+https://opengameart.org/content/1616-block-textures
+
+Автор указывает палитру Comfy52 (см. страницу пакета). Файлы скачаны
+12.09.2026 напрямую с opengameart.org. Разрешено использовать в любых
+целях, включая коммерческие, без указания авторства.
+
+Использованные файлы (16x16 px, пиксельный/voxel-стиль):
+- cobblestone.png, cobblestone_mossy.png — камень для стен/пола пещеры
+- dirt.png, gravel.png — грунт/пол
+- pine_log_side.png, pine_log_top.png, oak_planks.png — дерево
+- grass_top.png — трава (задел на будущее)

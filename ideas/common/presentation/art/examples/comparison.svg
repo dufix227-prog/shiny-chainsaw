@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Схема: три варианта мира и два варианта портрета</title>
+  <desc id="desc">A — плоские декорации и пиксельный кот. B — объёмные декорации и плоский пиксельный кот. C — объёмные декорации и условная объёмная фигурка. P — пиксельный портрет. Q — гладкий портрет. Не скриншоты игры и не финальный арт.</desc>
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fac579"/><stop offset="1" stop-color="#ad693d"/></linearGradient>
+    <g id="pixel-cat" shape-rendering="crispEdges">
+      <path fill="#d59458" d="M0 0h3v2h6V0h3v9h-1v3h-2v5H7v-4H5v4H3v-5H1V9H0Z"/>
+      <path fill="#f4c993" d="M2 5h8v5H8v2H4v-2H2Z"/>
+      <path fill="#453831" d="M3 5h1v2H3zm5 0h1v2H8zM5 8h2v1H5z"/>
+      <path fill="#9a5c37" d="M10 12h3v-3h2v5h-5z"/>
+    </g>
+    <g id="model-cat">
+      <ellipse cx="0" cy="30" rx="21" ry="31" fill="url(#body)"/>
+      <path d="M-28-10-26-42-7-26Q0-29 8-26L27-41 29-9Z" fill="url(#body)"/>
+      <ellipse cy="-8" rx="30" ry="24" fill="url(#body)"/>
+      <ellipse cx="-10" cy="-10" rx="3" ry="5" fill="#453831"/><ellipse cx="11" cy="-10" rx="3" ry="5" fill="#453831"/>
+      <path d="m-3 0 6 0-3 4Z" fill="#714a3d"/>
+      <ellipse cx="-12" cy="55" rx="12" ry="8" fill="#edb47a"/><ellipse cx="14" cy="55" rx="12" ry="8" fill="#d99b62"/>
+      <path d="M20 40Q48 43 43 14" fill="none" stroke="#ba7847" stroke-width="11" stroke-linecap="round"/>
+    </g>
+    <g id="island">
+      <path d="m25 110 175-65 125 70-170 80Z" fill="#9fbba3"/>
+      <path d="m25 110 130 85v22L25 132Z" fill="#6d8778"/>
+      <path d="m155 195 170-80v23l-170 79Z" fill="#526e62"/>
+      <path d="m45 115 22-9 125 72-24 12Z" fill="#dec5a4"/>
+      <path d="m183 110 17-8v-68l-17 7Z" fill="#82634c"/>
+      <path d="m142 53 55-35 54 26-54 35Z" fill="#648a78"/>
+      <path d="m142 53 55 26v38l-55-26Z" fill="#496f60"/>
+      <path d="m197 79 54-35v38l-54 35Z" fill="#35584e"/>
+    </g>
+  </defs>
+  <rect width="1200" height="900" fill="#f3f0e9"/>
+  <g font-family="DejaVu Sans, sans-serif" fill="#283b37">
+    <text x="32" y="44" font-size="27" font-weight="bold">Как может выглядеть игра — сначала выбираем принцип</text>
+    <text x="32" y="77" font-size="17" fill="#6b716b">УЧЕБНАЯ СХЕМА · не скриншоты игры, не финальный арт, не выбранные персонажи</text>
+    <g fill="#fffdf8" stroke="#d6dcd2"><rect x="24" y="103" width="368" height="358" rx="16"/><rect x="416" y="103" width="368" height="358" rx="16"/><rect x="808" y="103" width="368" height="358" rx="16"/></g>
+    <g font-size="21" font-weight="bold"><text x="46" y="139">A · Всё нарисовано</text><text x="438" y="139">B · Плоский кот в макете</text><text x="830" y="139">C · Кот тоже фигурка</text></g>
+    <g font-size="16" fill="#63776c"><text x="46" y="169">2D · вид сбоку — один из вариантов</text><text x="438" y="169">2.5D · глубина + пиксельный спрайт</text><text x="830" y="169">3D · условный рисунок объёма</text></g>
+    <path d="M48 340h318v28H48Z" fill="#9fbba3"/><path d="M48 342h318v12H48Z" fill="#dec5a4"/>
+    <rect x="284" y="240" width="16" height="101" fill="#82634c"/><path d="M240 225h102v59H240Z" fill="#648a78"/>
+    <use href="#pixel-cat" transform="translate(136 255) scale(5)"/>
+    <use href="#island" transform="translate(426 183)"/><use href="#pixel-cat" transform="translate(531 263) scale(4.5)"/>
+    <use href="#island" transform="translate(818 183)"/><ellipse cx="963" cy="347" rx="39" ry="13" fill="#567b68" opacity=".45"/><use href="#model-cat" transform="translate(953 286)"/>
+    <g font-size="17"><text x="46" y="409">Как театр из плоских декораций.</text><text x="46" y="436">Кот и дерево — рисунки.</text><text x="438" y="409">Дерево объёмное; кот плоский.</text><text x="438" y="436">Камеру можно закрепить.</text><text x="830" y="409">У кота есть объём и повороты.</text><text x="830" y="436">Текстуры могут быть пиксельными.</text></g>
+    <text x="32" y="505" font-size="24" font-weight="bold">А портреты в разговоре выбираются отдельно</text>
+    <g fill="#fffdf8" stroke="#d6dcd2"><rect x="24" y="525" width="564" height="276" rx="16"/><rect x="612" y="525" width="564" height="276" rx="16"/></g>
+    <text x="46" y="562" font-size="22" font-weight="bold">P · Пиксельный портрет</text><text x="634" y="562" font-size="22" font-weight="bold">Q · Гладкий рисованный портрет</text>
+    <g transform="translate(72 600) scale(10)" shape-rendering="crispEdges"><path d="M0 0h3v2h6V0h3v9h-1v2H9v1H3v-1H1V9H0Z" fill="#d59458"/><path d="M2 5h8v4H8v2H4V9H2Z" fill="#f4c993"/><path d="M3 5h1v2H3zm5 0h1v2H8zM5 8h2v1H5Z" fill="#453831"/></g>
+    <g transform="translate(735 668)"><path d="M-64-24-58-74-22-50Q0-59 23-50L59-74 65-24C85 63-81 65-64-24Z" fill="#d59458"/><path d="M-48 1Q0-20 49 1Q53 45 0 48Q-52 45-48 1" fill="#f4c993"/><ellipse cx="-26" cy="-8" rx="6" ry="10" fill="#453831"/><ellipse cx="27" cy="-8" rx="6" ry="10" fill="#453831"/><path d="M-8 15Q0 10 8 15L0 23Z" fill="#453831"/></g>
+    <g font-size="18"><text x="234" y="632">Ступеньки на контуре,</text><text x="234" y="662">маленькие цветовые клетки.</text><text x="234" y="701" font-size="15" fill="#63776c">Здесь они специально увеличены.</text><text x="846" y="632">Плавные линии,</text><text x="846" y="662">как в обычной иллюстрации.</text><text x="846" y="701" font-size="15" fill="#63776c">Можно сочетать с пиксельным миром.</text></g>
+    <g fill="#e7ebe2"><rect x="46" y="750" width="520" height="32" rx="7"/><rect x="634" y="750" width="520" height="32" rx="7"/></g>
+    <g font-size="15"><text x="62" y="772">Имя · окно текста · варианты ответа</text><text x="650" y="772">Имя · окно текста · варианты ответа</text></g>
+    <text x="32" y="847" font-size="18">Можно выбрать B + Q или A + P. Мир, камера, пиксельность и диалоги — разные решения.</text>
+    <text x="32" y="878" font-size="16" fill="#63776c">Все варианты открыты. Схема объясняет разницу, а не предлагает готовый стиль для релиза.</text>
+  </g>
+</svg>

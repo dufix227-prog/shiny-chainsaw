@@ -1,0 +1,281 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://probes/pack_viewer.gd" id="1_t66xr"]
+[ext_resource type="PackedScene" path="res://assets/own/goose_guard_v1.glb" id="2_d7pab"]
+[ext_resource type="PackedScene" path="res://assets/own/bridge_v1.glb" id="3_unpxt"]
+[ext_resource type="PackedScene" path="res://assets/own/strawberry_bed_v1.glb" id="4_syxmv"]
+[ext_resource type="PackedScene" path="res://assets/own/strawberry_basket_v1.glb" id="5_jal1a"]
+[ext_resource type="PackedScene" path="res://assets/own/grandma_house_v1.glb" id="6_wxiqq"]
+[ext_resource type="PackedScene" path="res://assets/own/yard_fence_v1.glb" id="7_f4qs7"]
+[ext_resource type="PackedScene" path="res://assets/own/yard_shed_v1.glb" id="8_s32ad"]
+[ext_resource type="PackedScene" path="res://assets/own/woodpile_v1.glb" id="9_rpbge"]
+[ext_resource type="PackedScene" path="res://assets/own/barrel_v1.glb" id="10_w8rjp"]
+[ext_resource type="PackedScene" path="res://assets/own/cat_v2_faceted.glb" id="11_trjgs"]
+[ext_resource type="PackedScene" path="res://assets/own/cat_v3_voxel.glb" id="12_rndyv"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2h3i2"]
+sky_top_color = Color(0.43, 0.56, 0.74, 1)
+sky_horizon_color = Color(0.76, 0.79, 0.82, 1)
+ground_bottom_color = Color(0.3, 0.32, 0.28, 1)
+ground_horizon_color = Color(0.62, 0.64, 0.6, 1)
+
+[sub_resource type="Sky" id="Sky_n82sd"]
+sky_material = SubResource("ProceduralSkyMaterial_2h3i2")
+
+[sub_resource type="Environment" id="Environment_d1j33"]
+background_mode = 2
+sky = SubResource("Sky_n82sd")
+ambient_light_source = 3
+ssao_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a14a5"]
+albedo_color = Color(0.42, 0.47, 0.34, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nnx81"]
+size = Vector3(49.72915, 0.4, 14)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqkbi"]
+albedo_color = Color(0.72, 0.74, 0.78, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qwc3w"]
+radius = 0.35
+height = 1.8
+
+[node name="PackViewer" type="Node3D" unique_id=172877574]
+script = ExtResource("1_t66xr")
+
+[node name="Environment" type="WorldEnvironment" parent="." unique_id=126184281]
+environment = SubResource("Environment_d1j33")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=186588657]
+transform = Transform3D(0.7880108, -0.48514786, 0.37903908, 0, 0.6156615, 0.7880107, -0.6156615, -0.62096095, 0.4851479, 0, 0, 0)
+light_color = Color(1, 0.96, 0.88, 1)
+light_energy = 1.35
+shadow_enabled = true
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=1860420703]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.514576, -0.2, 0)
+material_override = SubResource("StandardMaterial3D_a14a5")
+mesh = SubResource("BoxMesh_nnx81")
+
+[node name="Reference" type="Node3D" parent="." unique_id=178388675]
+
+[node name="Capsule" type="MeshInstance3D" parent="Reference" unique_id=303614342]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+material_override = SubResource("StandardMaterial3D_eqkbi")
+mesh = SubResource("CapsuleMesh_qwc3w")
+
+[node name="Label" type="Label3D" parent="Reference" unique_id=1836203914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, 0)
+pixel_size = 0.0026
+billboard = 1
+no_depth_test = true
+text = "рост 1,8 м"
+font_size = 40
+outline_size = 14
+
+[node name="Exhibits" type="Node3D" parent="." unique_id=420513668]
+
+[node name="1_goose_guard_v1" type="Node3D" parent="Exhibits" unique_id=1426139313]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0668294, 0, 0)
+metadata/title = "Гусь-охранник"
+metadata/note = "птица с мостика на 470 м, погоня в концовке"
+metadata/file = "goose_guard_v1"
+
+[node name="goose_guard_v1" type="Node3D" parent="Exhibits/1_goose_guard_v1" unique_id=320876636 instance=ExtResource("2_d7pab")]
+
+[node name="Number" type="Label3D" parent="Exhibits/1_goose_guard_v1" unique_id=1489438098]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50125, 0)
+pixel_size = 0.0026
+billboard = 1
+no_depth_test = true
+text = "1"
+font_size = 40
+outline_size = 14
+
+[node name="2_bridge_v1" type="Node3D" parent="Exhibits" unique_id=268628819]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.689113, 0, 0)
+metadata/title = "Мостик"
+metadata/note = "деревянный, 4 × 1,5 м, точка спасения на 470 м"
+metadata/file = "bridge_v1"
+
+[node name="bridge_v1" type="Node3D" parent="Exhibits/2_bridge_v1" unique_id=1238449455 instance=ExtResource("3_unpxt")]
+
+[node name="Number" type="Label3D" parent="Exhibits/2_bridge_v1" unique_id=1187025032]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0120001, 0)
+pixel_size = 0.0026
+billboard = 1
+no_depth_test = true
+text = "2"
+font_size = 40
+outline_size = 14
+
+[node name="3_strawberry_bed_v1" type="Node3D" parent="Exhibits" unique_id=1110339519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.049567, 0, 0)
+metadata/title = "Грядка"
+metadata/note = "клубничная грядка бабушки 2 × 1 м, кража"
+metadata/file = "strawberry_bed_v1"
+
+[node name="strawberry_bed_v1" type="Node3D" parent="Exhibits/3_strawberry_bed_v1" unique_id=597258066 instance=ExtResource("4_syxmv")]
+
+[node name="Number" type="Label3D" parent="Exhibits/3_strawberry_bed_v1" unique_id=285461445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.87875, 0)
+pixel_size = 0.0026
+billboard = 1
+no_depth_test = true
+text = "3"
+font_size = 40
+outline_size = 14
+
+[node name="4_strawberry_basket_v1" type="Node3D" parent="Exhibits" unique_id=538124896]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.791525, 0, 0)
+metadata/title = "Корзина"
+metadata/note = "плетёная с дужкой, 42 клубнички — кот несёт её в зубах"
+metadata/file = "strawberry_basket_v1"
+
+[node name="strawberry_basket_v1" type="Node3D" parent="Exhibits/4_strawberry_basket_v1" unique_id=1673245608 instance=ExtResource("5_jal1a")]
+
+[node name="Number" type="Label3D" parent="Exhibits/4_strawberry_basket_v1" unique_id=282918210]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6544616, 0)
+pixel_size = 0.0026
+billboard = 1
+no_depth_test = true
+text = "4"
+font_size = 40
+outline_size = 14
+
+[node name="5_grandma_house_v1" type="Node3D" parent="Exhibits" unique_id=1582294760]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.687687, 0, 0)
+metadata/title = "Дом бабушки"
+metadata/note = "жилой размер 6 × 4,5 м, конёк 4,2 м, сени и крыльцо; внутрь не заходим"
+metadata/file = "grandma_house_v1"
+
+[node name="grandma_house_v1" type="Node3D" parent="Exhibits/5_grandma_house_v1" unique_id=1377757422 instance=ExtResource("6_wxiqq")]
+
+[node name="Number" type="Label3D" parent="Exhibits/5_grandma_house_v1" unique_id=817074127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9100003, 0)
+pixel_size = 0.0026
+billboard = 1
+no_depth_test = true
+text = "5"
+font_size = 40
+outline_size = 14
+
+[node name="6_yard_fence_v1" type="Node3D" parent="Exhibits" unique_id=1221963380]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.716894, 0, 0)
+metadata/title = "Забор"
+metadata/note = "секция 2,4 м — двор бабушки"
+metadata/file = "yard_fence_v1"
+
+[node name="yard_fence_v1" type="Node3D" parent="Exhibits/6_yard_fence_v1" unique_id=1560319351 instance=ExtResource("7_f4qs7")]
+
+[node name="Number" type="Label3D" parent="Exhibits/6_yard_fence_v1" unique_id=1047156433]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5500001, 0)
+pixel_size = 0.0026
+billboard = 1
+no_depth_test = true
+text = "6"
+font_size = 40
+outline_size = 14
+
+[node name="7_yard_shed_v1" type="Node3D" parent="Exhibits" unique_id=1675574500]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.156893, 0, 0)
+metadata/title = "Сарай"
+metadata/note = "2,8 × 2,2 м под крышей — двор бабушки"
+metadata/file = "yard_shed_v1"
+
+[node name="yard_shed_v1" type="Node3D" parent="Exhibits/7_yard_shed_v1" unique_id=728230720 instance=ExtResource("8_s32ad")]
+
+[node name="Number" type="Label3D" parent="Exhibits/7_yard_shed_v1" unique_id=1645518056]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.0240705, 0)
+pixel_size = 0.0026
+billboard = 1
+no_depth_test = true
+text = "7"
+font_size = 40
+outline_size = 14
+
+[node name="8_woodpile_v1" type="Node3D" parent="Exhibits" unique_id=693897698]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.216892, 0, 0)
+metadata/title = "Поленница"
+metadata/note = "колотые дрова 1,8 м — двор бабушки"
+metadata/file = "woodpile_v1"
+
+[node name="woodpile_v1" type="Node3D" parent="Exhibits/8_woodpile_v1" unique_id=1811985654 instance=ExtResource("9_rpbge")]
+
+[node name="Number" type="Label3D" parent="Exhibits/8_woodpile_v1" unique_id=468316098]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.06725, 0)
+pixel_size = 0.0026
+billboard = 1
+no_depth_test = true
+text = "8"
+font_size = 40
+outline_size = 14
+
+[node name="9_barrel_v1" type="Node3D" parent="Exhibits" unique_id=350763607]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.006893, 0, 0)
+metadata/title = "Бочка"
+metadata/note = "деревянная с обручами, 0,74 м — двор бабушки"
+metadata/file = "barrel_v1"
+
+[node name="barrel_v1" type="Node3D" parent="Exhibits/9_barrel_v1" unique_id=707457558 instance=ExtResource("10_w8rjp")]
+
+[node name="Number" type="Label3D" parent="Exhibits/9_barrel_v1" unique_id=1050700089]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09, 0)
+pixel_size = 0.0026
+billboard = 1
+no_depth_test = true
+text = "9"
+font_size = 40
+outline_size = 14
+
+[node name="10_cat_v2_faceted" type="Node3D" parent="Exhibits" unique_id=264420364]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.38609, 0, 0)
+metadata/title = "Кот v2"
+metadata/note = "гранёный low-poly, кандидат для сравнения"
+metadata/file = "cat_v2_faceted"
+
+[node name="cat_v2_faceted" type="Node3D" parent="Exhibits/10_cat_v2_faceted" unique_id=314590511 instance=ExtResource("11_trjgs")]
+
+[node name="Number" type="Label3D" parent="Exhibits/10_cat_v2_faceted" unique_id=2096331902]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1499999, 0)
+pixel_size = 0.0026
+billboard = 1
+no_depth_test = true
+text = "10"
+font_size = 40
+outline_size = 14
+
+[node name="11_cat_v3_voxel" type="Node3D" parent="Exhibits" unique_id=600231530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.92222, 0, 0)
+metadata/title = "Кот v3"
+metadata/note = "ступенчатый voxel, кандидат для сравнения"
+metadata/file = "cat_v3_voxel"
+
+[node name="cat_v3_voxel" type="Node3D" parent="Exhibits/11_cat_v3_voxel" unique_id=427891947 instance=ExtResource("12_rndyv")]
+
+[node name="Number" type="Label3D" parent="Exhibits/11_cat_v3_voxel" unique_id=786213595]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, 0)
+pixel_size = 0.0026
+billboard = 1
+no_depth_test = true
+text = "11"
+font_size = 40
+outline_size = 14
+
+[node name="Camera" type="Camera3D" parent="." unique_id=1990020911]
+transform = Transform3D(-1, 1.8176218e-08, -8.551238e-08, 0, 0.9781476, 0.2079117, 8.742278e-08, 0.2079117, -0.9781476, 0, 3, 14)
+current = true
+far = 400.0
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1703121883]
+
+[node name="Hint" type="Label" parent="HUD" unique_id=89613475]
+offset_left = 18.0
+offset_top = 14.0
+offset_right = 18.0
+offset_bottom = 14.0
+theme_override_colors/font_color = Color(0.1, 0.12, 0.14, 1)
+theme_override_colors/font_outline_color = Color(0.95, 0.96, 0.97, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18

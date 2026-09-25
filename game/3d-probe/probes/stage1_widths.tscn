@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://probes/stage1_widths.gd" id="1_stage1w"]
+
+[node name="Stage1Widths" type="Node3D"]
+script = ExtResource("1_stage1w")

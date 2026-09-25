@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Пролог — пиксельный кот и угловатый объёмный мир</title>
+  <desc id="desc">Статичная авторская проба: плоский пиксельный кот, блочные деревья, ступенчатые берега, дом с освещёнными гранями. Объём нарисован, это не работающий 3D-мир.</desc>
+  <defs>
+    <pattern id="grass" width="48" height="38" patternUnits="userSpaceOnUse"><rect width="48" height="38" fill="#82965a"/><path d="M8 8h4v2H8zm20 18h6v2h-6zm11-20h3v3h-3z" fill="#a0ab65"/><path d="M2 31h4v2H2zm17-16h2v4h-2z" fill="#718451"/></pattern>
+    <pattern id="soil" width="16" height="12" patternUnits="userSpaceOnUse"><rect width="16" height="12" fill="#73513c"/><path d="M2 2h6v2H2zm6 6h6v2H8z" fill="#946b48"/></pattern>
+    <pattern id="paving" width="27" height="21" patternUnits="userSpaceOnUse"><rect width="27" height="21" fill="#d1b87d"/><path d="M3 4h8v2H3zm14 12h6v2h-6z" fill="#b99d68"/><path d="M12 2h4v2h-4z" fill="#e5ca8d"/></pattern>
+    <g id="leaf-block" shape-rendering="crispEdges">
+      <path d="M0 0l26-13L52 0 26 13z" fill="#a8b967"/>
+      <path d="M0 0l26 13v23L0 23z" fill="#718c4d"/>
+      <path d="M26 13L52 0v23L26 36z" fill="#456946"/>
+      <path d="M4 5l6 3v5l-6-3zm12 10l6 3v7l-6-3z" fill="#839b55"/>
+      <path d="M32 16l5-3v6l-5 3zm10-1l6-3v4l-6 3z" fill="#55784b"/>
+      <path d="M10 0l10-5 5 3-10 5zm21-6l8 4-5 2-8-4z" fill="#c4cc7e"/>
+    </g>
+    <g id="tree">
+      <path d="M-9 4l47-24 41 21-50 25z" fill="#365c43" opacity=".3"/>
+      <path d="M-7-48l7-4 8 4-8 4z" fill="#b99760"/><path d="M-7-48l7 4V8l-7-4z" fill="#8d714b"/><path d="M0-44l8-4V4L0 8z" fill="#624f3c"/>
+      <path d="M-4-31v20m8-36v13" stroke="#aa8856" stroke-width="2"/>
+      <use href="#leaf-block" x="-13" y="-74"/>
+      <use href="#leaf-block" x="-47" y="-57"/>
+      <use href="#leaf-block" x="5" y="-49"/>
+      <use href="#leaf-block" x="-22" y="-91"/>
+      <use href="#leaf-block" x="-35" y="-31" transform="translate(0 -12) scale(.65)"/>
+    </g>
+    <g id="bush"><use href="#leaf-block" transform="scale(.43 .36)"/><use href="#leaf-block" transform="translate(16 5) scale(.38 .32)"/></g>
+    <g id="plant" shape-rendering="crispEdges"><path d="M-5 0v-3h4v-4h3v4h5v3H2v4h-3V0z" fill="#425f37"/><path d="M-6 2h5v5h-4V5h-1zm9-1h5v5H4V4H3z" fill="#b94339"/><path d="M-5 2h2v2h-2zm9-1h2v2H4z" fill="#ed9170"/></g>
+    <g id="stone"><path d="M0 0l10-5 8 4-9 5z" fill="#b8b18e"/><path d="M0 0l9 4v6L0 6z" fill="#98987a"/><path d="M9 4l9-5v6l-9 5z" fill="#757e64"/></g>
+    <g id="cat" shape-rendering="crispEdges">
+      <path d="M25 29h6V19h4v14h-4v3h-6z" fill="#34392f"/><path d="M27 30h5v-9h2v11h-7z" fill="#9c957c"/>
+      <path d="M5 0h5v3h12V0h5v4h3v15h-3v3h-2v3h4v11h-5v-6h-1v11h-8v-7h-2v7H6V30H5v6H1V25h4v-3H3V5h2z" fill="#34392f"/>
+      <path d="M6 2h3v5h14V2h3v5h2v11h-3v3H6v-3H5V7h1z" fill="#b7ae92"/>
+      <path d="M6 3h2v4H6zm18 0h2v4h-2z" fill="#c8786c"/>
+      <path d="M10 7h3v4h-3zm6 0h3v3h-3zm8 2h3v3h-3z" fill="#817f6b"/>
+      <path d="M5 14h5v3h11v-3h7v4h-3v3H7v-3H5z" fill="#e2d5ae"/>
+      <path d="M8 12h4v4H8zm13 0h4v4h-4z" fill="#34392f"/><path d="M9 12h1v1H9zm13 0h1v1h-1z" fill="#fff3d2"/>
+      <path d="M15 16h3v2h-3zm1 3h1v1h-1z" fill="#6d5144"/>
+      <path d="M9 23h12v5h2v10h-5v-7h-6v8H8V28H4v5H3v-7h6z" fill="#a49e83"/>
+      <path d="M11 23h9v7h-9z" fill="#ded2ab"/><path d="M2 30h3v3H2z" fill="#b55045"/>
+      <path d="M8 38h4v2H8zm9-1h5v2h-5z" fill="#d2c6a0"/>
+    </g>
+    <g id="fence"><path d="M0 0l66-27m-66 18l66-27" stroke="#776044" stroke-width="3"/><path d="M0 4v-23l4-2V2zm32-13v-23l4-2v23zm31-14v-23l4-2v23z" fill="#ddc799"/><path d="M4-21l2 2V3L4 2zm32-13l2 2v22l-2-1zm31-14l2 2v22l-2-1z" fill="#a78b60"/></g>
+  </defs>
+  <g id="world" shape-rendering="crispEdges">
+    <rect width="640" height="400" fill="url(#grass)"/>
+    <path d="M0 23h88v14h88v18h70v16h-21v16h-91V74H72V64H0z" fill="#a3ac69"/>
+    <path d="M0 80h73v11h58v12h61v13h-31v10H73v-9H0z" fill="#657c4d"/>
+    <path d="M0 80h73v11h58v12h61v6h-65V97H69V87H0z" fill="#c0b477"/>
+    <path d="M640 274H526v14h-44v30h-44v29h-34v53h236z" fill="#667d4e"/>
+    <path d="M31 400v-84h17v-49h24v-72h30v-39h48v-32h58v-21h35v29h-21v20h-56v29h-43v34h-24v63H73v50H59v72z" fill="#577a68"/>
+    <path d="M39 400v-80h18v-49h23v-72h30v-37h49v-31h57v-20h19v14h-21v20h-56v30h-43v35H91v63H65v51H51v76z" fill="#8bab92"/>
+    <path d="M43 348h13v2H43zm19-53h16v2H62zm29-62h13v2H91zm35-64h23v2h-23zm49-29h20v2h-20z" fill="#c9cfaa"/>
+    <path d="M175 400v-49h18v-35h29v-31h37v-29h31v-33h15v-38h-12v-31h28v-21h56v-17h60v-25h43V76h44v38h-43v23h-49v16h-62v19h-40v22h12v38h-19v35h-37v31h-36v32h-27v33h-13v37z" fill="#667a49"/>
+    <path d="M181 400v-46h19v-34h29v-31h37v-29h32v-35h15v-42h-12v-25h25v-18h54v-17h60V98h43V82h34v27h-42v23h-49v16h-62v19h-40v28h12v35h-19v34h-37v30h-36v32h-27v34h-14v40z" fill="url(#paving)"/>
+    <path d="M178 399v-48h19v-34h29v-31h36v-28h32v-36h15" fill="none" stroke="#e7cf90" stroke-width="2"/>
+    <path d="M345 168l136-56 119 68-138 60z" fill="#536b40" opacity=".3"/>
+    <path d="M350 166l27-12 78 45-27 12zm39-17l28-12 78 45-28 12zm41-17l28-12 78 45-28 12z" fill="url(#soil)"/>
+    <path d="M350 166v5l78 45v-5zm39-17v5l78 45v-5zm41-17v5l78 45v-5z" fill="#503f31"/>
+    <use href="#plant" x="369" y="165"/><use href="#plant" x="389" y="177"/><use href="#plant" x="409" y="188"/><use href="#plant" x="429" y="199"/>
+    <use href="#plant" x="408" y="148"/><use href="#plant" x="428" y="160"/><use href="#plant" x="448" y="171"/><use href="#plant" x="468" y="182"/>
+    <use href="#plant" x="449" y="131"/><use href="#plant" x="469" y="143"/><use href="#plant" x="489" y="154"/><use href="#plant" x="509" y="165"/>
+    <use href="#fence" x="350" y="156"/><use href="#fence" x="420" y="127"/>
+    <path d="M461 100l91-39 78 58-91 34z" fill="#39543c" opacity=".35"/>
+    <path d="M456 69l59 29v50l-59-29z" fill="#d5c497"/><path d="M515 98l68-30v50l-68 30z" fill="#a29870"/>
+    <path d="M449 69l30-43 62-25 49 42-75 60z" fill="#a3734b"/>
+    <path d="M449 69l30-43 36 77z" fill="#d3995f"/><path d="M479 26l62-25 49 42-75 60z" fill="#8e5d43"/>
+    <path d="M449 69v6l66 34 75-60v-6l-75 60z" fill="#594839"/>
+    <path d="M486 28l58-23m-51 34l62-25m-55 36l66-27m-60 38l72-29M509 14l37 37m-21-44l35 33m-25-2l22 20m-64-19l24 25" fill="none" stroke="#b78653" stroke-width="2"/>
+    <path d="M481 105l13 6v26l-13-6z" fill="#705f44"/><path d="M459 85l12 6v14l-12-6zm82 18l17-8v16l-17 8z" fill="#486c63" stroke="#e1ce9a" stroke-width="2"/>
+    <path d="M550 99v16" stroke="#e1ce9a" stroke-width="2"/><path d="M479 133l15 7-7 4-15-7z" fill="#c0b285"/>
+    <path d="M520 15V0l8-4 7 4v18l-7 4z" fill="#8a7661"/><path d="M528 0l7-4v22l-7 4z" fill="#605b4c"/>
+    <use href="#tree" x="144" y="79"/><use href="#tree" x="43" y="135"/><use href="#tree" x="234" y="119"/><use href="#tree" x="372" y="71"/>
+    <use href="#tree" transform="translate(598 266) scale(1.1)"/>
+    <use href="#bush" x="131" y="252"/><use href="#bush" x="397" y="240"/><use href="#bush" x="423" y="247"/>
+    <use href="#stone" x="205" y="119"/><use href="#stone" x="224" y="291"/><use href="#stone" x="304" y="232"/><use href="#stone" x="453" y="288"/>
+    <path d="M345 137v44h4v-44z" fill="#7c6242"/><path d="M332 144l30-12 8 5-7 7-31 12z" fill="#d0b57e"/><path d="M340 147l17-7m-4-1l4 1-2 4" fill="none" stroke="#73613f" stroke-width="2"/>
+    <path d="M143 211h3v-6h2v10h-5zm305 51h4v-5h2v8h-6zm-94 54h3v-6h2v9h-5z" fill="#546e40"/>
+    <path d="M168 232h3v-3h3v3h-3v3h-3zm296 41h3v-3h3v3h-3v3h-3zm-139 61h3v-3h3v3h-3v3h-3z" fill="#e3cb7f"/>
+    <path d="M262 299h40v5h-7v3h-31v-3h-7v-3z" fill="#726c44" opacity=".4"/>
+    <use href="#cat" transform="translate(255 239) scale(1.5)"/>
+    <use href="#tree" transform="translate(65 408) scale(1.45)"/><use href="#tree" transform="translate(604 412) scale(1.4)"/>
+  </g>
+  <g id="ui" font-family="DejaVu Sans, sans-serif" fill="#e6ddba">
+    <rect width="640" height="22" fill="#263d32"/><text x="13" y="15" font-size="8.5" letter-spacing=".7">10 000 МЕТРОВ ДО ДОМА</text><text x="627" y="14" text-anchor="end" font-size="6.5" fill="#bfc99b">ПРОБА 03 · ПИКСЕЛЬНЫЙ КОТ / БЛОЧНЫЙ МИР</text>
+    <path d="M12 33h111v57H12z" fill="#273e33"/><path d="M14 35h107v53H14z" fill="none" stroke="#65754e"/>
+    <rect x="20" y="41" width="31" height="27" fill="#45543e"/><svg x="22" y="41" width="27" height="24" viewBox="2 0 28 23"><use href="#cat"/></svg>
+    <text x="57" y="47" font-size="5.5" fill="#afbc8f">ПРОЛОГ · 500 М</text><text x="57" y="60" font-size="7.5">За клубничкой</text><text x="20" y="78" font-size="6">Силы</text><rect x="45" y="73" width="65" height="4" fill="#536549"/><rect x="45" y="73" width="49" height="4" fill="#a9b766"/>
+    <rect x="544" y="33" width="83" height="63" fill="#273e33"/><rect x="546" y="35" width="79" height="59" fill="none" stroke="#65754e"/><text x="551" y="46" font-size="6">КАРТА</text><path d="M552 83h14V70h18V60h17V52h17" fill="none" stroke="#889568" stroke-width="5"/><rect x="581" y="66" width="5" height="5" fill="#deb781"/>
+    <rect x="231" y="336" width="173" height="37" fill="#273e33"/><g fill="#4d5d40" stroke="#8c9970"><rect x="237" y="342" width="23" height="23"/><rect x="267" y="342" width="23" height="23"/><rect x="297" y="342" width="23" height="23"/><rect x="327" y="342" width="23" height="23"/></g>
+    <path d="M244 358l10-11" stroke="#d0b584" stroke-width="3"/><use href="#plant" x="278" y="352"/><path d="M304 348l5-2 6 3v12l-6-3-5 2z" fill="#cfbd87"/><path d="M333 350h11v10h-11zm3-3h5v3h-5z" fill="#c4a575"/><text x="360" y="351" font-size="6">Tab</text><text x="360" y="361" font-size="5.5" fill="#bdc79d">Инвентарь</text>
+    <rect y="386" width="640" height="14" fill="#263d32"/><text x="320" y="395.5" text-anchor="middle" font-size="5.5" fill="#ced4b2">СТАТИЧНАЯ ПРОБА · ОБЪЁМ НАРИСОВАН · НЕ ИГРА · ВНЕШНОСТЬ И ПОРТРЕТ НЕ УТВЕРЖДЕНЫ</text>
+  </g>
+</svg>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пролог — анимированная проба 04</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #192d25; color: #ece4c8; font: 15px system-ui, sans-serif; }
+  header { max-width: 1280px; margin: auto; padding: 12px 16px; display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  h1 { font-size: 17px; margin: 0 auto 0 0; }
+  button, a { font: inherit; color: inherit; }
+  button { border: 1px solid #9cab7d; background: #354c39; padding: 8px 12px; cursor: pointer; }
+  button:focus-visible, a:focus-visible { outline: 3px solid #ebc980; outline-offset: 3px; }
+  iframe { display: block; width: 100%; max-width: 1280px; aspect-ratio: 8 / 5; border: 0; margin: auto; }
+  p { max-width: 1280px; margin: 12px auto; padding: 0 16px; color: #bac8a5; line-height: 1.5; }
+</style>
+<header>
+  <h1>Проба 04 · не игра</h1>
+  <button id="motion" type="button" aria-pressed="false" disabled>Остановить анимации</button>
+  <a href="living.svg">Кадр отдельно</a>
+</header>
+<iframe id="scene" src="living.svg" title="Прямая дорога, крупный кот, озеро и полная карта пролога"></iframe>
+<p>Кот стоит неподвижно. Порывы ветра проходят по растениям с задержками и паузами; вода движется своим ритмом. Это иллюстрация, игрового управления нет. Окрас, масштаб и детали карты ещё на согласовании.</p>
+<script>
+  const scene = document.getElementById('scene');
+  const motion = document.getElementById('motion');
+  scene.addEventListener('load', () => {
+    scene.contentDocument.documentElement.style.width = '100%';
+    scene.contentDocument.documentElement.style.height = 'auto';
+    motion.disabled = false;
+    motion.setAttribute('aria-pressed', 'false');
+    motion.textContent = 'Остановить анимации';
+  });
+  motion.addEventListener('click', () => {
+    const paused = scene.contentDocument.documentElement.classList.toggle('paused');
+    motion.setAttribute('aria-pressed', String(paused));
+    motion.textContent = paused ? 'Включить анимации' : 'Остановить анимации';
+  });
+</script>
+</html>

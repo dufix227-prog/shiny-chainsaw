@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/needs_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+starting_food = 60.0
+starting_stamina = 100.0
+portions = 2
+food_per_portion = 35.0
+food_walking_per_second = 0.11111111
+food_idle_per_second = 0.05555556
+stamina_per_metre = 0.5
+stamina_standing_per_second = 0.1
+stamina_rest_per_second = 0.35
+stamina_run_multiplier = 3.0
+hungry_stamina_multiplier = 1.5
+warning_threshold = 30.0
+hungry_recovery_factor = 0.5

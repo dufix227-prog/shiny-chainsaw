@@ -1,0 +1,15 @@
+Источник: ambientCG (https://ambientcg.com), лицензия CC0 1.0 Universal.
+Разрешено копировать, изменять, распространять и использовать коммерчески
+без указания авторства. Файлы скачаны 12.09.2026 через публичный API
+ambientCG (https://ambientcg.com/api/v3/assets), разрешение 1K-JPG.
+
+Использованные материалы:
+- Rock063 — https://ambientcg.com/a/Rock063 (мох на камне, тоннель пещеры)
+- Rock023 — https://ambientcg.com/a/Rock023 (чистый камень без мха, скачан
+  13.09.2026; крутой склон/подводный обрыв на пробе рельефа — автор отметил
+  мох на rock063 как лишний вне пещеры)
+- Ground107 — https://ambientcg.com/a/Ground107 (грунтовая тропа/пол)
+- Bark012 — https://ambientcg.com/a/Bark012 (кора дерева)
+- Grass001 — https://ambientcg.com/a/Grass001 (трава)
+
+Полный текст лицензии: https://creativecommons.org/publicdomain/zero/1.0/

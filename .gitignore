@@ -1,0 +1,19 @@
+.tools/
+.hoplite/artifacts/
+.hoplite/logs/
+game/3d-probe/.godot/
+game/3d-probe/build/*
+!game/3d-probe/build/.gdignore
+__pycache__/
+*.pyc
+.freebuff/
+.hoplite/
+.zcode/
+agent-browser.json
+photo_*.jpg
+Текстовий файл….txt
+# Побочные файлы Blender: *.blend1 — авторезервные копии при сохранении
+*.blend1
+
+# Дистрибутив Blender: скачивается отдельно, не хранить в репозитории
+блендер/
