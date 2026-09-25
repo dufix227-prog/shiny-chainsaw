@@ -10,7 +10,7 @@ const Recipes = preload("res://scenes/style_probe/voxel_recipes.gd")
 const COLUMN := 0.5
 const LAYER := 0.25
 const X_MIN := -44.0
-const X_MAX := 18.0
+const X_MAX := 20.0
 const Z_MIN := -100.0
 const Z_MAX := 22.0
 const VALLEY_Y := -16.0
@@ -42,12 +42,13 @@ func path_center_x(z: float) -> float:
 	return -2.0 + sin(z * 0.045) * 2.5 + sin(z * 0.11 + 1.0) * 0.8
 
 
+## Ширина тропы: от ~6,7 до ~10,3 (кот ≈ 3,4 ростом) — отзыв автора «тропа пошире».
 func path_width(z: float) -> float:
-	return 5.2 + 1.4 * sin(z * 0.07 + 0.5)
+	return 8.5 + 1.8 * sin(z * 0.07 + 0.5)
 
 
 func cliff_x(z: float) -> float:
-	return 12.0 + sin(z * 0.08) * 1.5
+	return 14.0 + sin(z * 0.08) * 1.5
 
 
 func fence_x(z: float) -> float:
@@ -66,7 +67,7 @@ func ground_height(x: float, z: float) -> float:
 	if not is_path(x, z):
 		var from_edge := absf(x - path_center_x(z)) - path_width(z) / 2.0
 		height = LAYER + maxf(_noise.get_noise_2d(x, z), 0.0) * 1.2 * smoothstep(0.0, 4.0, from_edge)
-	var rise := maxf(path_center_x(z) - 15.0 - x, 0.0) + maxf(z - START_RISE_Z, 0.0) + maxf(END_RISE_Z - z, 0.0)
+	var rise := maxf(path_center_x(z) - 18.0 - x, 0.0) + maxf(z - START_RISE_Z, 0.0) + maxf(END_RISE_Z - z, 0.0)
 	return snappedf(height + rise * EDGE_STEEPNESS, LAYER)
 
 

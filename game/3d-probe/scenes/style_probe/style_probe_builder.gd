@@ -317,7 +317,7 @@ func _build_fence(scene_root: Node) -> void:
 func _build_barrier(scene_root: Node) -> void:
 	var group := _new_group("Barrier", scene_root)
 	var z := Terrain.BARRIER_Z
-	var left := path_center_x(z) - 17.0
+	var left := path_center_x(z) - 20.0
 	var right := terrain.fence_x(z) + 0.5
 	for layer in 3:
 		var x := left + 3.9 + (3.8 if layer % 2 == 1 else 0.0)
@@ -363,7 +363,9 @@ func _plant_forest(scene_root: Node) -> void:
 			var chance := 0.0
 			if from_edge > 2.5:
 				chance = 0.16 if right_side else 0.8
-			if tree_z > Terrain.START_RISE_Z - 3.0 or tree_z < Terrain.BARRIER_Z - 2.0:
+			# За стартом лес начинается подальше: камера за котом не должна
+			# оказываться внутри крон.
+			if tree_z > Terrain.START_RISE_Z + 5.0 or tree_z < Terrain.BARRIER_Z - 2.0:
 				chance = 0.85
 			if tree_x > terrain.fence_x(tree_z) - 2.5:
 				chance = 0.0
@@ -408,7 +410,7 @@ func _scatter_ground_cover(scene_root: Node) -> void:
 		spots_by_variant.append([])
 	for attempt in 2600:
 		var z := _rng.randf_range(Terrain.BARRIER_Z - 4.0, Terrain.START_RISE_Z + 2.0)
-		var x := _rng.randf_range(path_center_x(z) - 16.0, terrain.fence_x(z) + 1.2)
+		var x := _rng.randf_range(path_center_x(z) - 19.0, terrain.fence_x(z) + 1.2)
 		if terrain.is_path(x, z):
 			continue
 		var variant := _rng.randi_range(0, COVER_FLOWERS.size() - 1)

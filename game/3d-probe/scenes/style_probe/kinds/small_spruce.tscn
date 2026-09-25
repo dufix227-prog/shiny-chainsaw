@@ -6,11 +6,11 @@
 height = 4.0
 radius = 0.3
 
-[node name="SmallSpruce" type="StaticBody3D" unique_id=488632677]
+[node name="SmallSpruce" type="StaticBody3D" unique_id=78997910]
 
-[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1035516706]
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1361948111]
 mesh = ExtResource("1_poxem")
 
-[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=523205973]
+[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=23858015]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("CylinderShape3D_poxem")

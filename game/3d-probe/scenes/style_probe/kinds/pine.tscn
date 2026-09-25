@@ -6,11 +6,11 @@
 height = 4.0
 radius = 0.35
 
-[node name="Pine" type="StaticBody3D" unique_id=726864379]
+[node name="Pine" type="StaticBody3D" unique_id=421318167]
 
-[node name="Mesh" type="MeshInstance3D" parent="." unique_id=519544969]
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=780875781]
 mesh = ExtResource("1_snxyv")
 
-[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=698449993]
+[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=102106633]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("CylinderShape3D_snxyv")

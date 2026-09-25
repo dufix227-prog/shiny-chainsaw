@@ -6,11 +6,11 @@
 height = 4.0
 radius = 0.3
 
-[node name="Birch" type="StaticBody3D" unique_id=1939006745]
+[node name="Birch" type="StaticBody3D" unique_id=1548107268]
 
-[node name="Mesh" type="MeshInstance3D" parent="." unique_id=512739225]
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=857995528]
 mesh = ExtResource("1_w4pmm")
 
-[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=938987967]
+[node name="TrunkCollision" type="CollisionShape3D" parent="." unique_id=1153114791]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("CylinderShape3D_w4pmm")
