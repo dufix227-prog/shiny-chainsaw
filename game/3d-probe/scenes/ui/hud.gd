@@ -1,0 +1,42 @@
+extends CanvasLayer
+
+## Игровой интерфейс участка: пройденные метры, выносливость,
+## подсказка управления в начале и сообщения по месту (например, у завала).
+
+const CONTROLS_HINT_SECONDS := 12.0
+
+@onready var metres_label: Label = %MetresLabel
+@onready var stamina_bar: ProgressBar = %StaminaBar
+@onready var bush_label: Label = %BushLabel
+@onready var controls_hint: Label = %ControlsHint
+@onready var notice_label: Label = %NoticeLabel
+
+
+func _ready() -> void:
+	notice_label.visible = false
+	bush_label.visible = false
+	var fade := create_tween()
+	fade.tween_interval(CONTROLS_HINT_SECONDS)
+	fade.tween_property(controls_hint, "modulate:a", 0.0, 1.5)
+
+
+func set_metres(walked: float, total: float) -> void:
+	metres_label.text = "%d м из %d" % [floori(walked), roundi(total)]
+
+
+func set_stamina(value: float, maximum: float) -> void:
+	stamina_bar.max_value = maximum
+	stamina_bar.value = value
+
+
+func set_in_bush(in_bush: bool) -> void:
+	bush_label.visible = in_bush
+
+
+func show_notice(text: String) -> void:
+	notice_label.text = text
+	notice_label.visible = true
+
+
+func hide_notice() -> void:
+	notice_label.visible = false

@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3]
+
+[ext_resource type="Shader" path="res://scenes/world/terrain.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" path="res://assets/textures/ambientcg/grass001/albedo.jpg" id="2_grass"]
+[ext_resource type="Texture2D" path="res://assets/textures/ambientcg/ground107/albedo.jpg" id="3_path"]
+[ext_resource type="Texture2D" path="res://assets/textures/ambientcg/rock023/albedo.jpg" id="4_rock"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/grass_texture = ExtResource("2_grass")
+shader_parameter/path_texture = ExtResource("3_path")
+shader_parameter/rock_texture = ExtResource("4_rock")

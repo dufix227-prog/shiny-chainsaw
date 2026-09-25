@@ -1,0 +1,91 @@
+[gd_resource type="Theme" load_steps=9 format=3]
+
+[ext_resource type="FontFile" path="res://assets/fonts/ptsans/PT_Sans-Web-Bold.ttf" id="1_bold"]
+
+[sub_resource type="StyleBoxEmpty" id="button_normal"]
+content_margin_left = 24.0
+content_margin_top = 6.0
+content_margin_right = 24.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="button_hover"]
+content_margin_left = 24.0
+content_margin_top = 6.0
+content_margin_right = 24.0
+content_margin_bottom = 6.0
+bg_color = Color(0.96, 0.62, 0.28, 0.2)
+border_width_left = 5
+border_color = Color(1, 0.74, 0.38, 1)
+
+[sub_resource type="StyleBoxFlat" id="button_pressed"]
+content_margin_left = 24.0
+content_margin_top = 6.0
+content_margin_right = 24.0
+content_margin_bottom = 6.0
+bg_color = Color(0.96, 0.62, 0.28, 0.35)
+border_width_left = 5
+border_color = Color(1, 0.8, 0.5, 1)
+
+[sub_resource type="StyleBoxFlat" id="panel"]
+content_margin_left = 36.0
+content_margin_top = 28.0
+content_margin_right = 36.0
+content_margin_bottom = 28.0
+bg_color = Color(0.07, 0.06, 0.05, 0.88)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.6, 0.32, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="bar_background"]
+bg_color = Color(0, 0, 0, 0.45)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="bar_fill"]
+bg_color = Color(0.98, 0.72, 0.3, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="focus_none"]
+
+[resource]
+default_font = ExtResource("1_bold")
+default_font_size = 22
+Button/colors/font_color = Color(0.96, 0.92, 0.84, 1)
+Button/colors/font_disabled_color = Color(0.62, 0.58, 0.54, 0.55)
+Button/colors/font_focus_color = Color(1, 0.82, 0.55, 1)
+Button/colors/font_hover_color = Color(1, 0.82, 0.55, 1)
+Button/colors/font_hover_pressed_color = Color(1, 0.86, 0.62, 1)
+Button/colors/font_pressed_color = Color(1, 0.86, 0.62, 1)
+Button/font_sizes/font_size = 32
+Button/styles/disabled = SubResource("button_normal")
+Button/styles/focus = SubResource("button_hover")
+Button/styles/hover = SubResource("button_hover")
+Button/styles/normal = SubResource("button_normal")
+Button/styles/pressed = SubResource("button_pressed")
+CheckBox/colors/font_color = Color(0.96, 0.92, 0.84, 1)
+CheckBox/colors/font_focus_color = Color(1, 0.82, 0.55, 1)
+CheckBox/colors/font_hover_color = Color(1, 0.82, 0.55, 1)
+CheckBox/colors/font_pressed_color = Color(0.96, 0.92, 0.84, 1)
+CheckBox/font_sizes/font_size = 24
+CheckBox/styles/focus = SubResource("button_hover")
+CheckBox/styles/hover = SubResource("button_hover")
+CheckBox/styles/normal = SubResource("button_normal")
+CheckBox/styles/pressed = SubResource("button_normal")
+Label/colors/font_color = Color(0.96, 0.92, 0.84, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.6)
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2
+PanelContainer/styles/panel = SubResource("panel")
+ProgressBar/styles/background = SubResource("bar_background")
+ProgressBar/styles/fill = SubResource("bar_fill")

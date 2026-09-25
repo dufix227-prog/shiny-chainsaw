@@ -1,0 +1,178 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scenes/menu/main_menu.gd" id="1_script"]
+[ext_resource type="Theme" path="res://scenes/ui/menu_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://assets/art/menu_background_candidate.jpg" id="3_background"]
+[ext_resource type="FontFile" path="res://assets/fonts/yesevaone/YesevaOne-Regular.ttf" id="4_title_font"]
+
+[sub_resource type="Gradient" id="shade_gradient"]
+offsets = PackedFloat32Array(0, 0.42, 0.7)
+colors = PackedColorArray(0.03, 0.02, 0.02, 0.86, 0.03, 0.02, 0.02, 0.55, 0.03, 0.02, 0.02, 0)
+
+[sub_resource type="GradientTexture2D" id="shade_texture"]
+gradient = SubResource("shade_gradient")
+width = 256
+height = 8
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_background")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="LeftShade" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("shade_texture")
+expand_mode = 1
+
+[node name="VersionLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 14.0
+offset_right = 220.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(0.96, 0.92, 0.84, 0.75)
+theme_override_font_sizes/font_size = 18
+text = "0.0.10"
+
+[node name="MainButtons" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 90.0
+offset_top = -250.0
+offset_right = 620.0
+offset_bottom = 250.0
+grow_vertical = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Title" type="Label" parent="MainButtons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.72, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/font = ExtResource("4_title_font")
+theme_override_font_sizes/font_size = 88
+text = "Пролог"
+
+[node name="Subtitle" type="Label" parent="MainButtons"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.85, 0.7, 0.85)
+theme_override_font_sizes/font_size = 24
+text = "лесная тропа · первые 40 метров"
+
+[node name="Gap" type="Control" parent="MainButtons"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="NewGameButton" type="Button" parent="MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Новая игра"
+alignment = 0
+
+[node name="ContinueButton" type="Button" parent="MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Сохранений пока нет"
+text = "Продолжить"
+alignment = 0
+
+[node name="SettingsButton" type="Button" parent="MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Настройки"
+alignment = 0
+
+[node name="QuitButton" type="Button" parent="MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Выход"
+alignment = 0
+
+[node name="SettingsPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 90.0
+offset_top = -220.0
+offset_right = 650.0
+offset_bottom = 220.0
+grow_vertical = 2
+
+[node name="Rows" type="VBoxContainer" parent="SettingsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Heading" type="Label" parent="SettingsPanel/Rows"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_title_font")
+theme_override_font_sizes/font_size = 40
+text = "Настройки"
+
+[node name="SensitivityLabel" type="Label" parent="SettingsPanel/Rows"]
+layout_mode = 2
+text = "Чувствительность мыши"
+
+[node name="SensitivitySlider" type="HSlider" parent="SettingsPanel/Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+min_value = 0.05
+max_value = 1.0
+step = 0.01
+value = 0.25
+
+[node name="InvertCheck" type="CheckBox" parent="SettingsPanel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Инвертировать камеру по вертикали"
+
+[node name="FullscreenCheck" type="CheckBox" parent="SettingsPanel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Полный экран"
+
+[node name="VolumeLabel" type="Label" parent="SettingsPanel/Rows"]
+layout_mode = 2
+text = "Громкость"
+
+[node name="VolumeSlider" type="HSlider" parent="SettingsPanel/Rows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 0.8
+
+[node name="SettingsBackButton" type="Button" parent="SettingsPanel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Назад"
+alignment = 0

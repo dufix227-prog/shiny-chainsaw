@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/pause_menu.gd" id="1_script"]
+[ext_resource type="Theme" path="res://scenes/ui/menu_theme.tres" id="2_theme"]
+[ext_resource type="FontFile" path="res://assets/fonts/yesevaone/YesevaOne-Regular.ttf" id="3_title_font"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 20
+script = ExtResource("1_script")
+
+[node name="Dim" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.02, 0.03, 0.62)
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -170.0
+offset_right = 220.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+
+[node name="Rows" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Panel/Rows"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_title_font")
+theme_override_font_sizes/font_size = 44
+text = "Пауза"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="Panel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Продолжить"
+
+[node name="MainMenuButton" type="Button" parent="Panel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "В главное меню"
+
+[node name="QuitButton" type="Button" parent="Panel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Выход из игры"

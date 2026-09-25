@@ -2,8 +2,13 @@ config_version=5
 
 [application]
 config/name="Пролог · 3D-проба"
-run/main_scene="res://main.tscn"
+run/main_scene="res://scenes/menu/main_menu.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
+
+[autoload]
+
+GameSettings="*res://scenes/game_settings.gd"
+Controls="*res://scenes/controls.gd"
 
 [display]
 window/size/viewport_width=1280
