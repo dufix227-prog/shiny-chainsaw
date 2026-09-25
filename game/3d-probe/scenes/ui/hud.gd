@@ -20,8 +20,12 @@ func _ready() -> void:
 	fade.tween_property(controls_hint, "modulate:a", 0.0, 1.5)
 
 
+## total ≤ 0 — показывать только пройденные метры.
 func set_metres(walked: float, total: float) -> void:
-	metres_label.text = "%d м из %d" % [floori(walked), roundi(total)]
+	if total <= 0.0:
+		metres_label.text = "%d м" % floori(walked)
+	else:
+		metres_label.text = "%d м из %d" % [floori(walked), roundi(total)]
 
 
 func set_stamina(value: float, maximum: float) -> void:

@@ -75,9 +75,11 @@ func commit(mesh: ArrayMesh, material: Material) -> void:
 ## Поле столбиков (земля, долина, горы): у каждого столбика верх на своей высоте,
 ## кубики идут вниз до самого низкого соседа — стенок-«дыр» между столбиками нет.
 ## height_at(x, z) — высота верха; color_at(x, z, y) — цвет кубика на высоте y.
+## skirt — на сколько слоёв вниз уходят столбики по краю поля: так не видно
+## щелей там, где стыкуются два поля.
 ## Возвращает мешер: материал выбирает вызывающий (commit).
 static func height_field(x_min: float, x_max: float, z_min: float, z_max: float, column: float, layer: float,
-		height_at: Callable, color_at: Callable):
+		height_at: Callable, color_at: Callable, skirt: int = 0):
 	var columns := int((x_max - x_min) / column) + 1
 	var rows := int((z_max - z_min) / column) + 1
 	var levels := PackedInt32Array()
@@ -96,6 +98,8 @@ static func height_field(x_min: float, x_max: float, z_min: float, z_max: float,
 				var nj: int = j + offset.y
 				if ni >= 0 and ni < columns and nj >= 0 and nj < rows:
 					lowest = mini(lowest, levels[ni + nj * columns])
+			if i == 0 or j == 0 or i == columns - 1 or j == rows - 1:
+				lowest -= skirt
 			var x := x_min + i * column
 			var z := z_min + j * column
 			for k in range(lowest - 1, top):

@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scenes/world/start_area.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/world/start_area_world.tscn" id="2_world"]
+[ext_resource type="PackedScene" path="res://scenes/player/cat_player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="5_pause"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pixelate.tscn" id="6_pixelate"]
+[ext_resource type="PackedScene" path="res://scenes/endings/car_ending.tscn" id="7_ending"]
+
+[sub_resource type="BoxShape3D" id="end_zone_shape"]
+size = Vector3(40, 6, 12)
+
+[node name="StartArea" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="World" parent="." instance=ExtResource("2_world")]
+
+[node name="CatPlayer" parent="." instance=ExtResource("3_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8643, 0.35, -74)
+
+[node name="EndZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0405, 2.5, -190.40)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="Shape" type="CollisionShape3D" parent="EndZone"]
+shape = SubResource("end_zone_shape")
+
+[node name="Pixelate" parent="." instance=ExtResource("6_pixelate")]
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_pause")]
+
+[node name="CarEnding" parent="." instance=ExtResource("7_ending")]

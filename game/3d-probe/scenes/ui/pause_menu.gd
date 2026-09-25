@@ -10,6 +10,8 @@ const MAIN_MENU := "res://scenes/menu/main_menu.tscn"
 enum Leave { NONE, MAIN_MENU, QUIT }
 
 var _leave_target := Leave.NONE
+## false — пауза не открывается (например, во время концовки).
+var enabled := true
 
 @onready var panel: Control = $Panel
 @onready var resume_button: Button = %ResumeButton
@@ -57,6 +59,8 @@ func _notification(what: int) -> void:
 
 
 func open() -> void:
+	if not enabled:
+		return
 	visible = true
 	panel.visible = true
 	get_tree().paused = true

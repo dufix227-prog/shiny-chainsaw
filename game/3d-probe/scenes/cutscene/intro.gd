@@ -7,7 +7,7 @@ extends Node3D
 ## Пропуск — сразу к управлению (канон). Кнопка пропуска — ЗАГЛУШКА: автор её
 ## ещё не назначил, сейчас это Esc / Start / Enter / A.
 
-const GAMEPLAY_SCENE := "res://scenes/style_probe/style_probe.tscn"
+const GAMEPLAY_SCENE := "res://scenes/world/start_area.tscn"
 
 var _finished := false
 

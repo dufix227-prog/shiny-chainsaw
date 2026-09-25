@@ -1,0 +1,41 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://scenes/world/start_kinds/sign_mesh.res" id="1_e6dho"]
+[ext_resource type="FontFile" path="res://assets/fonts/tiny5/Tiny5-Regular.ttf" id="2_tctl8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e6dho"]
+size = Vector3(0.2, 2.7, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tctl8"]
+size = Vector3(0.2, 2.7, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dmj8l"]
+size = Vector3(3.2, 1.3, 0.1)
+
+[node name="StrawberrySign" type="StaticBody3D" unique_id=729333851]
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1676614478]
+mesh = ExtResource("1_e6dho")
+
+[node name="Text" type="Label3D" parent="." unique_id=475553817]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05, 0.215)
+pixel_size = 0.0031
+texture_filter = 0
+modulate = Color(0.22745098, 0.14117648, 0.078431375, 1)
+text = "через 500 метров
+клубничные запасы"
+font = ExtResource("2_tctl8")
+font_size = 64
+outline_size = 0
+
+[node name="Collision2" type="CollisionShape3D" parent="." unique_id=1893823068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 1.35, 0)
+shape = SubResource("BoxShape3D_e6dho")
+
+[node name="Collision3" type="CollisionShape3D" parent="." unique_id=406148558]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 1.35, 0)
+shape = SubResource("BoxShape3D_tctl8")
+
+[node name="Collision4" type="CollisionShape3D" parent="." unique_id=712997666]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05, 0.15)
+shape = SubResource("BoxShape3D_dmj8l")

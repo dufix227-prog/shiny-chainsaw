@@ -68,3 +68,21 @@ static func sign(seed: int) -> ArrayMesh:
 			wood.set_cell(Vector3i(x, y, 1), Recipes._pick(WOOD, rng, 0.3) if frame
 				else Recipes._pick(BOARD, rng, 0.4 + 0.2 * sin(y * 1.3)))
 	return Recipes._finish([[wood, Recipes.VOXEL]])
+
+
+## Портал тоннеля в скале: каменная стена 2 × 20 × 16 с проёмом 11 × 5,5
+## над проезжей частью. Стена лицом к −X (в сторону улицы) — поворот задаёт сцена.
+static func tunnel_portal(seed: int) -> ArrayMesh:
+	var rng := Recipes._rng(seed)
+	var rock := Mesher.new(Vector3.ONE * 0.5, Vector3(0, 0, -10.0))
+	for x in 4:
+		for y in 32:
+			for z in 40:
+				var in_opening := y < 11 and z >= 9 and z < 31
+				var arch_top := y == 11 and (z == 9 or z == 30)
+				if in_opening or arch_top:
+					continue
+				var edge := (y == 11 or y == 12) and z >= 8 and z <= 31
+				var palette: Array = ["#4e4640", "#59504a", "#655b54"] if edge else ["#5b4a42", "#6a574c", "#786357", "#877063"]
+				rock.set_cell(Vector3i(x, y, z), Recipes._pick(palette, rng, float(y) / 32.0))
+	return Recipes._finish([[rock, Recipes.VOXEL]])

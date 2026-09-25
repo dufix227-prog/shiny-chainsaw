@@ -5,7 +5,8 @@ extends Node
 ##
 ## Графика применяется в двух местах:
 ## - к окну и экрану — apply() (режим окна, VSync, FPS, масштаб, сглаживание, тени);
-## - к миру сцены — apply_to_world(scene): свет, туман, SSAO, свечение, дальность, FOV.
+## - к миру сцены — apply_to_world(scene): тени, туман, SSAO, свечение, яркость
+##   (угол обзора и дальность камеры игрока — в cat_player.gd).
 ##   Каждая игровая сцена вызывает apply_to_world(self) в _ready().
 
 const SETTINGS_PATH := "user://settings.cfg"
@@ -131,9 +132,8 @@ func apply_to_world(scene: Node) -> void:
 		environment.adjustment_brightness = values.brightness
 	for light in scene.find_children("*", "DirectionalLight3D", true, false):
 		light.shadow_enabled = values.shadow_quality != Quality.OFF
-	for camera in scene.find_children("*", "Camera3D", true, false):
-		camera.far = values.draw_distance
-		camera.fov = values.field_of_view
+	# Угол обзора и дальность камеры игрока применяет сам кот (cat_player.gd):
+	# у камер катсцен свой угол, выбранный постановкой.
 
 
 func _apply_window() -> void:

@@ -5,7 +5,7 @@ extends SceneTree
 ## godot --headless --fixed-fps 60 --path game/3d-probe -s res://tests/intro.gd
 
 const INTRO := "res://scenes/cutscene/intro.tscn"
-const GAME_SCENE := "res://scenes/style_probe/style_probe.tscn"
+const GAME_SCENE := "res://scenes/world/start_area.tscn"
 
 var checks := 0
 var failures := 0
@@ -26,7 +26,7 @@ func _run() -> void:
 	var scene: Node = load(INTRO).instantiate()
 	var animation: Animation = scene.get_node("AnimationPlayer").get_animation("intro")
 	check(animation.length >= 45.0 and animation.length <= 75.0, "катсцена около минуты (%.0f с)" % animation.length)
-	var sign: Node3D = scene.get_node("Builder/Sign").get_child(0)
+	var sign: Node3D = scene.get_node("World/Builder/Sign").get_child(0)
 	check(sign.get_node("Text").text == "через 500 метров\nклубничные запасы", "текст таблички — формулировка автора")
 	var tracks := {}
 	for i in animation.get_track_count():
@@ -50,6 +50,10 @@ func _run() -> void:
 		longest_closeup = maxf(longest_closeup, closeup)
 		t += 0.05
 	check(on_road == 0, "кот не выходит на проезжую часть")
+	var spawn := preload("res://scenes/world/start_area_builder.gd").spawn_position_static()
+	var cat_end: Vector3 = animation.position_track_interpolate(cat_track, animation.length)
+	check(Vector2(cat_end.x - spawn.x, cat_end.z - spawn.z).length() < 0.2,
+		"катсцена кончается там, где игрок получает управление")
 	check(longest_closeup >= 2.9 and longest_closeup <= 3.6, "крупный план таблички ≈3 с (%.2f с)" % longest_closeup)
 	scene.free()
 

@@ -1,48 +1,28 @@
 @tool
-extends Node3D
+extends Node
 
-## Сборщик стартовой катсцены. Ставит улицу, лес, фонари, машины и табличку,
-## а постановку (путь кота, камеры, затемнение) записывает в анимацию «intro»
-## узла AnimationPlayer. Всё сохраняется в intro.tscn и правится в редакторе:
-## ключи анимации можно двигать руками во вкладке «Анимация».
+## Постановка стартовой катсцены С1: путь кота, камеры, затемнение — всё
+## записывается в анимацию «intro» узла AnimationPlayer и сохраняется в intro.tscn.
+## Сам мир (улица, лес, табличка) — общая сцена start_area_world.tscn: та же,
+## где потом играет игрок. Поэтому управление начинается там, где кончилась катсцена.
 ##
 ## ВНИМАНИЕ: пересборка перезаписывает анимацию. Если правили ключи руками —
-## перенесите правки сюда (в SHOTS / CAT_PATH), иначе они пропадут.
+## перенесите правки сюда (в _cat_path() / shots), иначе они пропадут.
 ##
 ## Пересобрать: узел Builder → «Пересобрать катсцену» → Ctrl+S, или
-## godot --path game/3d-probe -s res://tools/build_intro.gd (с окном — трава MultiMesh).
+## godot --headless --path game/3d-probe -s res://tools/build_intro.gd
 
-const Terrain = preload("res://scenes/cutscene/intro_terrain.gd")
-const StreetRecipes = preload("res://scenes/cutscene/street_recipes.gd")
-const Recipes = preload("res://scenes/style_probe/voxel_recipes.gd")
-const TRAFFIC_SCRIPT = preload("res://scenes/cutscene/traffic_car.gd")
-
-const PROBE_KINDS := "res://scenes/style_probe/kinds/"
-const PROBE_GENERATED := "res://scenes/style_probe/generated/"
-const KINDS_DIR := "res://scenes/cutscene/kinds/"
-const GENERATED_DIR := "res://scenes/cutscene/generated/"
-const GENERATED_GROUPS := ["Terrain", "Forest", "Bushes", "GroundCover", "Lamps", "Traffic", "Sign"]
+const Terrain = preload("res://scenes/world/start_area_terrain.gd")
+const StartArea = preload("res://scenes/world/start_area_builder.gd")
 
 ## Скорость кота в катсцене (единиц в секунду) — как обычный шаг в игре.
 const CAT_SPEED := 2.2
-## Табличка: где стоит и куда повёрнута (лицом к подходящему коту).
-const SIGN_POSITION := Vector3(3.4, 0.25, -11.5)
-const SIGN_YAW := -0.4
 ## Сколько держится крупный план таблички — канон автора: 3 секунды.
 const SIGN_CLOSEUP_SECONDS := 3.0
 
-const CAR_COLORS := [
-	["#8e2a24", "#a8332b", "#c24034"], ["#24466e", "#2d5585", "#38669b"],
-	["#c9a032", "#dab240", "#e8c552"], ["#d9d6cf", "#e6e3dc", "#f1eee8"], ["#2e5a3a", "#386b45", "#447d52"],
-]
-
-@export var layout_seed := 5
 @export_tool_button("Пересобрать катсцену", "Reload") var rebuild_button := _rebuild_in_editor
 
 var terrain := Terrain.new()
-var _rng := RandomNumberGenerator.new()
-var _scenes := {}
-var _camera_spots: Array[Vector3] = []
 
 
 func _rebuild_in_editor() -> void:
@@ -50,223 +30,7 @@ func _rebuild_in_editor() -> void:
 
 
 func rebuild(scene_root: Node) -> void:
-	_rng.seed = layout_seed
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(KINDS_DIR))
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(GENERATED_DIR))
-	for group_name in GENERATED_GROUPS:
-		var old := get_node_or_null(NodePath(group_name))
-		if old:
-			remove_child(old)
-			old.free()
-	_build_kinds()
-	var timeline := _build_animation(scene_root)
-	_camera_spots = timeline
-	_build_terrain(scene_root)
-	_build_sign(scene_root)
-	_build_lamps(scene_root)
-	_build_traffic(scene_root)
-	_plant_forest(scene_root)
-	_scatter_ground_cover(scene_root)
-	var sun := scene_root.get_node_or_null("Sun")
-	if sun:
-		# Низкое закатное солнце, как в пробе графики.
-		sun.basis = Basis.looking_at(-Vector3(0.75, 0.3, 0.55).normalized())
-
-
-# --- Объекты -------------------------------------------------------------------
-
-func _build_kinds() -> void:
-	for i in CAR_COLORS.size():
-		var mesh_path := KINDS_DIR + "car_%d_mesh.res" % i
-		ResourceSaver.save(StreetRecipes.car(40 + i, CAR_COLORS[i]), mesh_path, ResourceSaver.FLAG_COMPRESS)
-		var car := Node3D.new()
-		car.name = "Car"
-		car.set_script(TRAFFIC_SCRIPT)
-		var visual := MeshInstance3D.new()
-		visual.name = "Mesh"
-		visual.mesh = ResourceLoader.load(mesh_path, "", ResourceLoader.CACHE_MODE_REPLACE)
-		car.add_child(visual)
-		visual.owner = car
-		_pack(car, "car_%d" % i)
-	# Табличка: меш + надпись Label3D (текст — формулировка автора).
-	var sign_mesh := KINDS_DIR + "sign_mesh.res"
-	ResourceSaver.save(StreetRecipes.sign(50), sign_mesh, ResourceSaver.FLAG_COMPRESS)
-	var sign := Node3D.new()
-	sign.name = "StrawberrySign"
-	var board := MeshInstance3D.new()
-	board.name = "Mesh"
-	board.mesh = ResourceLoader.load(sign_mesh, "", ResourceLoader.CACHE_MODE_REPLACE)
-	sign.add_child(board)
-	board.owner = sign
-	var text := Label3D.new()
-	text.name = "Text"
-	text.text = "через 500 метров\nклубничные запасы"
-	text.font = load("res://assets/fonts/tiny5/Tiny5-Regular.ttf")
-	text.font_size = 64
-	text.pixel_size = 0.0031
-	text.modulate = Color("#3a2414")
-	text.outline_size = 0
-	text.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
-	text.position = Vector3(0, 2.05, 0.215)
-	sign.add_child(text)
-	text.owner = sign
-	_pack(sign, "sign")
-
-
-func _pack(root: Node, kind: String) -> void:
-	var packed := PackedScene.new()
-	packed.pack(root)
-	ResourceSaver.save(packed, KINDS_DIR + kind + ".tscn")
-	root.free()
-	_scenes[kind] = ResourceLoader.load(KINDS_DIR + kind + ".tscn", "", ResourceLoader.CACHE_MODE_REPLACE)
-
-
-func _scene(path: String) -> PackedScene:
-	if not _scenes.has(path):
-		_scenes[path] = load(path)
-	return _scenes[path]
-
-
-func _new_group(group_name: String, scene_root: Node) -> Node3D:
-	var group := Node3D.new()
-	group.name = group_name
-	add_child(group)
-	group.owner = scene_root
-	return group
-
-
-func _place(scene: PackedScene, parent: Node3D, scene_root: Node, position: Vector3, yaw: float = 0.0,
-		size: float = 1.0) -> Node3D:
-	var instance: Node3D = scene.instantiate()
-	instance.position = position
-	instance.rotation.y = yaw
-	instance.scale = Vector3.ONE * size
-	parent.add_child(instance, true)
-	instance.owner = scene_root
-	return instance
-
-
-func _build_terrain(scene_root: Node) -> void:
-	var group := _new_group("Terrain", scene_root)
-	var path := GENERATED_DIR + "ground_mesh.res"
-	ResourceSaver.save(terrain.build_ground(), path, ResourceSaver.FLAG_COMPRESS)
-	var ground := MeshInstance3D.new()
-	ground.name = "Ground"
-	ground.mesh = ResourceLoader.load(path, "", ResourceLoader.CACHE_MODE_REPLACE)
-	group.add_child(ground)
-	ground.owner = scene_root
-
-
-func _build_sign(scene_root: Node) -> void:
-	var group := _new_group("Sign", scene_root)
-	_place(_scenes.sign, group, scene_root, SIGN_POSITION, SIGN_YAW)
-
-
-## Фонари вдоль южного тротуара.
-func _build_lamps(scene_root: Node) -> void:
-	var group := _new_group("Lamps", scene_root)
-	var lantern := _scene(PROBE_KINDS + "lantern.tscn")
-	var x := Terrain.X_MIN + 8.0
-	while x < Terrain.X_MAX - 4.0:
-		if not _near_camera(Vector3(x, 0, 7.3)):
-			_place(lantern, group, scene_root, Vector3(x, 0.25, 7.3), PI)
-		x += 13.0
-
-
-## Поток машин в обе стороны (канон: «по улице в обе стороны едут машины»).
-func _build_traffic(scene_root: Node) -> void:
-	var group := _new_group("Traffic", scene_root)
-	var lanes := [[-2.5, 0.0, 11.0], [2.5, PI, 12.5]]  # [z полосы, поворот, скорость]
-	var index := 0
-	for lane in lanes:
-		var x := Terrain.X_MIN + _rng.randf_range(0.0, 10.0)
-		while x < Terrain.X_MAX:
-			var car := _place(_scenes["car_%d" % (index % CAR_COLORS.size())], group, scene_root,
-				Vector3(x, 0.0, lane[0]), lane[1])
-			car.speed = lane[2] + _rng.randf_range(-1.5, 1.5)
-			# Машины исчезают и появляются за краем кадра, а не на виду.
-			car.x_min = Terrain.X_MIN - 5.0
-			car.x_max = Terrain.X_MAX + 5.0
-			index += 1
-			x += _rng.randf_range(18.0, 30.0)
-
-
-## Лес по обе стороны улицы, коридор тропы свободен, у камер свободно.
-func _plant_forest(scene_root: Node) -> void:
-	var forest := _new_group("Forest", scene_root)
-	var bushes := _new_group("Bushes", scene_root)
-	var kinds := ["spruce", "spruce", "spruce_tall", "small_spruce", "pine", "birch", "broadleaf"]
-	var spacing := 3.2
-	var z := Terrain.Z_MAX - 1.0
-	while z > Terrain.Z_MIN + 1.0:
-		var x := Terrain.X_MIN + 1.0
-		while x < Terrain.X_MAX - 1.0:
-			# Дальше от тропы лес нужен только у улицы — его видно в общем плане.
-			if z < -30.0 and absf(x) > 45.0:
-				x += spacing
-				continue
-			var tree_x := x + _rng.randf_range(-1.2, 1.2)
-			var tree_z := z + _rng.randf_range(-1.2, 1.2)
-			x += spacing
-			if absf(tree_z) < Terrain.SIDEWALK_OUTER + 1.5:
-				continue
-			var from_trail := absf(tree_x - terrain.trail_center_x(tree_z)) - terrain.trail_half_width(tree_z)
-			if tree_z < 0.0 and from_trail < 2.2:
-				continue
-			if tree_x > 0.0 and tree_x < 7.0 and tree_z > -16.0 and tree_z < -8.0:
-				continue  # место вокруг таблички
-			if _near_camera(Vector3(tree_x, 0, tree_z)):
-				continue
-			var chance := 0.75 if tree_z < 0.0 else 0.55
-			if _rng.randf() > chance:
-				continue
-			var kind: String = kinds[_rng.randi_range(0, kinds.size() - 1)]
-			if kind == "broadleaf" and from_trail < 5.0:
-				kind = "birch"
-			_place(_scene(PROBE_KINDS + kind + ".tscn"), forest, scene_root,
-				Vector3(tree_x, terrain.height(tree_x, tree_z) - 0.1, tree_z), _rng.randf() * TAU, _rng.randf_range(0.85, 1.2))
-			if _rng.randf() < 0.2:
-				var bush_x := tree_x + _rng.randf_range(-2.0, 2.0)
-				var bush_z := tree_z + _rng.randf_range(-2.0, 2.0)
-				if absf(bush_z) > Terrain.SIDEWALK_OUTER + 0.5 and not terrain.is_trail(bush_x, bush_z):
-					_place(_scene(PROBE_KINDS + "bush.tscn"), bushes, scene_root,
-						Vector3(bush_x, terrain.height(bush_x, bush_z), bush_z), _rng.randf() * TAU)
-		z -= spacing
-
-
-func _near_camera(point: Vector3) -> bool:
-	for spot in _camera_spots:
-		if Vector2(point.x - spot.x, point.z - spot.z).length() < 4.5:
-			return true
-	return false
-
-
-func _scatter_ground_cover(scene_root: Node) -> void:
-	var group := _new_group("GroundCover", scene_root)
-	var variants := 6
-	var spots := []
-	for i in variants:
-		spots.append([])
-	for attempt in 3000:
-		var x := _rng.randf_range(-40.0, 30.0)
-		var z := _rng.randf_range(-80.0, 30.0)
-		if terrain.is_street(z) or terrain.is_trail(x, z) or _near_camera(Vector3(x, 0, z)):
-			continue
-		spots[_rng.randi_range(0, variants - 1)].append(
-			Transform3D(Basis(Vector3.UP, _rng.randf() * TAU), Vector3(x, terrain.height(x, z), z)))
-	for i in variants:
-		var cover := MultiMesh.new()
-		cover.transform_format = MultiMesh.TRANSFORM_3D
-		cover.mesh = load(PROBE_GENERATED + "ground_cover_%d.res" % i)
-		cover.instance_count = spots[i].size()
-		for j in spots[i].size():
-			cover.set_instance_transform(j, spots[i][j])
-		var instance := MultiMeshInstance3D.new()
-		instance.name = "Patches%d" % i
-		instance.multimesh = cover
-		instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		group.add_child(instance)
-		instance.owner = scene_root
+	_build_animation(scene_root)
 
 
 # --- Постановка ------------------------------------------------------------------
@@ -280,9 +44,11 @@ func _cat_path() -> Array:
 		[Vector3(0.6, 0.25, -10.6), true],  # остановка у таблички
 	]
 	var z := -14.0
-	while z > -76.0:
+	while z > StartArea.SPAWN_Z + 1.0:
 		points.append([Vector3(terrain.trail_center_x(z), 0.25, z), false])
 		z -= 5.0
+	# Последняя точка — ровно там, где игрок получит управление.
+	points.append([StartArea.spawn_position_static(), false])
 	return points
 
 
@@ -328,7 +94,7 @@ func _build_animation(scene_root: Node) -> Array[Vector3]:
 		if path[i][1]:
 			# Остановка: повернуться к табличке, постоять, пока идёт крупный план, развернуться.
 			animation.track_insert_key(cat_speed, time, 0.0)
-			var to_sign := SIGN_POSITION - point
+			var to_sign := Terrain.SIGN_POSITION - point
 			var sign_yaw := atan2(-to_sign.x, -to_sign.z)
 			animation.rotation_track_insert_key(cat_rotation, time + 0.6, Quaternion(Vector3.UP, sign_yaw))
 			sign_look_start = time + 0.8
@@ -346,8 +112,8 @@ func _build_animation(scene_root: Node) -> Array[Vector3]:
 
 	# Камеры: список планов [начало, откуда, куда смотрит]. Смена плана — резкая (кадр).
 	var corner_time: float = times[2]
-	var sign_normal := Vector3(sin(SIGN_YAW), 0, cos(SIGN_YAW))
-	var sign_center := SIGN_POSITION + Vector3(0, 2.05, 0)
+	var sign_normal := Vector3(sin(Terrain.SIGN_YAW), 0, cos(Terrain.SIGN_YAW))
+	var sign_center := Terrain.SIGN_POSITION + Vector3(0, 2.05, 0)
 	var shots: Array = []
 	# 1. Общий план улицы: камера на южном тротуаре, панорама за котом.
 	shots.append([[0.0, Vector3(-14.0, 5.5, 6.8), _cat_at(animation, cat_position, 0.0) + Vector3(0, 1.4, 0)],

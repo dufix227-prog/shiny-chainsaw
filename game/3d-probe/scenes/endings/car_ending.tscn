@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/endings/car_ending.gd" id="1_script"]
+[ext_resource type="Theme" path="res://scenes/ui/menu_theme.tres" id="2_theme"]
+[ext_resource type="FontFile" path="res://assets/fonts/pressstart2p/PressStart2P-Regular.ttf" id="3_title_font"]
+
+[node name="CarEnding" type="CanvasLayer"]
+layer = 30
+script = ExtResource("1_script")
+
+[node name="Fade" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="TheEnd" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -50.0
+offset_right = 400.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+theme_override_colors/font_color = Color(1, 0.9, 0.72, 1)
+theme_override_fonts/font = ExtResource("3_title_font")
+theme_override_font_sizes/font_size = 64
+text = "Конец"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 520.0
+grow_horizontal = 2
+theme = ExtResource("2_theme")
+theme_override_font_sizes/font_size = 30
+text = "10 000 метров до дома
+
+
+[заглушка]
+Титры — текст за автором"
+horizontal_alignment = 1

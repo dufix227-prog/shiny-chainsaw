@@ -141,6 +141,8 @@ func start_new_game(new_hero_name: String) -> void:
 
 
 func _metres(scene: Node, player: Node3D) -> float:
+	if scene.has_method("metres_walked"):
+		return scene.metres_walked()
 	# 12,24 единицы мира на метр пути — общий темп маршрута.
 	return maxf(-player.global_position.z / 12.24, 0.0)
 

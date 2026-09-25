@@ -23,6 +23,8 @@ const PITCH_MAX := 0.35
 const FADE_START_DISTANCE := 3.0
 const FADE_GONE_DISTANCE := 1.3
 
+signal struck_by_car(car: Node3D)
+
 var stamina := STAMINA_MAX
 var is_running := false
 var controls_enabled := true
@@ -67,6 +69,12 @@ func _unhandled_input(event: InputEvent) -> void:
 func turn_camera(yaw_change: float, pitch_change: float) -> void:
 	camera_pivot.rotation.y += yaw_change
 	camera_pivot.rotation.x = clampf(camera_pivot.rotation.x + pitch_change, PITCH_MIN, PITCH_MAX)
+
+
+## Вызывает машина, в чью зону попал кот (traffic_car.gd).
+func hit_by_car(car: Node3D) -> void:
+	if controls_enabled:
+		struck_by_car.emit(car)
 
 
 func enter_bush() -> void:

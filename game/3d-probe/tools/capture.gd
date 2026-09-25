@@ -18,12 +18,8 @@ func _capture() -> void:
 		await process_frame
 	var scene := current_scene
 	if args.size() > 2 and scene.has_node("CatPlayer"):
-		var builder = scene.get_node("Builder")
-		builder.setup_noise()
-		var z := roundi(-float(args[2]) * builder.WORLD_UNITS_PER_METRE)
-		var x := roundi(builder.path_center_x(z))
 		var player: Node3D = scene.get_node("CatPlayer")
-		player.global_position = Vector3(x, builder.block_height(x, z) + 0.1, z)
+		player.global_position = _spot(scene, float(args[2]))
 		var pivot: Node3D = player.get_node("CameraPivot")
 		if args.size() > 3:
 			pivot.rotation.y = deg_to_rad(float(args[3]))
@@ -38,3 +34,17 @@ func _capture() -> void:
 		image.save_png(output_path)
 	print("Кадр сохранён: ", output_path)
 	quit()
+
+
+## Точка на середине тропы через metres метров от начала управления.
+func _spot(scene: Node, metres: float) -> Vector3:
+	if scene.has_node("World/Builder"):  # стартовое место (улица + тропа)
+		var builder = scene.get_node("World/Builder")
+		var z: float = builder.SPAWN_Z - metres * builder.WORLD_UNITS_PER_METRE
+		var x: float = builder.terrain.trail_center_x(z)
+		return Vector3(x, builder.terrain.height(x, z) + 0.1, z)
+	var old_builder = scene.get_node("Builder")
+	old_builder.setup_noise()
+	var old_z := roundi(-metres * old_builder.WORLD_UNITS_PER_METRE)
+	var old_x := roundi(old_builder.path_center_x(old_z))
+	return Vector3(old_x, old_builder.block_height(old_x, old_z) + 0.1, old_z)
