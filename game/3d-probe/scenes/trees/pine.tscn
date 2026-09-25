@@ -14,4 +14,3 @@ visibility_range_end = 160.0
 [node name="TrunkCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 shape = SubResource("shape_0")
-

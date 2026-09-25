@@ -28,4 +28,3 @@ shape = SubResource("shape_1")
 [node name="Collision2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
 shape = SubResource("shape_2")
-

@@ -14,4 +14,3 @@ visibility_range_end = 160.0
 [node name="LogCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0)
 shape = SubResource("shape_0")
-
