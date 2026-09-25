@@ -1,0 +1,41 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scenes/player/cat_model.gd" id="1_script"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/body.res" id="2_body"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/leg_left.res" id="3_leg_left"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/leg_right.res" id="4_leg_right"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/arm_left.res" id="5_arm_left"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/arm_right.res" id="6_arm_right"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/tail.res" id="7_tail"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/head.res" id="8_head"]
+
+[node name="CatModel" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("2_body")
+
+[node name="LegLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.75, 0.0)
+mesh = ExtResource("3_leg_left")
+
+[node name="LegRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.75, 0.0)
+mesh = ExtResource("4_leg_right")
+
+[node name="ArmLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.65, -0.05)
+mesh = ExtResource("5_arm_left")
+
+[node name="ArmRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.65, -0.05)
+mesh = ExtResource("6_arm_right")
+
+[node name="Tail" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0.4)
+mesh = ExtResource("7_tail")
+
+[node name="Head" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, -0.1)
+mesh = ExtResource("8_head")

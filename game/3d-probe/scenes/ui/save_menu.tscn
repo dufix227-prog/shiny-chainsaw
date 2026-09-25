@@ -1,0 +1,566 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/save_menu.gd" id="1_script"]
+[ext_resource type="Theme" path="res://scenes/ui/menu_theme.tres" id="2_theme"]
+[ext_resource type="FontFile" path="res://assets/fonts/pressstart2p/PressStart2P-Regular.ttf" id="3_title_font"]
+
+[node name="SaveMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.02, 0.03, 0.55)
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -440.0
+offset_top = -350.0
+offset_right = 440.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rows" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Panel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_title_font")
+theme_override_font_sizes/font_size = 28
+text = "Сохранить"
+
+[node name="Scroll" type="ScrollContainer" parent="Panel/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="List" type="VBoxContainer" parent="Panel/Rows/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="Slot01" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 1
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot01"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "1. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot01"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot01"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot02" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 2
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot02"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "2. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot02"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot02"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot03" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 3
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot03"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "3. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot03"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot03"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot04" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 4
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot04"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "4. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot04"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot04"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot05" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 5
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot05"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "5. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot05"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot05"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot06" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 6
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot06"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "6. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot06"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot06"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot07" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 7
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot07"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "7. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot07"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot07"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot08" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 8
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot08"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "8. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot08"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot08"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot09" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 9
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot09"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "9. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot09"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot09"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot10" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 10
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot10"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "10. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot10"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot10"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot11" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 11
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot11"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "11. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot11"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot11"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot12" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 12
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot12"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "12. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot12"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot12"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot13" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 13
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot13"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "13. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot13"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot13"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot14" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 14
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot14"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "14. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot14"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot14"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot15" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 15
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot15"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "15. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot15"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot15"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot16" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 16
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot16"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "16. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot16"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot16"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot17" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 17
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot17"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "17. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot17"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot17"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot18" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 18
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot18"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "18. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot18"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot18"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot19" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 19
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot19"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "19. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot19"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot19"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="Slot20" type="HBoxContainer" parent="Panel/Rows/Scroll/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+metadata/slot = 20
+
+[node name="Pick" type="Button" parent="Panel/Rows/Scroll/List/Slot20"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 22
+text = "20. пусто"
+alignment = 0
+
+[node name="Rename" type="Button" parent="Panel/Rows/Scroll/List/Slot20"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Переименовать"
+text = "Имя"
+
+[node name="Delete" type="Button" parent="Panel/Rows/Scroll/List/Slot20"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+tooltip_text = "Удалить"
+text = "Удалить"
+
+[node name="RenameRow" type="HBoxContainer" parent="Panel/Rows"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RenameField" type="LineEdit" parent="Panel/Rows/RenameRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Новое имя снимка"
+max_length = 40
+
+[node name="RenameConfirm" type="Button" parent="Panel/Rows/RenameRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Готово"
+
+[node name="BackButton" type="Button" parent="Panel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Назад"

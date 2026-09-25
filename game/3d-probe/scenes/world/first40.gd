@@ -12,6 +12,8 @@ const Builder = preload("res://scenes/world/first40_builder.gd")
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	GameSettings.apply_to_world(self)
+	SaveGame.restore_into(self)
 	end_zone.body_entered.connect(_on_end_zone_entered)
 	end_zone.body_exited.connect(_on_end_zone_exited)
 

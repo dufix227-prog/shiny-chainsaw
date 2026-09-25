@@ -6,7 +6,7 @@ extends RefCounted
 ##
 ## Палитры идут от тёмного к светлому: верх кроны светлее, низ темнее.
 
-const Mesher = preload("res://scenes/style_probe/voxel_mesher.gd")
+const Mesher = preload("res://scenes/voxel/voxel_mesher.gd")
 
 const VOXEL := preload("res://scenes/style_probe/materials/voxel.tres")
 const FOLIAGE := preload("res://scenes/style_probe/materials/foliage.tres")

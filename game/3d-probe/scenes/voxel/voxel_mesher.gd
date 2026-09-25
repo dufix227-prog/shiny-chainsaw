@@ -70,3 +70,34 @@ func commit(mesh: ArrayMesh, material: Material) -> void:
 	arrays[Mesh.ARRAY_INDEX] = indices
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	mesh.surface_set_material(mesh.get_surface_count() - 1, material)
+
+
+## Поле столбиков (земля, долина, горы): у каждого столбика верх на своей высоте,
+## кубики идут вниз до самого низкого соседа — стенок-«дыр» между столбиками нет.
+## height_at(x, z) — высота верха; color_at(x, z, y) — цвет кубика на высоте y.
+## Возвращает мешер: материал выбирает вызывающий (commit).
+static func height_field(x_min: float, x_max: float, z_min: float, z_max: float, column: float, layer: float,
+		height_at: Callable, color_at: Callable):
+	var columns := int((x_max - x_min) / column) + 1
+	var rows := int((z_max - z_min) / column) + 1
+	var levels := PackedInt32Array()
+	levels.resize(columns * rows)
+	for j in rows:
+		for i in columns:
+			levels[i + j * columns] = roundi(height_at.call(x_min + i * column, z_min + j * column) / layer)
+	var mesher = load("res://scenes/voxel/voxel_mesher.gd").new(Vector3(column, layer, column),
+		Vector3(x_min - column / 2.0, 0, z_min - column / 2.0))
+	for j in rows:
+		for i in columns:
+			var top := levels[i + j * columns]
+			var lowest := top
+			for offset in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+				var ni: int = i + offset.x
+				var nj: int = j + offset.y
+				if ni >= 0 and ni < columns and nj >= 0 and nj < rows:
+					lowest = mini(lowest, levels[ni + nj * columns])
+			var x := x_min + i * column
+			var z := z_min + j * column
+			for k in range(lowest - 1, top):
+				mesher.set_cell(Vector3i(i, k, j), color_at.call(x, z, k * layer))
+	return mesher

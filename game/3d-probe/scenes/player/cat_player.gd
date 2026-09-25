@@ -29,22 +29,19 @@ var controls_enabled := true
 
 var _out_of_breath := false
 var _bushes_touching := 0
-var _walk_cycle := 0.0
 var _visual_parts: Array[GeometryInstance3D] = []
 var _current_fade := 0.0
 
 @onready var visual: Node3D = $Visual
-@onready var leg_left: Node3D = $Visual/LegLeft
-@onready var leg_right: Node3D = $Visual/LegRight
-@onready var arm_left: Node3D = $Visual/ArmLeft
-@onready var arm_right: Node3D = $Visual/ArmRight
-@onready var tail: Node3D = $Visual/Tail
+@onready var model: Node3D = $Visual/CatModel
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var spring_arm: SpringArm3D = $CameraPivot/SpringArm3D
 @onready var camera: Camera3D = $CameraPivot/SpringArm3D/Camera3D
 
 
 func _ready() -> void:
+	GameSettings.changed.connect(_apply_camera_settings)
+	_apply_camera_settings()
 	for part in visual.find_children("*", "GeometryInstance3D", true, false):
 		_visual_parts.append(part)
 
@@ -132,28 +129,22 @@ func _update_stamina(wants_to_run: bool, delta: float) -> void:
 		stamina = minf(stamina + STAMINA_RECOVERY * delta, STAMINA_MAX)
 
 
-## Блочная анимация: лапы качаются в такт шагу (частота зависит от скорости,
-## чтобы кот не скользил), хвост покачивается всегда.
+## Поворот по ходу движения; сама анимация шага — в модели (cat_model.gd).
 func _animate(direction: Vector3, delta: float) -> void:
-	var moving := direction != Vector3.ZERO and is_on_floor()
 	if direction != Vector3.ZERO:
 		# Модель смотрит вдоль −Z, поэтому угол считается от −direction.
 		var target_yaw := atan2(-direction.x, -direction.z)
 		visual.rotation.y = lerp_angle(visual.rotation.y, target_yaw, 12.0 * delta)
-	var swing := 0.0
-	if moving:
-		var speed := Vector2(velocity.x, velocity.z).length()
-		_walk_cycle += delta * speed * 2.6
-		swing = sin(_walk_cycle) * (0.9 if is_running else 0.6)
-		visual.position.y = absf(sin(_walk_cycle)) * 0.06
-	else:
-		_walk_cycle = 0.0
-		visual.position.y = lerpf(visual.position.y, 0.0, 10.0 * delta)
-	if not is_on_floor():
-		swing = -0.5  # в прыжке лапы поджаты
-	var blend := 14.0 * delta
-	leg_left.rotation.x = lerpf(leg_left.rotation.x, swing, blend)
-	leg_right.rotation.x = lerpf(leg_right.rotation.x, -swing if is_on_floor() else swing, blend)
-	arm_left.rotation.x = lerpf(arm_left.rotation.x, -swing * 0.8, blend)
-	arm_right.rotation.x = lerpf(arm_right.rotation.x, swing * 0.8, blend)
-	tail.rotation.y = sin(Time.get_ticks_msec() * 0.003) * 0.3
+	# Реальная скорость, а не желаемая: упёрся в дерево — стоит неподвижно.
+	var real := get_real_velocity()
+	var ground_speed := Vector2(real.x, real.z).length()
+	model.move_speed = ground_speed
+	model.running = is_running
+	model.airborne = not is_on_floor()
+	if ground_speed > 0.05 and controls_enabled:
+		SaveGame.has_unsaved_progress = true
+
+
+func _apply_camera_settings() -> void:
+	camera.fov = GameSettings.get_value("field_of_view")
+	camera.far = GameSettings.get_value("draw_distance")

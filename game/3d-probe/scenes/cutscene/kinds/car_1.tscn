@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/cutscene/traffic_car.gd" id="1_jkjwi"]
+[ext_resource type="ArrayMesh" path="res://scenes/cutscene/kinds/car_1_mesh.res" id="2_773xx"]
+
+[node name="Car" type="Node3D" unique_id=1894911498]
+script = ExtResource("1_jkjwi")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=876847990]
+mesh = ExtResource("2_773xx")

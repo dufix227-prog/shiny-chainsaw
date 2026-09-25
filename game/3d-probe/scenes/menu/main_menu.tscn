@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scenes/menu/main_menu.gd" id="1_script"]
 [ext_resource type="Theme" path="res://scenes/ui/menu_theme.tres" id="2_theme"]
 [ext_resource type="Texture2D" path="res://assets/art/menu_background_candidate.jpg" id="3_background"]
 [ext_resource type="FontFile" path="res://assets/fonts/pressstart2p/PressStart2P-Regular.ttf" id="4_title_font"]
+[ext_resource type="PackedScene" path="res://scenes/ui/settings_menu.tscn" id="5_settings"]
+[ext_resource type="PackedScene" path="res://scenes/ui/save_menu.tscn" id="6_saves"]
 
 [sub_resource type="Gradient" id="shade_gradient"]
 offsets = PackedFloat32Array(0, 0.42, 0.7)
@@ -62,9 +64,9 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 90.0
-offset_top = -250.0
+offset_top = -280.0
 offset_right = 520.0
-offset_bottom = 250.0
+offset_bottom = 280.0
 grow_vertical = 2
 theme_override_constants/separation = 12
 alignment = 1
@@ -95,18 +97,16 @@ layout_mode = 2
 text = "Новая игра"
 alignment = 0
 
-[node name="StyleProbeButton" type="Button" parent="MainButtons"]
-unique_name_in_owner = true
-layout_mode = 2
-tooltip_text = "Короткий кусок тропы в стиле картинки меню — на оценку"
-text = "Проба графики"
-alignment = 0
-
 [node name="ContinueButton" type="Button" parent="MainButtons"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Сохранений пока нет"
 text = "Продолжить"
+alignment = 0
+
+[node name="LoadButton" type="Button" parent="MainButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Загрузить"
 alignment = 0
 
 [node name="SettingsButton" type="Button" parent="MainButtons"]
@@ -121,7 +121,7 @@ layout_mode = 2
 text = "Выход"
 alignment = 0
 
-[node name="SettingsPanel" type="PanelContainer" parent="."]
+[node name="NamePanel" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -129,73 +129,46 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 90.0
-offset_top = -280.0
+offset_top = -130.0
 offset_right = 650.0
-offset_bottom = 280.0
+offset_bottom = 130.0
 grow_vertical = 2
 
-[node name="Rows" type="VBoxContainer" parent="SettingsPanel"]
+[node name="Rows" type="VBoxContainer" parent="NamePanel"]
 layout_mode = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 16
 
-[node name="Heading" type="Label" parent="SettingsPanel/Rows"]
+[node name="Heading" type="Label" parent="NamePanel/Rows"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_title_font")
-theme_override_font_sizes/font_size = 40
-text = "Настройки"
+theme_override_font_sizes/font_size = 24
+text = "Имя котика"
 
-[node name="SensitivityLabel" type="Label" parent="SettingsPanel/Rows"]
-layout_mode = 2
-text = "Чувствительность мыши"
-
-[node name="SensitivitySlider" type="HSlider" parent="SettingsPanel/Rows"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 28)
-layout_mode = 2
-min_value = 0.05
-max_value = 1.0
-step = 0.01
-value = 0.25
-
-[node name="InvertCheck" type="CheckBox" parent="SettingsPanel/Rows"]
+[node name="NameField" type="LineEdit" parent="NamePanel/Rows"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Инвертировать камеру по вертикали"
+theme_override_font_sizes/font_size = 28
+placeholder_text = "Кот"
+max_length = 24
 
-[node name="FullscreenCheck" type="CheckBox" parent="SettingsPanel/Rows"]
+[node name="Buttons" type="HBoxContainer" parent="NamePanel/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="StartButton" type="Button" parent="NamePanel/Rows/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Полный экран"
+text = "Начать"
 
-[node name="VolumeLabel" type="Label" parent="SettingsPanel/Rows"]
-layout_mode = 2
-text = "Громкость"
-
-[node name="VolumeSlider" type="HSlider" parent="SettingsPanel/Rows"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 28)
-layout_mode = 2
-max_value = 1.0
-step = 0.05
-value = 0.8
-
-[node name="PixelLabel" type="Label" parent="SettingsPanel/Rows"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Пиксельность картинки"
-
-[node name="PixelSlider" type="HSlider" parent="SettingsPanel/Rows"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 28)
-layout_mode = 2
-min_value = 1.0
-max_value = 4.0
-value = 3.0
-tick_count = 4
-ticks_on_borders = true
-
-[node name="SettingsBackButton" type="Button" parent="SettingsPanel/Rows"]
+[node name="NameBackButton" type="Button" parent="NamePanel/Rows/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Назад"
-alignment = 0
+
+[node name="SettingsMenu" parent="." instance=ExtResource("5_settings")]
+unique_name_in_owner = true
+layout_mode = 1
+
+[node name="SaveMenu" parent="." instance=ExtResource("6_saves")]
+unique_name_in_owner = true
+layout_mode = 1

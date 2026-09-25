@@ -4,7 +4,7 @@ extends RefCounted
 ## в долину с рекой, вдали горы. Земля — мелкие воксельные столбики 0,5×0,25,
 ## у каждого свой оттенок; горы и долина — из кубиков крупнее (их видно издалека).
 
-const Mesher = preload("res://scenes/style_probe/voxel_mesher.gd")
+const Mesher = preload("res://scenes/voxel/voxel_mesher.gd")
 const Recipes = preload("res://scenes/style_probe/voxel_recipes.gd")
 
 const COLUMN := 0.5
@@ -169,32 +169,11 @@ func _mountain_color(x: float, z: float, height: float) -> Color:
 	return Recipes._pick(MOUNTAIN_HIGH, _rng, clampf(above_valley / 110.0, 0.0, 1.0))
 
 
-## Поле столбиков для дали: столбик от соседа пониже до своей высоты.
+## Поле столбиков для дали (общая функция — в voxel_mesher.gd).
 func _height_field(x_min: float, x_max: float, z_min: float, z_max: float, column: float, layer: float,
 		height_at: Callable, color_at: Callable) -> ArrayMesh:
-	var columns := int((x_max - x_min) / column) + 1
-	var rows := int((z_max - z_min) / column) + 1
-	var levels := PackedInt32Array()
-	levels.resize(columns * rows)
-	for j in rows:
-		for i in columns:
-			levels[i + j * columns] = roundi(height_at.call(x_min + i * column, z_min + j * column) / layer)
-	var mesher := Mesher.new(Vector3(column, layer, column), Vector3(x_min - column / 2.0, 0, z_min - column / 2.0))
-	for j in rows:
-		for i in columns:
-			var top := levels[i + j * columns]
-			var lowest := top
-			for offset in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
-				var ni: int = i + offset.x
-				var nj: int = j + offset.y
-				if ni >= 0 and ni < columns and nj >= 0 and nj < rows:
-					lowest = mini(lowest, levels[ni + nj * columns])
-			var x := x_min + i * column
-			var z := z_min + j * column
-			for k in range(lowest - 1, top):
-				mesher.set_cell(Vector3i(i, k, j), color_at.call(x, z, k * layer))
 	var mesh := ArrayMesh.new()
-	mesher.commit(mesh, Recipes.VOXEL)
+	Mesher.height_field(x_min, x_max, z_min, z_max, column, layer, height_at, color_at).commit(mesh, Recipes.VOXEL)
 	return mesh
 
 

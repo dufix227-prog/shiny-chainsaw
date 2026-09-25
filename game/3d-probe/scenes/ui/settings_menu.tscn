@@ -1,0 +1,451 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/settings_menu.gd" id="1_script"]
+[ext_resource type="Theme" path="res://scenes/ui/menu_theme.tres" id="2_theme"]
+[ext_resource type="FontFile" path="res://assets/fonts/pressstart2p/PressStart2P-Regular.ttf" id="3_title_font"]
+
+[node name="SettingsMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.02, 0.02, 0.03, 0.55)
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -440.0
+offset_top = -350.0
+offset_right = 440.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Rows" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Panel/Rows"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_title_font")
+theme_override_font_sizes/font_size = 28
+text = "Настройки"
+
+[node name="Tabs" type="TabContainer" parent="Panel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Graphics" type="ScrollContainer" parent="Panel/Rows/Tabs"]
+metadata/tab_title = "Графика"
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 0
+
+[node name="List" type="VBoxContainer" parent="Panel/Rows/Tabs/Graphics"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="WindowModeRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/WindowModeRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Режим окна"
+
+[node name="WindowMode" type="OptionButton" parent="Panel/Rows/Tabs/Graphics/List/WindowModeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "В окне"
+popup/item_0/id = 0
+popup/item_1/text = "Полный экран"
+popup/item_1/id = 1
+popup/item_2/text = "Без рамки"
+popup/item_2/id = 2
+metadata/setting_key = "window_mode"
+metadata/option_values = [0, 1, 2]
+
+[node name="VsyncRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/VsyncRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Вертикальная синхронизация"
+
+[node name="Vsync" type="CheckBox" parent="Panel/Rows/Tabs/Graphics/List/VsyncRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "вкл"
+metadata/setting_key = "vsync"
+
+[node name="MaxFpsRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/MaxFpsRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Ограничение кадров"
+
+[node name="MaxFps" type="OptionButton" parent="Panel/Rows/Tabs/Graphics/List/MaxFpsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 6
+popup/item_0/text = "Без ограничения"
+popup/item_0/id = 0
+popup/item_1/text = "30"
+popup/item_1/id = 1
+popup/item_2/text = "60"
+popup/item_2/id = 2
+popup/item_3/text = "90"
+popup/item_3/id = 3
+popup/item_4/text = "120"
+popup/item_4/id = 4
+popup/item_5/text = "144"
+popup/item_5/id = 5
+metadata/setting_key = "max_fps"
+metadata/option_values = [0, 30, 60, 90, 120, 144]
+
+[node name="RenderScaleRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/RenderScaleRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Разрешение 3D"
+
+[node name="RenderScale" type="HSlider" parent="Panel/Rows/Tabs/Graphics/List/RenderScaleRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.5
+max_value = 1.0
+step = 0.05
+metadata/setting_key = "render_scale"
+metadata/value_format = "percent"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Graphics/List/RenderScaleRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="AntialiasingRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/AntialiasingRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Сглаживание"
+
+[node name="Antialiasing" type="OptionButton" parent="Panel/Rows/Tabs/Graphics/List/AntialiasingRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 5
+popup/item_0/text = "Выкл"
+popup/item_0/id = 0
+popup/item_1/text = "FXAA"
+popup/item_1/id = 1
+popup/item_2/text = "MSAA ×2"
+popup/item_2/id = 2
+popup/item_3/text = "MSAA ×4"
+popup/item_3/id = 3
+popup/item_4/text = "TAA"
+popup/item_4/id = 4
+metadata/setting_key = "antialiasing"
+metadata/option_values = [0, 1, 2, 3, 4]
+
+[node name="ShadowQualityRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/ShadowQualityRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Тени"
+
+[node name="ShadowQuality" type="OptionButton" parent="Panel/Rows/Tabs/Graphics/List/ShadowQualityRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 4
+popup/item_0/text = "Выкл"
+popup/item_0/id = 0
+popup/item_1/text = "Низкие"
+popup/item_1/id = 1
+popup/item_2/text = "Средние"
+popup/item_2/id = 2
+popup/item_3/text = "Высокие"
+popup/item_3/id = 3
+metadata/setting_key = "shadow_quality"
+metadata/option_values = [0, 1, 2, 3]
+
+[node name="AmbientOcclusionRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/AmbientOcclusionRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Затенение в углах (SSAO)"
+
+[node name="AmbientOcclusion" type="CheckBox" parent="Panel/Rows/Tabs/Graphics/List/AmbientOcclusionRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "вкл"
+metadata/setting_key = "ambient_occlusion"
+
+[node name="GlowRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/GlowRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Свечение"
+
+[node name="Glow" type="CheckBox" parent="Panel/Rows/Tabs/Graphics/List/GlowRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "вкл"
+metadata/setting_key = "glow"
+
+[node name="FogRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/FogRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Туман и дымка"
+
+[node name="Fog" type="CheckBox" parent="Panel/Rows/Tabs/Graphics/List/FogRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "вкл"
+metadata/setting_key = "fog"
+
+[node name="DrawDistanceRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/DrawDistanceRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Дальность прорисовки"
+
+[node name="DrawDistance" type="HSlider" parent="Panel/Rows/Tabs/Graphics/List/DrawDistanceRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 100.0
+max_value = 800.0
+step = 50.0
+metadata/setting_key = "draw_distance"
+metadata/value_format = "number"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Graphics/List/DrawDistanceRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="FieldOfViewRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/FieldOfViewRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Угол обзора"
+
+[node name="FieldOfView" type="HSlider" parent="Panel/Rows/Tabs/Graphics/List/FieldOfViewRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 55.0
+max_value = 100.0
+step = 1.0
+metadata/setting_key = "field_of_view"
+metadata/value_format = "degrees"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Graphics/List/FieldOfViewRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="BrightnessRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/BrightnessRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Яркость"
+
+[node name="Brightness" type="HSlider" parent="Panel/Rows/Tabs/Graphics/List/BrightnessRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.6
+max_value = 1.4
+step = 0.05
+metadata/setting_key = "brightness"
+metadata/value_format = "percent"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Graphics/List/BrightnessRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="PixelSizeRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/PixelSizeRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Пиксельность картинки"
+
+[node name="PixelSize" type="OptionButton" parent="Panel/Rows/Tabs/Graphics/List/PixelSizeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 4
+popup/item_0/text = "Выкл"
+popup/item_0/id = 0
+popup/item_1/text = "×2"
+popup/item_1/id = 1
+popup/item_2/text = "×3"
+popup/item_2/id = 2
+popup/item_3/text = "×4"
+popup/item_3/id = 3
+metadata/setting_key = "pixel_size"
+metadata/option_values = [1, 2, 3, 4]
+
+[node name="Controls" type="ScrollContainer" parent="Panel/Rows/Tabs"]
+metadata/tab_title = "Управление"
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 1
+
+[node name="List" type="VBoxContainer" parent="Panel/Rows/Tabs/Controls"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="MouseSensitivityRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/MouseSensitivityRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Чувствительность мыши"
+
+[node name="MouseSensitivity" type="HSlider" parent="Panel/Rows/Tabs/Controls/List/MouseSensitivityRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.05
+max_value = 1.0
+step = 0.01
+metadata/setting_key = "mouse_sensitivity"
+metadata/value_format = "percent"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Controls/List/MouseSensitivityRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="InvertCameraYRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/InvertCameraYRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Инвертировать камеру по вертикали"
+
+[node name="InvertCameraY" type="CheckBox" parent="Panel/Rows/Tabs/Controls/List/InvertCameraYRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "вкл"
+metadata/setting_key = "invert_camera_y"
+
+[node name="Sound" type="ScrollContainer" parent="Panel/Rows/Tabs"]
+metadata/tab_title = "Звук"
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 2
+
+[node name="List" type="VBoxContainer" parent="Panel/Rows/Tabs/Sound"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="MasterVolumeRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Sound/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Sound/List/MasterVolumeRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Общая громкость"
+
+[node name="MasterVolume" type="HSlider" parent="Panel/Rows/Tabs/Sound/List/MasterVolumeRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+metadata/setting_key = "master_volume"
+metadata/value_format = "percent"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Sound/List/MasterVolumeRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Panel/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="BackButton" type="Button" parent="Panel/Rows/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Назад"
+
+[node name="DefaultsButton" type="Button" parent="Panel/Rows/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "По умолчанию"

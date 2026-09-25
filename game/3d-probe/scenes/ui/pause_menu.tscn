@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/pause_menu.gd" id="1_script"]
 [ext_resource type="Theme" path="res://scenes/ui/menu_theme.tres" id="2_theme"]
 [ext_resource type="FontFile" path="res://assets/fonts/pressstart2p/PressStart2P-Regular.ttf" id="3_title_font"]
+[ext_resource type="PackedScene" path="res://scenes/ui/settings_menu.tscn" id="4_settings"]
+[ext_resource type="PackedScene" path="res://scenes/ui/save_menu.tscn" id="5_saves"]
+[ext_resource type="PackedScene" path="res://scenes/ui/unsaved_dialog.tscn" id="6_unsaved"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -15,7 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.02, 0.02, 0.03, 0.62)
+color = Color(0.02, 0.02, 0.03, 0.5)
 
 [node name="Panel" type="PanelContainer" parent="."]
 anchors_preset = 8
@@ -23,10 +26,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -220.0
-offset_top = -170.0
-offset_right = 220.0
-offset_bottom = 170.0
+offset_left = -230.0
+offset_top = -215.0
+offset_right = 230.0
+offset_bottom = 215.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_theme")
@@ -38,7 +41,7 @@ theme_override_constants/separation = 8
 [node name="Title" type="Label" parent="Panel/Rows"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_title_font")
-theme_override_font_sizes/font_size = 44
+theme_override_font_sizes/font_size = 32
 text = "Пауза"
 horizontal_alignment = 1
 
@@ -46,6 +49,21 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 text = "Продолжить"
+
+[node name="SaveButton" type="Button" parent="Panel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Сохранить"
+
+[node name="LoadButton" type="Button" parent="Panel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Загрузить"
+
+[node name="SettingsButton" type="Button" parent="Panel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Настройки"
 
 [node name="MainMenuButton" type="Button" parent="Panel/Rows"]
 unique_name_in_owner = true
@@ -56,3 +74,9 @@ text = "В главное меню"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Выход из игры"
+
+[node name="SettingsMenu" parent="." instance=ExtResource("4_settings")]
+
+[node name="SaveMenu" parent="." instance=ExtResource("5_saves")]
+
+[node name="UnsavedDialog" parent="." instance=ExtResource("6_unsaved")]
