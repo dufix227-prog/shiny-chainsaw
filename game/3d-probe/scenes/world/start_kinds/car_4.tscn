@@ -2,21 +2,31 @@
 
 [ext_resource type="Script" path="res://scenes/cutscene/traffic_car.gd" id="1_5vss8"]
 [ext_resource type="ArrayMesh" path="res://scenes/world/start_kinds/car_4_mesh.res" id="2_wfqwk"]
+[ext_resource type="AudioStream" path="res://audio/engine_loop.wav" id="3_wfqwk"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_5vss8"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_witgd"]
 size = Vector3(4.4, 1.8, 2)
 
-[node name="Car" type="Node3D" unique_id=605845378]
+[node name="Car" type="Node3D" unique_id=254941635]
 script = ExtResource("1_5vss8")
 
-[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1663458690]
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1089706983]
 mesh = ExtResource("2_wfqwk")
 
-[node name="HitZone" type="Area3D" parent="." unique_id=1281160681]
+[node name="HitZone" type="Area3D" parent="." unique_id=28788092]
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 
-[node name="Shape" type="CollisionShape3D" parent="HitZone" unique_id=1919330962]
+[node name="Shape" type="CollisionShape3D" parent="HitZone" unique_id=780107257]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-shape = SubResource("BoxShape3D_5vss8")
+shape = SubResource("BoxShape3D_witgd")
+
+[node name="Engine" type="AudioStreamPlayer3D" parent="." unique_id=2146584120]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0.6, 0)
+stream = ExtResource("3_wfqwk")
+volume_db = -4.0
+unit_size = 5.0
+autoplay = true
+max_distance = 45.0
+bus = &"Effects"

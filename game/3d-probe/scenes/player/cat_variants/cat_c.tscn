@@ -1,0 +1,55 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/player/cat_model.gd" id="1_ds726"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/c/body.res" id="2_mr3mg"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/c/leg_left.res" id="3_td5l4"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/c/leg_right.res" id="4_e8qar"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/c/arm_left.res" id="5_8877j"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/c/arm_right.res" id="6_hdvdk"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/c/tail.res" id="7_uxmmx"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/c/head.res" id="8_gw5bm"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/c/eyes_neutral.res" id="9_30a7q"]
+[ext_resource type="ArrayMesh" path="res://scenes/player/cat_parts/c/mouth_neutral.res" id="10_1gsfv"]
+
+[node name="CatModel" type="Node3D" unique_id=276376910]
+script = ExtResource("1_ds726")
+variant_id = "c"
+eye_height = 2.8600000000000003
+
+[node name="Body" type="MeshInstance3D" parent="." unique_id=1698899218]
+mesh = ExtResource("2_mr3mg")
+
+[node name="LegLeft" type="MeshInstance3D" parent="." unique_id=329735297]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 1.1, 0)
+mesh = ExtResource("3_td5l4")
+
+[node name="LegRight" type="MeshInstance3D" parent="." unique_id=307144983]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 1.1, 0)
+mesh = ExtResource("4_e8qar")
+
+[node name="ArmLeft" type="MeshInstance3D" parent="." unique_id=142821722]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 2.1, 0)
+mesh = ExtResource("5_8877j")
+
+[node name="ArmRight" type="MeshInstance3D" parent="." unique_id=1509048416]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 2.1, 0)
+mesh = ExtResource("6_hdvdk")
+
+[node name="Tail" type="MeshInstance3D" parent="." unique_id=1196545698]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0.3)
+mesh = ExtResource("7_uxmmx")
+
+[node name="Head" type="MeshInstance3D" parent="." unique_id=426799606]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, -0.1)
+mesh = ExtResource("8_gw5bm")
+
+[node name="Eyes" type="MeshInstance3D" parent="Head" unique_id=1590981630]
+mesh = ExtResource("9_30a7q")
+
+[node name="Mouth" type="MeshInstance3D" parent="Head" unique_id=1092957383]
+mesh = ExtResource("10_1gsfv")
+
+[node name="Footsteps" type="AudioStreamPlayer3D" parent="." unique_id=1632675360]
+unit_size = 4.0
+max_distance = 30.0
+bus = &"Effects"

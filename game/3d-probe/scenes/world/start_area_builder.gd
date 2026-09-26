@@ -112,10 +112,22 @@ func _save_car(index: int) -> void:
 	shape.position = Vector3(0, 0.9, 0)
 	zone.add_child(shape)
 	shape.owner = car
+	# Гул мотора (собственная синтезированная заглушка, tools/make_sounds.py).
+	var engine := AudioStreamPlayer3D.new()
+	engine.name = "Engine"
+	engine.stream = load("res://audio/engine_loop.wav")
+	engine.bus = &"Effects"
+	engine.autoplay = true
+	engine.volume_db = -4.0
+	engine.unit_size = 5.0
+	engine.max_distance = 45.0
+	engine.position = Vector3(1.4, 0.6, 0)
+	car.add_child(engine)
+	engine.owner = car
 	_pack(car, "car_%d" % index)
 
 
-## Табличка: меш, надпись Label3D (текст — формулировка автора) и коллизия столбиков и доски.
+## Табличка: меш, надпись Label3D (текст — формулировка автора 25.09.2026) и коллизия столбиков и доски.
 func _save_sign() -> void:
 	var mesh_path := KINDS_DIR + "sign_mesh.res"
 	ResourceSaver.save(StreetRecipes.sign(50), mesh_path, ResourceSaver.FLAG_COMPRESS)
@@ -124,7 +136,7 @@ func _save_sign() -> void:
 	_add_mesh_child(sign, mesh_path)
 	var text := Label3D.new()
 	text.name = "Text"
-	text.text = "через 500 метров\nклубничные запасы"
+	text.text = "халявная клубника\nчерез 500 метров"
 	text.font = load("res://assets/fonts/tiny5/Tiny5-Regular.ttf")
 	text.font_size = 64
 	text.pixel_size = 0.0031
@@ -271,6 +283,8 @@ func _build_street(scene_root: Node) -> void:
 			var car := _place(_scenes["car_%d" % (index % CAR_COLORS.size())], traffic, scene_root,
 				Vector3(car_x, 0.0, lane[0]), lane[1])
 			car.speed = lane[2] + _rng.randf_range(-1.5, 1.5)
+			# Разный тон мотора — чтобы поток не гудел одной нотой.
+			car.get_node("Engine").pitch_scale = _rng.randf_range(0.8, 1.25)
 			# Машины исчезают и появляются в темноте тоннелей.
 			car.x_min = -Terrain.TUNNEL_X - 5.0
 			car.x_max = Terrain.TUNNEL_X + 5.0

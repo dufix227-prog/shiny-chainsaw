@@ -13,16 +13,16 @@ size = Vector3(8, 5.5, 11)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bu8n8"]
 size = Vector3(0.5, 5.5, 11)
 
-[node name="Tunnel" type="StaticBody3D" unique_id=1320913150]
+[node name="Tunnel" type="StaticBody3D" unique_id=1259855216]
 
-[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1528866262]
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2060808057]
 mesh = ExtResource("1_f2udj")
 
-[node name="Darkness" type="MeshInstance3D" parent="." unique_id=1628973654]
+[node name="Darkness" type="MeshInstance3D" parent="." unique_id=440691578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.75, 0)
 material_override = SubResource("StandardMaterial3D_f2udj")
 mesh = SubResource("BoxMesh_lmoed")
 
-[node name="Collision2" type="CollisionShape3D" parent="." unique_id=2135439988]
+[node name="Collision2" type="CollisionShape3D" parent="." unique_id=1088210484]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 2.75, 0)
 shape = SubResource("BoxShape3D_bu8n8")

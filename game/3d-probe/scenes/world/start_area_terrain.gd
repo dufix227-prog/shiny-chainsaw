@@ -31,7 +31,7 @@ const SLOPE_STEEPNESS := 1.6
 const SLOPE_MAX_DISTANCE := 16.0
 const LAYER := 0.25
 
-## Табличка «через 500 метров клубничные запасы» — у входа на тропу.
+## Табличка «халявная клубника через 500 метров» — у входа на тропу.
 const SIGN_POSITION := Vector3(3.4, 0.25, -11.5)
 const SIGN_YAW := -0.4
 
@@ -82,6 +82,15 @@ func distance_outside(x: float, z: float) -> float:
 	var along := maxf(TRAIL_END_Z - z, 0.0) + maxf(z + SIDEWALK_OUTER, 0.0)
 	var trail := Vector2(maxf(absf(x - trail_center_x(z)) - CORRIDOR_HALF, 0.0), along).length()
 	return minf(street, minf(canyon, trail))
+
+
+## Поверхность под лапами: asphalt / concrete / dirt / grass (для звука шагов).
+func surface(x: float, z: float) -> String:
+	if absf(z) < SIDEWALK_OUTER and absf(x) < TUNNEL_X + 8.0:
+		return "asphalt" if absf(z) < ROAD_HALF else "concrete"
+	if is_trail(x, z):
+		return "concrete" if z > CONCRETE_END_Z else "dirt"
+	return "grass"
 
 
 func height(x: float, z: float) -> float:

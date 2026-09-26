@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scenes/ui/settings_menu.gd" id="1_script"]
 [ext_resource type="Theme" path="res://scenes/ui/menu_theme.tres" id="2_theme"]
-[ext_resource type="FontFile" path="res://assets/fonts/pressstart2p/PressStart2P-Regular.ttf" id="3_title_font"]
 
 [node name="SettingsMenu" type="Control"]
 process_mode = 3
@@ -31,10 +30,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -440.0
-offset_top = -350.0
-offset_right = 440.0
-offset_bottom = 350.0
+offset_left = -470.0
+offset_top = -360.0
+offset_right = 470.0
+offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -44,7 +43,7 @@ theme_override_constants/separation = 12
 
 [node name="Title" type="Label" parent="Panel/Rows"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_title_font")
+theme_type_variation = &"TitleLabel"
 theme_override_font_sizes/font_size = 28
 text = "Настройки"
 
@@ -55,9 +54,9 @@ size_flags_vertical = 3
 current_tab = 0
 
 [node name="Graphics" type="ScrollContainer" parent="Panel/Rows/Tabs"]
-metadata/tab_title = "Графика"
 layout_mode = 2
 horizontal_scroll_mode = 0
+metadata/tab_title = "Графика"
 metadata/_tab_index = 0
 
 [node name="List" type="VBoxContainer" parent="Panel/Rows/Tabs/Graphics"]
@@ -275,31 +274,6 @@ custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 horizontal_alignment = 2
 
-[node name="FieldOfViewRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="Label" type="Label" parent="Panel/Rows/Tabs/Graphics/List/FieldOfViewRow"]
-custom_minimum_size = Vector2(380, 0)
-layout_mode = 2
-text = "Угол обзора"
-
-[node name="FieldOfView" type="HSlider" parent="Panel/Rows/Tabs/Graphics/List/FieldOfViewRow"]
-custom_minimum_size = Vector2(0, 28)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-min_value = 55.0
-max_value = 100.0
-step = 1.0
-metadata/setting_key = "field_of_view"
-metadata/value_format = "degrees"
-
-[node name="Value" type="Label" parent="Panel/Rows/Tabs/Graphics/List/FieldOfViewRow"]
-custom_minimum_size = Vector2(90, 0)
-layout_mode = 2
-horizontal_alignment = 2
-
 [node name="BrightnessRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Graphics/List"]
 layout_mode = 2
 theme_override_constants/separation = 16
@@ -349,11 +323,234 @@ popup/item_3/id = 3
 metadata/setting_key = "pixel_size"
 metadata/option_values = [1, 2, 3, 4]
 
-[node name="Controls" type="ScrollContainer" parent="Panel/Rows/Tabs"]
-metadata/tab_title = "Управление"
+[node name="Interface" type="ScrollContainer" parent="Panel/Rows/Tabs"]
 layout_mode = 2
 horizontal_scroll_mode = 0
+metadata/tab_title = "Интерфейс"
 metadata/_tab_index = 1
+
+[node name="List" type="VBoxContainer" parent="Panel/Rows/Tabs/Interface"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="UiFontRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Interface/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Interface/List/UiFontRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Шрифт"
+
+[node name="UiFont" type="OptionButton" parent="Panel/Rows/Tabs/Interface/List/UiFontRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 3
+popup/item_0/text = "Пиксельный"
+popup/item_0/id = 0
+popup/item_1/text = "Обычный (читаемый)"
+popup/item_1/id = 1
+popup/item_2/text = "Жирный (читаемый)"
+popup/item_2/id = 2
+metadata/setting_key = "ui_font"
+metadata/option_values = [0, 1, 2]
+
+[node name="UiScaleRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Interface/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Interface/List/UiScaleRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Размер интерфейса"
+
+[node name="UiScale" type="HSlider" parent="Panel/Rows/Tabs/Interface/List/UiScaleRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.8
+max_value = 1.5
+step = 0.05
+metadata/setting_key = "ui_scale"
+metadata/value_format = "percent"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Interface/List/UiScaleRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="FontSample" type="Label" parent="Panel/Rows/Tabs/Interface/List"]
+layout_mode = 2
+autowrap_mode = 3
+text = "Пример текста: халявная клубника через 500 метров. 0123456789"
+
+[node name="Camera" type="ScrollContainer" parent="Panel/Rows/Tabs"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/tab_title = "Камера"
+metadata/_tab_index = 2
+
+[node name="List" type="VBoxContainer" parent="Panel/Rows/Tabs/Camera"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="CameraModeRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Camera/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Camera/List/CameraModeRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Вид камеры"
+
+[node name="CameraMode" type="OptionButton" parent="Panel/Rows/Tabs/Camera/List/CameraModeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 4
+popup/item_0/text = "Третье лицо"
+popup/item_0/id = 0
+popup/item_1/text = "За спиной"
+popup/item_1/id = 1
+popup/item_2/text = "Первое лицо"
+popup/item_2/id = 2
+popup/item_3/text = "Своя"
+popup/item_3/id = 3
+metadata/setting_key = "camera_mode"
+metadata/option_values = [0, 1, 2, 3]
+
+[node name="CameraDistanceRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Camera/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Camera/List/CameraDistanceRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Расстояние до кота"
+
+[node name="CameraDistance" type="HSlider" parent="Panel/Rows/Tabs/Camera/List/CameraDistanceRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 2.5
+max_value = 16.0
+step = 0.5
+metadata/setting_key = "camera_distance"
+metadata/value_format = "number1"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Camera/List/CameraDistanceRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="FieldOfViewRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Camera/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Camera/List/FieldOfViewRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Угол обзора"
+
+[node name="FieldOfView" type="HSlider" parent="Panel/Rows/Tabs/Camera/List/FieldOfViewRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 55.0
+max_value = 100.0
+step = 1.0
+metadata/setting_key = "field_of_view"
+metadata/value_format = "degrees"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Camera/List/FieldOfViewRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="CameraHeightRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Camera/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Camera/List/CameraHeightRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Своя камера: высота"
+
+[node name="CameraHeight" type="HSlider" parent="Panel/Rows/Tabs/Camera/List/CameraHeightRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 1.5
+max_value = 7.0
+step = 0.1
+metadata/setting_key = "camera_height"
+metadata/value_format = "number1"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Camera/List/CameraHeightRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="CameraSideRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Camera/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Camera/List/CameraSideRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Своя камера: сдвиг вбок"
+
+[node name="CameraSide" type="HSlider" parent="Panel/Rows/Tabs/Camera/List/CameraSideRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -3.0
+max_value = 3.0
+step = 0.1
+metadata/setting_key = "camera_side"
+metadata/value_format = "number1"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Camera/List/CameraSideRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="CameraPitchRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Camera/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Camera/List/CameraPitchRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Своя камера: наклон"
+
+[node name="CameraPitch" type="HSlider" parent="Panel/Rows/Tabs/Camera/List/CameraPitchRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -60.0
+max_value = 15.0
+step = 1.0
+metadata/setting_key = "camera_pitch"
+metadata/value_format = "degrees"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Camera/List/CameraPitchRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="Controls" type="ScrollContainer" parent="Panel/Rows/Tabs"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/tab_title = "Управление"
+metadata/_tab_index = 3
 
 [node name="List" type="VBoxContainer" parent="Panel/Rows/Tabs/Controls"]
 layout_mode = 2
@@ -385,6 +582,31 @@ custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 horizontal_alignment = 2
 
+[node name="StickSensitivityRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/StickSensitivityRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Чувствительность стика"
+
+[node name="StickSensitivity" type="HSlider" parent="Panel/Rows/Tabs/Controls/List/StickSensitivityRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.3
+max_value = 2.5
+step = 0.05
+metadata/setting_key = "stick_sensitivity"
+metadata/value_format = "percent"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Controls/List/StickSensitivityRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
 [node name="InvertCameraYRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
 layout_mode = 2
 theme_override_constants/separation = 16
@@ -400,11 +622,563 @@ size_flags_horizontal = 3
 text = "вкл"
 metadata/setting_key = "invert_camera_y"
 
+[node name="RebindTitle" type="Label" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(1, 0.82, 0.55, 1)
+text = "Кнопки (нажмите, затем нужную клавишу; Backspace — очистить)"
+autowrap_mode = 3
+
+[node name="RebindHeader" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Action" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindHeader"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Действие"
+
+[node name="Key1" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindHeader"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Клавиша 1"
+
+[node name="Key2" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindHeader"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Клавиша 2"
+
+[node name="Pad" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindHeader"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Геймпад"
+
+[node name="RebindMoveUp" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindMoveUp"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Вперёд"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindMoveUp"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "move_up"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindMoveUp"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "move_up"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindMoveUp"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "move_up"
+metadata/rebind_slot = 2
+
+[node name="RebindMoveDown" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindMoveDown"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Назад"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindMoveDown"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "move_down"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindMoveDown"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "move_down"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindMoveDown"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "move_down"
+metadata/rebind_slot = 2
+
+[node name="RebindMoveLeft" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindMoveLeft"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Влево"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindMoveLeft"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "move_left"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindMoveLeft"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "move_left"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindMoveLeft"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "move_left"
+metadata/rebind_slot = 2
+
+[node name="RebindMoveRight" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindMoveRight"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Вправо"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindMoveRight"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "move_right"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindMoveRight"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "move_right"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindMoveRight"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "move_right"
+metadata/rebind_slot = 2
+
+[node name="RebindRun" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindRun"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Бег"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindRun"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "run"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindRun"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "run"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindRun"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "run"
+metadata/rebind_slot = 2
+
+[node name="RebindJump" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindJump"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Прыжок"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindJump"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "jump"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindJump"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "jump"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindJump"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "jump"
+metadata/rebind_slot = 2
+
+[node name="RebindLookUp" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindLookUp"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Камера вверх"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindLookUp"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "look_up"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindLookUp"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "look_up"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindLookUp"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "look_up"
+metadata/rebind_slot = 2
+
+[node name="RebindLookDown" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindLookDown"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Камера вниз"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindLookDown"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "look_down"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindLookDown"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "look_down"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindLookDown"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "look_down"
+metadata/rebind_slot = 2
+
+[node name="RebindLookLeft" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindLookLeft"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Камера влево"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindLookLeft"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "look_left"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindLookLeft"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "look_left"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindLookLeft"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "look_left"
+metadata/rebind_slot = 2
+
+[node name="RebindLookRight" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindLookRight"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Камера вправо"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindLookRight"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "look_right"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindLookRight"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "look_right"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindLookRight"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "look_right"
+metadata/rebind_slot = 2
+
+[node name="RebindCameraZoomIn" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindCameraZoomIn"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Камера ближе"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindCameraZoomIn"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "camera_zoom_in"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindCameraZoomIn"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "camera_zoom_in"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindCameraZoomIn"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "camera_zoom_in"
+metadata/rebind_slot = 2
+
+[node name="RebindCameraZoomOut" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindCameraZoomOut"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Камера дальше"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindCameraZoomOut"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "camera_zoom_out"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindCameraZoomOut"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "camera_zoom_out"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindCameraZoomOut"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "camera_zoom_out"
+metadata/rebind_slot = 2
+
+[node name="RebindCameraMode" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindCameraMode"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Вид камеры"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindCameraMode"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "camera_mode"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindCameraMode"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "camera_mode"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindCameraMode"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "camera_mode"
+metadata/rebind_slot = 2
+
+[node name="RebindPause" type="HBoxContainer" parent="Panel/Rows/Tabs/Controls/List"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Controls/List/RebindPause"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Пауза"
+
+[node name="Slot0" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindPause"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "pause"
+metadata/rebind_slot = 0
+
+[node name="Slot1" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindPause"]
+custom_minimum_size = Vector2(185, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "pause"
+metadata/rebind_slot = 1
+
+[node name="Slot2" type="Button" parent="Panel/Rows/Tabs/Controls/List/RebindPause"]
+custom_minimum_size = Vector2(215, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "—"
+clip_text = true
+metadata/rebind_action = "pause"
+metadata/rebind_slot = 2
+
+[node name="RebindMessage" type="Label" parent="Panel/Rows/Tabs/Controls/List"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.55, 1)
+theme_override_font_sizes/font_size = 20
+autowrap_mode = 3
+
+[node name="ResetControls" type="Button" parent="Panel/Rows/Tabs/Controls/List"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Сбросить кнопки"
+
 [node name="Sound" type="ScrollContainer" parent="Panel/Rows/Tabs"]
-metadata/tab_title = "Звук"
 layout_mode = 2
 horizontal_scroll_mode = 0
-metadata/_tab_index = 2
+metadata/tab_title = "Звук"
+metadata/_tab_index = 4
 
 [node name="List" type="VBoxContainer" parent="Panel/Rows/Tabs/Sound"]
 layout_mode = 2
@@ -435,6 +1209,152 @@ metadata/value_format = "percent"
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 horizontal_alignment = 2
+
+[node name="MusicVolumeRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Sound/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Sound/List/MusicVolumeRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Музыка"
+
+[node name="MusicVolume" type="HSlider" parent="Panel/Rows/Tabs/Sound/List/MusicVolumeRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+metadata/setting_key = "music_volume"
+metadata/value_format = "percent"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Sound/List/MusicVolumeRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="EffectsVolumeRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Sound/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Sound/List/EffectsVolumeRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Эффекты (шаги, машины)"
+
+[node name="EffectsVolume" type="HSlider" parent="Panel/Rows/Tabs/Sound/List/EffectsVolumeRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+metadata/setting_key = "effects_volume"
+metadata/value_format = "percent"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Sound/List/EffectsVolumeRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="AmbientVolumeRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Sound/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Sound/List/AmbientVolumeRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Окружение (лес, ветер)"
+
+[node name="AmbientVolume" type="HSlider" parent="Panel/Rows/Tabs/Sound/List/AmbientVolumeRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+metadata/setting_key = "ambient_volume"
+metadata/value_format = "percent"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Sound/List/AmbientVolumeRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="InterfaceVolumeRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Sound/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Sound/List/InterfaceVolumeRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Интерфейс"
+
+[node name="InterfaceVolume" type="HSlider" parent="Panel/Rows/Tabs/Sound/List/InterfaceVolumeRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+metadata/setting_key = "interface_volume"
+metadata/value_format = "percent"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Sound/List/InterfaceVolumeRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="VoiceVolumeRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Sound/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Sound/List/VoiceVolumeRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Голоса"
+
+[node name="VoiceVolume" type="HSlider" parent="Panel/Rows/Tabs/Sound/List/VoiceVolumeRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+metadata/setting_key = "voice_volume"
+metadata/value_format = "percent"
+
+[node name="Value" type="Label" parent="Panel/Rows/Tabs/Sound/List/VoiceVolumeRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="MuteUnfocusedRow" type="HBoxContainer" parent="Panel/Rows/Tabs/Sound/List"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="Panel/Rows/Tabs/Sound/List/MuteUnfocusedRow"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+text = "Без звука, когда игра свёрнута"
+
+[node name="MuteUnfocused" type="CheckBox" parent="Panel/Rows/Tabs/Sound/List/MuteUnfocusedRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "вкл"
+metadata/setting_key = "mute_unfocused"
+
+[node name="SoundNote" type="Label" parent="Panel/Rows/Tabs/Sound/List"]
+layout_mode = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 18
+text = "Музыки и голосов в игре пока нет — ползунки для них готовы заранее."
 
 [node name="Buttons" type="HBoxContainer" parent="Panel/Rows"]
 layout_mode = 2

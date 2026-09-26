@@ -27,7 +27,7 @@ func _run() -> void:
 	var animation: Animation = scene.get_node("AnimationPlayer").get_animation("intro")
 	check(animation.length >= 45.0 and animation.length <= 75.0, "катсцена около минуты (%.0f с)" % animation.length)
 	var sign: Node3D = scene.get_node("World/Builder/Sign").get_child(0)
-	check(sign.get_node("Text").text == "через 500 метров\nклубничные запасы", "текст таблички — формулировка автора")
+	check(sign.get_node("Text").text == "халявная клубника\nчерез 500 метров", "текст таблички — формулировка автора")
 	var tracks := {}
 	for i in animation.get_track_count():
 		tracks[str(animation.track_get_path(i)) + ":" + str(animation.track_get_type(i))] = i
@@ -50,6 +50,11 @@ func _run() -> void:
 		longest_closeup = maxf(longest_closeup, closeup)
 		t += 0.05
 	check(on_road == 0, "кот не выходит на проезжую часть")
+	var mood_track: int = tracks["CatModel:emotion:%d" % Animation.TYPE_VALUE]
+	var moods := []
+	for key in animation.track_get_key_count(mood_track):
+		moods.append(animation.track_get_key_value(mood_track, key))
+	check(moods.has("joy"), "у таблички кот радуется (мимика в катсцене)")
 	var spawn := preload("res://scenes/world/start_area_builder.gd").spawn_position_static()
 	var cat_end: Vector3 = animation.position_track_interpolate(cat_track, animation.length)
 	check(Vector2(cat_end.x - spawn.x, cat_end.z - spawn.z).length() < 0.2,

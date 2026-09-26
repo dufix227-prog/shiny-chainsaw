@@ -11,7 +11,8 @@ extends Node
 ## формат меняется, FORMAT_VERSION растёт и в _migrate() добавляется перевод
 ## старых снимков — старые сохранения игрока не должны ломаться.
 
-const FORMAT_VERSION := 1
+## История формата: 1 — позиция кота; 2 — добавлены модель кота и флаги событий.
+const FORMAT_VERSION := 2
 const SLOT_COUNT := 20
 const SAVE_DIR := "user://saves/"
 ## Папку можно подменить (тесты пишут в отдельную, не трогая снимки игрока).
@@ -19,6 +20,11 @@ var save_dir := SAVE_DIR
 
 ## Имя героя вводит игрок перед катсценой.
 var hero_name := ""
+## Выбранная модель кота (scenes/player/cat_variants/cat_<id>.tscn).
+var cat_variant := "a"
+## Однократные события прохождения: {имя: true}. Например, «сценка у завала
+## уже показана» — чтобы после загрузки она не повторялась.
+var flags := {}
 ## true, если после последней записи/загрузки игрок что-то сделал.
 var has_unsaved_progress := false
 
@@ -27,6 +33,15 @@ var _pending_state := {}
 
 func slot_path(slot: int) -> String:
 	return save_dir + "slot_%02d.json" % slot
+
+
+func set_flag(flag: String) -> void:
+	flags[flag] = true
+	has_unsaved_progress = true
+
+
+func has_flag(flag: String) -> bool:
+	return flags.get(flag, false)
 
 
 func has_slot(slot: int) -> bool:
@@ -73,6 +88,8 @@ func save_to_slot(slot: int, title: String = "") -> bool:
 		"title": title,
 		"saved_at": Time.get_unix_time_from_system(),
 		"hero_name": hero_name,
+		"cat_variant": cat_variant,
+		"flags": flags,
 		"scene": scene.scene_file_path,
 		"metres": _metres(scene, player),
 		"player": {
@@ -99,6 +116,8 @@ func load_slot(slot: int) -> bool:
 	if data.is_empty() or not ResourceLoader.exists(data.scene):
 		return false
 	hero_name = data.hero_name
+	cat_variant = data.cat_variant
+	flags = data.flags.duplicate()
 	_pending_state = data.player
 	has_unsaved_progress = false
 	get_tree().paused = false
@@ -134,8 +153,10 @@ func rename_slot(slot: int, title: String) -> void:
 
 
 ## Новая игра: сброс всего, что относится к прохождению.
-func start_new_game(new_hero_name: String) -> void:
+func start_new_game(new_hero_name: String, variant: String = "a") -> void:
 	hero_name = new_hero_name
+	cat_variant = variant
+	flags = {}
 	_pending_state = {}
 	has_unsaved_progress = false
 
@@ -147,11 +168,15 @@ func _metres(scene: Node, player: Node3D) -> float:
 	return maxf(-player.global_position.z / 12.24, 0.0)
 
 
-## Перевод старых снимков в текущий формат. Сейчас формат один (версия 1).
+## Перевод старых снимков в текущий формат: каждая версия добавляет то, чего
+## в старом файле не было, значениями по умолчанию.
 func _migrate(data: Dictionary) -> Dictionary:
 	var version: int = int(data.get("version", 1))
 	if version > FORMAT_VERSION:
 		push_warning("Снимок из более новой версии игры (формат %d)" % version)
-	# Пример на будущее: if version < 2: data.new_field = значение_по_умолчанию
+	if version < 2:
+		# В первой версии модели на выбор ещё не было — значит, это «Рыжик».
+		data.cat_variant = "a"
+		data.flags = {}
 	data.version = FORMAT_VERSION
 	return data

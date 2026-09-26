@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=10 format=3]
+[gd_resource type="Theme" load_steps=11 format=3]
 
 [ext_resource type="FontFile" path="res://assets/fonts/tiny5/Tiny5-Regular.ttf" id="1_pixel_font"]
+[ext_resource type="FontFile" path="res://assets/fonts/pressstart2p/PressStart2P-Regular.ttf" id="2_title_font"]
 
 [sub_resource type="StyleBoxFlat" id="button_normal"]
 content_margin_left = 22.0
@@ -181,3 +182,5 @@ TabContainer/styles/tab_focus = SubResource("tab_selected")
 TabContainer/styles/tab_hovered = SubResource("tab_selected")
 TabContainer/styles/tab_selected = SubResource("tab_selected")
 TabContainer/styles/tab_unselected = SubResource("tab_unselected")
+TitleLabel/base_type = &"Label"
+TitleLabel/fonts/font = ExtResource("2_title_font")

@@ -46,6 +46,7 @@ func start(player: Node3D) -> void:
 	player.controls_enabled = false
 	player.set_physics_process(false)
 	_flying = player.get_node("Visual")
+	$Whoosh.play()
 	# Камера переходит из «пружины» за котом прямо в мир — иначе пружина
 	# каждый кадр возвращала бы её за спину кота и отдаления не было бы.
 	_camera = player.camera

@@ -1,14 +1,17 @@
 extends SceneTree
 
-## Портрет модели кота на нейтральном фоне: спереди, сбоку и в шаге.
-## godot --path game/3d-probe -s res://tools/capture_cat.gd -- <файл.jpg>
+## Кадры моделей кота на нейтральном фоне.
+## godot --path game/3d-probe -s res://tools/capture_cat.gd -- <папка>
+## Пишет: variants.jpg (все модели в ряд, три четверти), faces_<id>.jpg (лица с эмоциями).
+
+const CatModel = preload("res://scenes/player/cat_model.gd")
 
 
 func _initialize() -> void:
 	_capture.call_deferred()
 
 
-func _capture() -> void:
+func _stage() -> Node3D:
 	var stage := Node3D.new()
 	root.add_child(stage)
 	var environment := WorldEnvironment.new()
@@ -17,29 +20,70 @@ func _capture() -> void:
 	environment.environment.background_color = Color("#3b3440")
 	environment.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	environment.environment.ambient_light_color = Color("#d9c3a8")
-	environment.environment.ambient_light_energy = 0.7
+	environment.environment.ambient_light_energy = 0.75
 	environment.environment.tonemap_mode = Environment.TONE_MAPPER_ACES
 	stage.add_child(environment)
 	var sun := DirectionalLight3D.new()
-	sun.light_color = Color(1, 0.8, 0.62)
-	sun.light_energy = 2.2
+	sun.light_color = Color(1, 0.82, 0.64)
+	sun.light_energy = 2.0
 	sun.shadow_enabled = true
 	stage.add_child(sun)
-	sun.look_at_from_position(Vector3(3, 5, -4), Vector3.ZERO)
-	var model_scene: PackedScene = load("res://scenes/player/cat_model.tscn")
-	var poses := [[-2.4, 0.0, 0.0], [0.0, -PI / 2.0, 0.0], [2.4, PI * 0.75, 3.4]]
-	for pose in poses:
-		var cat: Node3D = model_scene.instantiate()
-		stage.add_child(cat)
-		cat.position.x = pose[0]
-		cat.rotation.y = PI + pose[1]
-		cat.move_speed = pose[2]
+	sun.look_at_from_position(Vector3(3, 5, 4), Vector3.ZERO)
+	return stage
+
+
+func _cat(stage: Node3D, id: String, position: Vector3, yaw: float, mood: String) -> Node3D:
+	var cat: Node3D = load(CatModel.scene_path(id)).instantiate()
+	cat.blink_enabled = false
+	cat.footsteps_enabled = false
+	stage.add_child(cat)
+	cat.position = position
+	cat.rotation.y = yaw
+	cat.emotion = mood
+	return cat
+
+
+func _camera(stage: Node3D, from: Vector3, to: Vector3, fov: float) -> void:
 	var camera := Camera3D.new()
 	stage.add_child(camera)
-	camera.fov = 40
-	camera.look_at_from_position(Vector3(0, 2.2, 9.5), Vector3(0, 1.7, 0))
+	camera.fov = fov
+	camera.look_at_from_position(from, to)
 	camera.current = true
-	for i in 23:
+
+
+func _save(path: String) -> void:
+	for i in 20:
 		await process_frame
-	root.get_texture().get_image().save_jpg(OS.get_cmdline_user_args()[0], 0.9)
+	root.get_texture().get_image().save_jpg(path, 0.9)
+	print("Кадр: ", path)
+
+
+func _capture() -> void:
+	var folder: String = OS.get_cmdline_user_args()[0]
+	var ids := CatModel.VARIANT_NAMES.keys()
+	var stage := _stage()
+	for i in ids.size():
+		# Модель смотрит вдоль −Z; поворот PI+0.5 — три четверти к камере.
+		_cat(stage, ids[i], Vector3((i - 1.5) * 2.6, 0, 0), PI + 0.45, "neutral")
+	_camera(stage, Vector3(0, 2.4, 9.5), Vector3(0, 1.6, 0), 45)
+	await _save(folder + "/variants.jpg")
+	stage.free()
+	var moods := CatModel.EMOTION_NAMES.keys()
+	for id in ids:
+		var faces := _stage()
+		for i in moods.size():
+			_cat(faces, id, Vector3((i - 2) * 2.7, 0, 0), PI, moods[i])
+			var label := Label3D.new()
+			label.text = CatModel.EMOTION_NAMES[moods[i]]
+			label.font = load("res://assets/fonts/ptsans/PT_Sans-Web-Bold.ttf")
+			label.font_size = 48
+			label.pixel_size = 0.006
+			label.position = Vector3((i - 2) * 2.7, 0.4, 1.2)
+			faces.add_child(label)
+		var probe: Node3D = load(CatModel.scene_path(id)).instantiate()
+		var eye_y: float = probe.eye_height
+		probe.free()
+		_camera(faces, Vector3(0, eye_y * 0.75, 11.5), Vector3(0, eye_y * 0.6, 0), 42)
+		await _save(folder + "/faces_%s.jpg" % id)
+		faces.free()
 	quit()

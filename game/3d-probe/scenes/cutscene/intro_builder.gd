@@ -19,6 +19,8 @@ const StartArea = preload("res://scenes/world/start_area_builder.gd")
 const CAT_SPEED := 2.2
 ## Сколько держится крупный план таблички — канон автора: 3 секунды.
 const SIGN_CLOSEUP_SECONDS := 3.0
+## После таблички — короткий план мордочки: кот радуется (предложение).
+const FACE_SHOT_SECONDS := 1.8
 
 @export_tool_button("Пересобрать катсцену", "Reload") var rebuild_button := _rebuild_in_editor
 
@@ -72,6 +74,11 @@ func _build_animation(scene_root: Node) -> Array[Vector3]:
 	animation.track_set_path(camera_rotation, "ShotCamera")
 	var fade := animation.add_track(Animation.TYPE_VALUE)
 	animation.track_set_path(fade, "Overlay/Fade:color")
+	# Мимика: у таблички про халявную клубнику кот радуется (предложение).
+	var mood := animation.add_track(Animation.TYPE_VALUE)
+	animation.track_set_path(mood, "CatModel:emotion")
+	animation.value_track_set_update_mode(mood, Animation.UPDATE_DISCRETE)
+	animation.track_insert_key(mood, 0.0, "neutral")
 
 	# Кот: идёт по точкам, у таблички стоит, поворачивается к ней и обратно.
 	var path := _cat_path()
@@ -98,7 +105,9 @@ func _build_animation(scene_root: Node) -> Array[Vector3]:
 			var sign_yaw := atan2(-to_sign.x, -to_sign.z)
 			animation.rotation_track_insert_key(cat_rotation, time + 0.6, Quaternion(Vector3.UP, sign_yaw))
 			sign_look_start = time + 0.8
-			var wait := 0.8 + SIGN_CLOSEUP_SECONDS + 0.8
+			# Радость — когда кот дочитал табличку: её видно на плане мордочки.
+			animation.track_insert_key(mood, time + 0.8 + SIGN_CLOSEUP_SECONDS - 0.2, "joy")
+			var wait := 0.8 + SIGN_CLOSEUP_SECONDS + FACE_SHOT_SECONDS + 0.4
 			animation.rotation_track_insert_key(cat_rotation, time + wait - 0.4, Quaternion(Vector3.UP, sign_yaw))
 			var next: Vector3 = path[i + 1][0]
 			var onward := next - point
@@ -106,6 +115,7 @@ func _build_animation(scene_root: Node) -> Array[Vector3]:
 			animation.position_track_insert_key(cat_position, time + wait, point)
 			time += wait
 			times[i] = time
+			animation.track_insert_key(mood, time + 2.5, "neutral")
 			animation.track_insert_key(cat_speed, time, CAT_SPEED)
 	var walk_end := time
 	animation.track_insert_key(cat_speed, walk_end, 0.0)
@@ -130,9 +140,18 @@ func _build_animation(scene_root: Node) -> Array[Vector3]:
 	# 4. Крупный план таблички — ровно SIGN_CLOSEUP_SECONDS.
 	shots.append([[sign_look_start, sign_center + sign_normal * 2.6 + Vector3(0, 0.15, 0), sign_center],
 		[sign_look_start + SIGN_CLOSEUP_SECONDS, sign_center + sign_normal * 2.1 + Vector3(0, 0.1, 0), sign_center]])
+	# 4а. Мордочка: камера между котом и табличкой, кот радуется.
+	var stop_point: Vector3 = _cat_path()[3][0]
+	var toward_sign := (Terrain.SIGN_POSITION - stop_point)
+	toward_sign.y = 0.0
+	toward_sign = toward_sign.normalized()
+	var face := stop_point + Vector3(0, 2.3, 0)
+	var face_start := sign_look_start + SIGN_CLOSEUP_SECONDS
+	shots.append([[face_start, face + toward_sign * 3.0 + Vector3(0.4, 0.35, 0), face],
+		[face_start + FACE_SHOT_SECONDS, face + toward_sign * 2.5 + Vector3(0.3, 0.3, 0), face]])
 	# 5. Камера за спиной кота: он уходит по плитам в лес.
 	var follow: Array = []
-	var t := sign_look_start + SIGN_CLOSEUP_SECONDS
+	var t := face_start + FACE_SHOT_SECONDS
 	while t < walk_end - 6.0:
 		var cat := _cat_at(animation, cat_position, t)
 		follow.append([t, cat + Vector3(0.6, 3.6, 7.5), cat + Vector3(0, 1.6, -4.0)])

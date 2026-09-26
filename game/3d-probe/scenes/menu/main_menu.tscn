@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://scenes/menu/main_menu.gd" id="1_script"]
 [ext_resource type="Theme" path="res://scenes/ui/menu_theme.tres" id="2_theme"]
 [ext_resource type="Texture2D" path="res://assets/art/menu_background_candidate.jpg" id="3_background"]
-[ext_resource type="FontFile" path="res://assets/fonts/pressstart2p/PressStart2P-Regular.ttf" id="4_title_font"]
 [ext_resource type="PackedScene" path="res://scenes/ui/settings_menu.tscn" id="5_settings"]
 [ext_resource type="PackedScene" path="res://scenes/ui/save_menu.tscn" id="6_saves"]
+[ext_resource type="PackedScene" path="res://scenes/menu/cat_preview.tscn" id="7_preview"]
 
 [sub_resource type="Gradient" id="shade_gradient"]
 offsets = PackedFloat32Array(0, 0.42, 0.7)
@@ -76,7 +76,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.9, 0.72, 1)
 theme_override_constants/shadow_offset_x = 5
 theme_override_constants/shadow_offset_y = 5
-theme_override_fonts/font = ExtResource("4_title_font")
+theme_type_variation = &"TitleLabel"
 theme_override_font_sizes/font_size = 44
 text = "10 000 метров
 до дома"
@@ -103,12 +103,6 @@ layout_mode = 2
 text = "Продолжить"
 alignment = 0
 
-[node name="LoadButton" type="Button" parent="MainButtons"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Загрузить"
-alignment = 0
-
 [node name="SettingsButton" type="Button" parent="MainButtons"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -129,41 +123,145 @@ anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 90.0
-offset_top = -130.0
-offset_right = 650.0
-offset_bottom = 130.0
+offset_top = -300.0
+offset_right = 930.0
+offset_bottom = 300.0
 grow_vertical = 2
 
-[node name="Rows" type="VBoxContainer" parent="NamePanel"]
+[node name="Columns" type="HBoxContainer" parent="NamePanel"]
 layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Rows" type="VBoxContainer" parent="NamePanel/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 16
 
-[node name="Heading" type="Label" parent="NamePanel/Rows"]
+[node name="Heading" type="Label" parent="NamePanel/Columns/Rows"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_title_font")
+theme_type_variation = &"TitleLabel"
 theme_override_font_sizes/font_size = 24
+text = "Новая игра"
+
+[node name="NameLabel" type="Label" parent="NamePanel/Columns/Rows"]
+layout_mode = 2
 text = "Имя котика"
 
-[node name="NameField" type="LineEdit" parent="NamePanel/Rows"]
+[node name="NameField" type="LineEdit" parent="NamePanel/Columns/Rows"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 placeholder_text = "Кот"
 max_length = 24
 
-[node name="Buttons" type="HBoxContainer" parent="NamePanel/Rows"]
+[node name="ModelLabel" type="Label" parent="NamePanel/Columns/Rows"]
+layout_mode = 2
+text = "Модель котика"
+
+[node name="ModelRow" type="HBoxContainer" parent="NamePanel/Columns/Rows"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PreviousModel" type="Button" parent="NamePanel/Columns/Rows/ModelRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "<"
+
+[node name="ModelName" type="Label" parent="NamePanel/Columns/Rows/ModelRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Рыжик"
+horizontal_alignment = 1
+
+[node name="NextModel" type="Button" parent="NamePanel/Columns/Rows/ModelRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = ">"
+
+[node name="EmotionButton" type="Button" parent="NamePanel/Columns/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Мимика: спокойствие"
+
+[node name="Gap" type="Control" parent="NamePanel/Columns/Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="HBoxContainer" parent="NamePanel/Columns/Rows"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="StartButton" type="Button" parent="NamePanel/Rows/Buttons"]
+[node name="StartButton" type="Button" parent="NamePanel/Columns/Rows/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Начать"
 
-[node name="NameBackButton" type="Button" parent="NamePanel/Rows/Buttons"]
+[node name="NameBackButton" type="Button" parent="NamePanel/Columns/Rows/Buttons"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Назад"
+
+[node name="PreviewFrame" type="SubViewportContainer" parent="NamePanel/Columns"]
+custom_minimum_size = Vector2(340, 520)
+layout_mode = 2
+stretch = true
+
+[node name="PreviewViewport" type="SubViewport" parent="NamePanel/Columns/PreviewFrame"]
+unique_name_in_owner = true
+own_world_3d = true
+handle_input_locally = false
+size = Vector2i(340, 520)
+render_target_update_mode = 4
+
+[node name="CatPreview" parent="NamePanel/Columns/PreviewFrame/PreviewViewport" instance=ExtResource("7_preview")]
+unique_name_in_owner = true
+
+[node name="ContinuePanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 90.0
+offset_top = -150.0
+offset_right = 720.0
+offset_bottom = 150.0
+grow_vertical = 2
+
+[node name="Rows" type="VBoxContainer" parent="ContinuePanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Heading" type="Label" parent="ContinuePanel/Rows"]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+theme_override_font_sizes/font_size = 24
+text = "Продолжить"
+
+[node name="LatestButton" type="Button" parent="ContinuePanel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Последнее сохранение"
+alignment = 0
+text_overrun_behavior = 3
+
+[node name="OtherSavesButton" type="Button" parent="ContinuePanel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Выбрать другое сохранение"
+alignment = 0
+
+[node name="ContinueBackButton" type="Button" parent="ContinuePanel/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Назад"
+alignment = 0
 
 [node name="SettingsMenu" parent="." instance=ExtResource("5_settings")]
 unique_name_in_owner = true
