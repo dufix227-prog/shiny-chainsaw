@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scenes/player/cat_player.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/player/cat_variants/cat_a.tscn" id="2_model"]
+
+[sub_resource type="CapsuleShape3D" id="body_shape"]
+radius = 0.55
+height = 3.4
+
+[sub_resource type="SphereShape3D" id="camera_probe"]
+radius = 0.3
+
+[node name="CatPlayer" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 1
+floor_snap_length = 0.5
+script = ExtResource("1_script")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+shape = SubResource("body_shape")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="CatModel" parent="Visual" instance=ExtResource("2_model")]
+
+[node name="FaceCamera" type="Camera3D" parent="Visual"]
+transform = Transform3D(-0.966, 0, 0.259, 0.03, 0.993, 0.112, -0.257, 0.116, -0.959, 0.9, 2.65, -3.4)
+fov = 45.0
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939373, -0.342898, 0, 0.342898, 0.939373, 0, 3.2, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+shape = SubResource("camera_probe")
+spring_length = 10.0
+collision_mask = 5
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+current = true
+fov = 70.0
+far = 400.0

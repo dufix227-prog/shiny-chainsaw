@@ -2,14 +2,27 @@ config_version=5
 
 [application]
 config/name="Пролог · 3D-проба"
-run/main_scene="res://main.tscn"
+run/main_scene="res://scenes/menu/main_menu.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
+
+[autoload]
+
+GameSettings="*res://scenes/game_settings.gd"
+Controls="*res://scenes/controls.gd"
+SaveGame="*res://scenes/save_game.gd"
+UiSounds="*res://scenes/ui_sounds.gd"
 
 [display]
 window/size/viewport_width=1280
 window/size/viewport_height=800
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[layer_names]
+
+3d_physics/layer_1="world"
+3d_physics/layer_2="player"
+3d_physics/layer_3="camera_only"
 
 [physics]
 ; Keep normal simulation speed in the software-rendered preview below 8 FPS.

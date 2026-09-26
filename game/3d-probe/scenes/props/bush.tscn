@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scenes/props/bush.gd" id="1_script"]
+[ext_resource type="ArrayMesh" path="res://scenes/trees/meshes/bush.res" id="2_mesh"]
+
+[sub_resource type="BoxShape3D" id="slow_zone_shape"]
+size = Vector3(3, 1.6, 3)
+
+[node name="Bush" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_mesh")
+visibility_range_end = 120.0
+
+[node name="SlowZone" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="Shape" type="CollisionShape3D" parent="SlowZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("slow_zone_shape")

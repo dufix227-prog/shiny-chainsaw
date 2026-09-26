@@ -1,0 +1,28 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://scenes/world/start_kinds/tunnel_mesh.res" id="1_f2udj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2udj"]
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0.02745098, 0.023529412, 0.039215688, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lmoed"]
+size = Vector3(8, 5.5, 11)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bu8n8"]
+size = Vector3(0.5, 5.5, 11)
+
+[node name="Tunnel" type="StaticBody3D" unique_id=1259855216]
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=2060808057]
+mesh = ExtResource("1_f2udj")
+
+[node name="Darkness" type="MeshInstance3D" parent="." unique_id=440691578]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.75, 0)
+material_override = SubResource("StandardMaterial3D_f2udj")
+mesh = SubResource("BoxMesh_lmoed")
+
+[node name="Collision2" type="CollisionShape3D" parent="." unique_id=1088210484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75, 2.75, 0)
+shape = SubResource("BoxShape3D_bu8n8")

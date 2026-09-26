@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3]
+
+[ext_resource type="Shader" path="res://scenes/world/terrain.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" path="res://assets/textures/pixel_own/grass_top.png" id="2_grass_top"]
+[ext_resource type="Texture2D" path="res://assets/textures/pixel_own/grass_side.png" id="3_grass_side"]
+[ext_resource type="Texture2D" path="res://assets/textures/pixel_own/dirt.png" id="4_dirt"]
+[ext_resource type="Texture2D" path="res://assets/textures/pixel_own/path.png" id="5_path"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/grass_top_texture = ExtResource("2_grass_top")
+shader_parameter/grass_side_texture = ExtResource("3_grass_side")
+shader_parameter/dirt_texture = ExtResource("4_dirt")
+shader_parameter/path_texture = ExtResource("5_path")

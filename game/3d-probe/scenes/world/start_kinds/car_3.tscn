@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/cutscene/traffic_car.gd" id="1_ik40d"]
+[ext_resource type="ArrayMesh" path="res://scenes/world/start_kinds/car_3_mesh.res" id="2_hnivo"]
+[ext_resource type="AudioStream" path="res://audio/engine_loop.wav" id="3_hnivo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x1hyi"]
+size = Vector3(4.4, 1.8, 2)
+
+[node name="Car" type="Node3D" unique_id=1133076529]
+script = ExtResource("1_ik40d")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=783849737]
+mesh = ExtResource("2_hnivo")
+
+[node name="HitZone" type="Area3D" parent="." unique_id=987541254]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="Shape" type="CollisionShape3D" parent="HitZone" unique_id=1650555676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("BoxShape3D_x1hyi")
+
+[node name="Engine" type="AudioStreamPlayer3D" parent="." unique_id=834505931]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0.6, 0)
+stream = ExtResource("3_hnivo")
+volume_db = -4.0
+unit_size = 5.0
+autoplay = true
+max_distance = 45.0
+bus = &"Effects"
